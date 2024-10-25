@@ -32,11 +32,12 @@ function App() {
 
   return (
     <>
+    
       <AuthContext.Provider value={authObject}>
-        
-        < NavBar handleSignOut={handleSignOut} />
 
         <h1>Savor the Seasons</h1>
+        
+        < NavBar /> 
 
         <Routes>
 
