@@ -1,20 +1,20 @@
 /* --------------------------------Imports--------------------------------*/
 
 // css
-import './MyActions.css';
+import './RecipeForm.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function MyActions() {
+function RecipeForm() {
 
     return (
-      <section id="my-actions-section">
-          MyActions
-      </section>
+      <form id="recipe-form">
+          RecipeForm
+      </form>
     )
 
   }
 
 /* --------------------------------Exports--------------------------------*/
 
-export default MyActions;
+export default RecipeForm;

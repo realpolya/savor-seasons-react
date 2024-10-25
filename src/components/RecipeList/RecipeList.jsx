@@ -1,20 +1,20 @@
 /* --------------------------------Imports--------------------------------*/
 
 // css
-import './MyActions.css';
+import './RecipeList.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function MyActions() {
+function RecipeList() {
 
     return (
-      <section id="my-actions-section">
-          MyActions
-      </section>
+      <main id="recipe-list-main">
+          RecipeList
+      </main>
     )
 
   }
 
 /* --------------------------------Exports--------------------------------*/
 
-export default MyActions;
+export default RecipeList;

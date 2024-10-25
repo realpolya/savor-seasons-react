@@ -1,15 +1,15 @@
 /* --------------------------------Imports--------------------------------*/
 
 // css
-import './MyActions.css';
+import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function MyActions() {
+function SortBar() {
 
     return (
-      <section id="my-actions-section">
-          MyActions
+      <section id="sort-bar-section">
+          SortBar
       </section>
     )
 
@@ -17,4 +17,4 @@ function MyActions() {
 
 /* --------------------------------Exports--------------------------------*/
 
-export default MyActions;
+export default SortBar;

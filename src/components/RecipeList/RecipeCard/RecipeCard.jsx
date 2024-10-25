@@ -1,15 +1,15 @@
 /* --------------------------------Imports--------------------------------*/
 
 // css
-import './MyActions.css';
+import './RecipeCard.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function MyActions() {
+function RecipeCard() {
 
     return (
-      <section id="my-actions-section">
-          MyActions
+      <section id="recipe-card-section">
+          RecipeCard
       </section>
     )
 
@@ -17,4 +17,4 @@ function MyActions() {
 
 /* --------------------------------Exports--------------------------------*/
 
-export default MyActions;
+export default RecipeCard;
