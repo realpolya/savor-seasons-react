@@ -13,9 +13,9 @@ import './RecipeList.css';
 
 // TODO: pass the listCondition prop to know which list to render (landing page, favorites, my recipes)
 
-function RecipeList({ recipes, setRecipes }) {
+function RecipeList() {
 
-    // const {user} = useContext(AuthContext);
+    const {user, recipes, setRecipes} = useContext(AuthContext);
 
     return (
       <main id="recipe-list-main">
