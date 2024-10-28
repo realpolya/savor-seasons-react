@@ -14,7 +14,7 @@ import * as recipesService from "./services/recipesService.js";
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
-//import RecipeList from './components/RecipeList/RecipeList.jsx';
+import RecipeList from './components/RecipeList/RecipeList.jsx';
 import RecipeForm from './components/RecipeForm/RecipeForm.jsx';
 import RecipePage from './components/RecipePage/RecipePage.jsx';
 import SignInForm from './components/SignInForm/SignInForm.jsx';
@@ -31,6 +31,7 @@ import {dummyRecipes} from './dummy-data/dummy-data.js';
 // AuthContext can be set to an object (if you want to pass down
 // multiple items through the value prop)
 // EXAMPLE: const contextObject = { user, setUser }
+
 const AuthContext = createContext(null);
 
 /* --------------------------------Function--------------------------------*/
@@ -48,7 +49,6 @@ function App() {
   const [toggle, setToggle] = useState(true);
 
   /* FUNCTIONS */
-
   const fetchAllRecipes = async () => {
     const recipesData = await recipesService.index();
     setRecipes(prev => [...prev, recipesData]);
@@ -65,18 +65,17 @@ function App() {
 
   /* USE EFFECT */
   // useEffect(() => {
-    
-  //   if (user) fetchAllHoots();
-  // }, [user]);
+  //   fetchAllRecipes();
+  // }, [recipes]);
 
   /* USE CONTEXT */
-  const authObject = { user, setUser };
+  const contextObject = { user, setUser, recipes, setRecipes };
 
   /* RETURN */
   return (
     <>
     
-      <AuthContext.Provider value={authObject}>
+      <AuthContext.Provider value={contextObject}>
 
         <h1>Savor the Seasons</h1>
         
@@ -87,7 +86,6 @@ function App() {
           <>
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
-            
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
           </>
 
@@ -97,6 +95,9 @@ function App() {
 
           < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
           < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
+          { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList/>} />)}
+          < Route path="/sign-up" element={< SignUpForm />} />
+          < Route path="/sign-in" element={< SignInForm />} />
           
         </Routes>
 

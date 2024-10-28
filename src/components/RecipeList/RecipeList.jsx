@@ -13,14 +13,14 @@ import './RecipeList.css';
 
 // TODO: pass the listCondition prop to know which list to render (landing page, favorites, my recipes)
 
-function RecipeList({ recipes, setRecipes }) {
+function RecipeList() {
 
-    // const {user} = useContext(AuthContext);
+    const {user, recipes, setRecipes} = useContext(AuthContext);
 
     return (
       <main id="recipe-list-main">
           
-          <h1>Recipe List</h1>
+          <h2>Recipes List</h2>
 
           < SortBar recipes={recipes} setRecipes={setRecipes}/>
 
