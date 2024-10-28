@@ -26,7 +26,7 @@ function RecipeList({ recipes, setRecipes }) {
 
           <section id="recipe-list-section">
             {recipes.map(recipe => {
-              return <Link to={`/recipes/${recipe._id}`}>
+              return <Link to={`/recipes/${recipe._id}`} key={recipe._id}>
               < RecipeCard recipe={recipe}/>
               </Link>
             })}

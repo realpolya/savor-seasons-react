@@ -30,10 +30,11 @@ function RecipeCard({ recipe }) {
               {recipe.holiday}
             </p>
             <p className="recipe-card-author">
-              By <span>{recipe.author}</span>
+              By <span>{recipe.author.username}</span>
             </p>
             <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
-            <p className="recipe-card-details">🕒 {recipe.description} min</p>
+            {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
+            <p className="recipe-card-details">{recipe.description}</p>
             <button className="recipe-card-button">View {recipe.name}</button>
           </div>
       </section>
