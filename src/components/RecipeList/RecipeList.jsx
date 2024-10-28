@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../App.jsx';
+//import { AuthContext } from '../App.jsx';
 
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
 import SortBar from './SortBar/SortBar.jsx';
