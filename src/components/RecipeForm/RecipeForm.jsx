@@ -9,11 +9,15 @@ function RecipeForm() {
 
     return (
       <form id="recipe-form">
-          RecipeForm
+          <select>
+            {ingredients.map(ingredient =>
+              {}
+            )}
+          </select>
       </form>
     )
 
-  }
+}
 
 /* --------------------------------Exports--------------------------------*/
 
