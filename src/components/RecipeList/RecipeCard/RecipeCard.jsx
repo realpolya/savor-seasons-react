@@ -5,13 +5,15 @@ import './RecipeCard.css';
 
 /* --------------------------------Function--------------------------------*/
 
+//TODO: work on the star plug in for recipe.rating
+
 function RecipeCard({ recipe }) {
 
     // calculated recipe.rating
     recipe.rating = 0;
     if (recipe.reviews.length > 0) {
 
-      recipe.reviews.forEach(review => +recipe.rating + +review.rating);
+      recipe.reviews.forEach(review => recipe.rating += +review.rating);
       recipe.rating = recipe.rating / recipe.reviews.length;
 
     }

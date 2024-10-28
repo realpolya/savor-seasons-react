@@ -41,14 +41,13 @@ function App() {
         <Routes>
           {/* protected Routes */}
           <>
-            <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
             <Route path="/recipe-list" element={< RecipeList setUser={setUser} />} />
-            <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
+            <Route path="/recipe-page" element={< RecipePage setUser={setUser} /> } />
           </>
           {/* Public Routes */}
-          { user ? (< Route path="/" element={<Dashboard/>} />) : (< Route path="/" element={<RecipeList />} />)}
+          { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList />} />)}
           < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
           < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
           
