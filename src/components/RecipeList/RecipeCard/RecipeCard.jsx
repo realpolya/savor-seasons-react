@@ -5,7 +5,7 @@ import './RecipeCard.css';
 
 /* --------------------------------Function--------------------------------*/
 
-//TODO: work on the star plug in for recipe.rating
+//TODO: work on the star package for recipe.rating
 
 function RecipeCard({ recipe }) {
 
@@ -26,6 +26,15 @@ function RecipeCard({ recipe }) {
           <div className="recipe-card-div-info">
             <h3 className="recipe-card-h3">{recipe.name}</h3>
             <p className="recipe-card-rating">{recipe.rating}</p>
+            <p className="recipe-card-holiday">
+              {recipe.holiday}
+            </p>
+            <p className="recipe-card-author">
+              By <span>{recipe.author}</span>
+            </p>
+            <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
+            <p className="recipe-card-details">🕒 {recipe.description} min</p>
+            <button className="recipe-card-button">View {recipe.name}</button>
           </div>
       </section>
     )
