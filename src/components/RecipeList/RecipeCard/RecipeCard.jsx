@@ -20,12 +20,14 @@ function RecipeCard({ recipe }) {
 
     return (
       <section className="recipe-card-section">
+        
           <div className="recipe-card-div-img">
             <img loading="eager" className="recipe-card-img" alt={recipe.name} src={recipe.image} />
           </div>
+
           <div className="recipe-card-div-info">
             <h3 className="recipe-card-h3">{recipe.name}</h3>
-            <p className="recipe-card-rating">{recipe.rating}</p>
+            <p className="recipe-card-rating">Rating: {recipe.rating}</p>
             <p className="recipe-card-holiday">
               {recipe.holiday}
             </p>
