@@ -14,7 +14,7 @@ import * as recipesService from "./services/recipesService.js";
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
-//import RecipeList from './components/RecipeList/RecipeList.jsx';
+import RecipeList from './components/RecipeList/RecipeList.jsx';
 import RecipeForm from './components/RecipeForm/RecipeForm.jsx';
 import RecipePage from './components/RecipePage/RecipePage.jsx';
 import SignInForm from './components/SignInForm/SignInForm.jsx';
@@ -87,22 +87,12 @@ function App() {
           <>
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
-<<<<<<< HEAD
-            
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
-=======
-            <Route path="/recipe-list" element={< RecipeList setUser={setUser} />} />
-            <Route path="/recipe-page" element={< RecipePage setUser={setUser} /> } />
->>>>>>> 00587398b4648393537bfeb2a5458cb5a21f30b4
           </>
 
           {/* Public Routes */}
-<<<<<<< HEAD
-          
-=======
           { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList 
           recipes={recipes} setRecipes={setRecipes}/>} />)}
->>>>>>> 00587398b4648393537bfeb2a5458cb5a21f30b4
           < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
           < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
           
