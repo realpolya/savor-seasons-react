@@ -27,7 +27,6 @@ const AuthContext = createContext(null);
 function App() {
 
   const [user, setUser] = useState(null);
-
   const authObject = { user, setUser }
 
   return (
