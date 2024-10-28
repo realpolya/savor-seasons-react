@@ -52,7 +52,7 @@ function SortBar({ recipes, setRecipes }) {
           <div id="search-div">
             <form id="search-form" onSubmit={handleSubmit}>
               <input type="text" placeholder="e.g. mashed potatoes" name="search" onChange={handleSearchChange}/>
-              <button class="search-form-button" type="submit">Search</button>
+              <button className="search-form-button" type="submit">Search</button>
             </form>
           </div>
 
