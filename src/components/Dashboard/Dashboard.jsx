@@ -12,7 +12,6 @@ function Dashboard() {
 
     return (
       <main id="dashboard-main">
-          Dashboard
           < MyRecipesCard />
           <div id="actions-favorites">
             < MyActions />
