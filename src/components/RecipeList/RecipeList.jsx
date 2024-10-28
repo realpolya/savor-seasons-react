@@ -20,7 +20,7 @@ function RecipeList({ recipes, setRecipes }) {
     return (
       <main id="recipe-list-main">
           
-          <h1>Recipe List</h1>
+          <h2>Recipes List</h2>
 
           < SortBar recipes={recipes} setRecipes={setRecipes}/>
 

@@ -1,5 +1,37 @@
+.recipe-card-section {
+    background-color: var(--light-color);
+    border-radius: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+
+    max-width: 22rem;
+    height: 25rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .recipe-card-img {
     height: 150px;
     width: 150px;
     object-fit: cover;
+    border-radius: 50%;
+}
+
+.recipe-card-div-info,
+.recipe-card-div-img {
+    margin: 0 .5rem;
+}
+
+.recipe-card-div-info {
+    text-align: left;
+}
+
+.recipe-card-details {
+    max-width: 10rem;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
