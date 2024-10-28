@@ -26,6 +26,13 @@ const AuthContext = createContext(null);
 
 function App() {
 
+  // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
+  const [listCondition, setListCondition] = useState('all');
+
+  const handleListCondition = condition => {
+    setListCondition(condition);
+  }
+
   const [user, setUser] = useState(null);
   const authObject = { user, setUser }
 
