@@ -8,12 +8,12 @@ import './RecipeCard.css';
 function RecipeCard() {
 
     return (
-      <section id="recipe-card-section">
+      <section className="recipe-card-section">
           RecipeCard
       </section>
     )
 
-  }
+}
 
 /* --------------------------------Exports--------------------------------*/
 
