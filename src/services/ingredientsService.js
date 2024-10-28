@@ -1,18 +1,29 @@
-/* --------------------------------Imports--------------------------------*/
+// /* --------------------------------Imports--------------------------------*/
+// import axios from "axios";
+// /* --------------------------------Variables--------------------------------*/
 
-import axios from 'axios';
+// const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
-/* --------------------------------Variables--------------------------------*/
+// /* --------------------------------Helper Functions--------------------------------*/
 
-const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
+// /* --------------------------------Functions--------------------------------*/
+// export const saveIngredients = async (recipeId, token) => {
+//   try {
+//     const response = await axios.get(`${BACKEND_URL}/favorites/${recipeId}`, {
+//       headers: {
+//         Authorization: `Bearer${token}`,
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error(
+//       "Error removing from favorites:",
+//       error.response?.data || error.message
+//     );
+//     throw error;
+//   }
+// };
 
-/* --------------------------------Helper Functions--------------------------------*/
+// /* --------------------------------Exports--------------------------------*/
 
-
-/* --------------------------------Functions--------------------------------*/
-
-
-
-/* --------------------------------Exports--------------------------------*/
-
-export { };
+// export {};

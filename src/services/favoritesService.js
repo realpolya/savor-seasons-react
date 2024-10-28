@@ -1,52 +1,77 @@
 /* --------------------------------Imports--------------------------------*/
 import axios from "axios";
-import { Router } from "react-router-dom";
-import Favorites from "../models/model-favorite.js";
 /* --------------------------------Variables--------------------------------*/
 const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Helper Functions--------------------------------*/
 
 /* --------------------------------Functions--------------------------------*/
-Router.get("/", async (req, res) => {
-  const { userId } = req.params;
-
+/* --------------------------------GET Servies--------------------------------*/
+export const getFavorites = async (token) => {
   try {
-    const getFavorites = await getFavorites.find({ userId });
-
-    return res.staus(200).json({
-      message: "Favorits loaded Successfully",
-      favorites: getFavorites,
-    });
+    const response = await axios.get(
+      `${BACKEND_URL}/favorites/${recipeId}`,
+      {
+        headers: {
+          Authorization: `Bearer${token}`,
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
-    return res.staus(500).json({
-      message: "ERROR TRY AGIAN",
-      error: error.message,
-    });
+    console.error(
+      "Error removing from favorites:",
+      error.response?.data || error.message
+    );
+    throw error;
   }
-});
-
-Router.post("/:recipeId", async (req, res) => {
-  const { userId, recipeId } = req.params;
-
+};
+/* --------------------------------POST Service--------------------------------*/
+export const addToFavorites = async (recipeId, token) => {
   try {
-    const addToFavorites = await addToFavorites.create({
-      userId,
-      recipeId,
-    });
-    return res.staus(200).json({
-      message: "Recipe add Successfully",
-      favorites: addToFavorites,
-    });
+    const response = await axios.post(
+      `${BACKEND_URL}/favorites/${recipeId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer${token}`,
+        },
+      }
+    );
+    return response.data;
   } catch (error) {
-    return res.staus(500).json({
-      message: "ERROR TRY AGIAN",
-      error: error.message,
-    });
+    console.error(
+      "Error adding to favorites:",
+      error.response?.data || error.message
+    );
+    throw error;
   }
-});
+};
+/* --------------------------------PUT Service--------------------------------*/
+export const removeRecipeFromFavorites = async (recipeId, token) => {
+  try {
+    const response = await axios.delete(
+      `${BACKEND_URL}/favorites/${recipeId}`,
+      {
+        headers: {
+          Authorization: `Bearer${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error removing from favorites:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
 
-Router.put(() => {});
 /* --------------------------------Exports--------------------------------*/
 
-export { get, post };
+export {
+  get,
+  post,
+  delete
+};
