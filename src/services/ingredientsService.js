@@ -11,8 +11,13 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Functions--------------------------------*/
 
+const index = async () => {
 
+    // retrieve all of the ingredients
+    console.log('hello');
+
+}
 
 /* --------------------------------Exports--------------------------------*/
 
-export { };
+export { index };
