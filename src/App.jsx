@@ -6,7 +6,7 @@ import './App.css'
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
-import RecipeList from './components/RecipeList/RecipeList.jsx';
+//import RecipeList from './components/RecipeList/RecipeList.jsx';
 import RecipeForm from './components/RecipeForm/RecipeForm.jsx';
 import RecipePage from './components/RecipePage/RecipePage.jsx';
 import SignInForm from './components/SignInForm/SignInForm.jsx';
@@ -45,11 +45,11 @@ function App() {
             <Route path="/" element={<Dashboard user={user} />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
-            <Route path="/recipe-list" element={< RecipeList setUser={setUser} />} />
+            
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
           </>
           {/* Public Routes */}
-          { user ? (< Route path="/" element={<Dashboard/>} />) : (< Route path="/" element={<RecipeList />} />)}
+          
           < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
           < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
           
