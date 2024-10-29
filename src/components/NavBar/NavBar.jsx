@@ -49,7 +49,10 @@ function NavBar() {
   return (
     <nav id='nav-bar'>
 
-      <h1 id="nav-bar-h1">Savor the Seasons</h1>
+      <div id='nav-bar-logo'>
+        <h1 id="nav-bar-h1">Savor the Seasons</h1>
+        <p id="nav-bar-p">seasonal recipes website</p>
+      </div>
 
       {user ? userNav : outNav}
       

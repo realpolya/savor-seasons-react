@@ -15,10 +15,11 @@ import './Dashboard.css';
 function Dashboard() {
 
     const {user} = useContext(AuthContext);
+    console.log(user);
 
     return (
       <main id="dashboard-main">
-          <h2 id="dashboard-h2">Welcome {user.username}!</h2>
+          <h2 id="dashboard-h2">Welcome !</h2>
           <div id="dashboard-div">
             < MyRecipesCard />
             <div id="actions-favorites">

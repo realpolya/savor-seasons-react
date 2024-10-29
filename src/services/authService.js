@@ -11,10 +11,12 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 /* --------------------------------Functions--------------------------------*/
 
 const signUp = async (formData) => {
+
+    console.log('trying to sign up')
     
     try {
 
-        const response = await axios.post(`${BACKEND_URL}/users/sign-up`, formData);
+        const response = await axios.post(`${BACKEND_URL}/auth/sign-up`, formData);
 
         if (response.data.error) {
             console.log(response.data.error)
@@ -40,7 +42,7 @@ const signIn = async (formData) => {
 
     try {
 
-        const response = await axios.post(`${BACKEND_URL}/users/sign-in`, formData);
+        const response = await axios.post(`${BACKEND_URL}/auth/sign-in`, formData);
 
         if (response.data.error) {
             console.log(response.data.error)
