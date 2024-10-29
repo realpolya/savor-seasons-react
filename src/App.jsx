@@ -44,6 +44,9 @@ function App() {
   const [listCondition, setListCondition] = useState('all');
   const [user, setUser] = useState(null); // FIXME: change to null
   const [favorites, setFavorites] = useState(null);
+
+  // all recipes are a constant, recipes can get sorted / filtered
+  const [allRecipes, setAllRecipes] = useState(dummyRecipes);
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [ingredients, setIngredients] = useState([]);
   const [toggle, setToggle] = useState(true);
@@ -51,12 +54,12 @@ function App() {
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
     const recipesData = await recipesService.index();
-    setRecipes(prev => [...prev, recipesData]);
+    setRecipes(recipesData);
   };
 
   const fetchAllIngredients = async () => {
     const ingredientsData = await ingredientsService.index();
-    setIngredients(prev => [...prev, ingredientsData]);
+    setIngredients(ingredientsData);
   };
 
   const handleListCondition = condition => {
@@ -69,7 +72,7 @@ function App() {
   // }, [recipes]);
 
   /* USE CONTEXT */
-  const contextObject = { user, setUser, recipes, setRecipes };
+  const contextObject = { user, setUser, allRecipes, recipes, setRecipes };
 
   /* RETURN */
   return (
