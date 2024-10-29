@@ -10,13 +10,7 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Functions--------------------------------*/
 
-const index = async (token) => {
-  try {
-    const response = await axios.get(`${BACKEND_URL}/ingredients`, {
-      headers: {
-        Authorization: `Bearer${token}`,
-      },
-    });
+const getAllIngredients = async (token) => {
 
     return response.data;
   } catch (error) {
@@ -31,4 +25,4 @@ const index = async (token) => {
 
 /* --------------------------------Exports--------------------------------*/
 
-export { index };
+export { getAllIngredients };

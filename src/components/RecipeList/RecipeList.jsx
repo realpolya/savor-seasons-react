@@ -23,7 +23,6 @@ function RecipeList() {
           <h2>Recipes List</h2>
 
           < SortBar />
-
           <section id="recipe-list-section">
             {recipes.map(recipe => {
               return <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-card-link">
