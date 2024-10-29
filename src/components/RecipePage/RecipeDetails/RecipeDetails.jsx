@@ -1,5 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
+import RatingComponent from './Rating';
 
 // css
 import './RecipeDetails.css';
