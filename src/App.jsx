@@ -68,9 +68,15 @@ function App() {
   }
 
   /* USE EFFECT */
-  // useEffect(() => {
-  //   fetchAllRecipes();
-  // }, [recipes]);
+  useEffect(() => {
+
+    // fetchAllRecipes();
+    let retrieveUser = authService.getUser();
+    if (retrieveUser) {
+      setUser(retrieveUser);
+    }
+  
+  }, []);
 
   /* USE CONTEXT */
   const contextObject = { user, setUser, allRecipes, recipes, setRecipes };
