@@ -6,7 +6,7 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 /* --------------------------------Helper Functions--------------------------------*/
 /* --------------------------------Functions--------------------------------*/
 /* --------------------------------GET Services--------------------------------*/
-export const index = async (token) => {
+const index = async (token) => {
   
   try {
     
