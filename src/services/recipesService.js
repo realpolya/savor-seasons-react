@@ -36,7 +36,7 @@ export const singleRecipe = async (recipeId) => {
 // service to fetch a recipe by the logged-in user
 export const getUserRecipes= async (userId) => {
     try{
-        const response = await axios.get(`${BACKEND_URL}/recipes/${userId}`);
+        const response = await axios.get(`${BACKEND_URL}/recipes/my-recipes`);
         return response.data;
 
     }catch (error) {
