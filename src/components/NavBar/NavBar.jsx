@@ -8,7 +8,15 @@ import { useContext } from 'react'
 function NavBar() {
   return (
     <nav id='nav-bar'>
-        NavBar
+      <ul>
+        <li>
+          <Link to="/">DashBoard</Link>
+          <Link to="//sign-up">sign up</Link>
+          <Link to="/sign-in">sign in</Link>
+          <Link to="/about-team"> about team</Link>
+          
+        </li>
+      </ul>
     </nav>
   )
 }
