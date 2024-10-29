@@ -1,17 +1,14 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, useEffect, createContext } from 'react'
-import * as recipesService from '../services/recipesService';
+import { useState, createContext } from 'react'
+import * as recipesService from './services/recipesService.js';
 import { Routes, Route } from 'react-router-dom'
 
 // css
 import './App.css'
 
 // services
-import * as authService from "./services/authService.js";
-import * as favoritesService from "./services/favoritesService.js";
 import * as ingredientsService from "./services/ingredientsService.js";
-import * as recipesService from "./services/recipesService.js";
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
@@ -51,13 +48,8 @@ function App() {
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
-    const recipesData = await recipesService.index();
+    const recipesData = await recipesService.index(); //?????
     setRecipes(prev => [...prev, recipesData]);
-  };
-
-  const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.index();
-    setIngredients(prev => [...prev, ingredientsData]);
   };
 
   const handleListCondition = condition => {

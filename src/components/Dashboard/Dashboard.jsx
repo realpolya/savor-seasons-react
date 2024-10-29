@@ -15,7 +15,7 @@ import './Dashboard.css';
 function Dashboard() {
 
     const {user} = useContext(AuthContext);
-
+    console.log(user);
     return (
       <main id="dashboard-main">
           <h2 id="dashboard-h2">Welcome {user.username}!</h2>
