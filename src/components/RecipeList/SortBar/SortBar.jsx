@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
 import { Link } from 'react-router-dom';
 
+import { sortRecipes } from '../../../services/sortService.js';
+
 // css
 import './SortBar.css';
 
@@ -24,7 +26,10 @@ function SortBar() {
     }
 
     const handleSortChange = e => {
-      console.log(e)
+
+      filtered = sortRecipes(e.target.value, allRecipes);
+      handleSubmit(e);
+
     }
 
     const handleFilterChange = (e) => {
@@ -51,7 +56,6 @@ function SortBar() {
                     <option value="" disabled selected>---Sort---</option>
                     <option value="rating">By rating (best first)</option>
                     <option value="prepTime">By prep time (shortest first)</option>
-                    <option value="ingredients">By number of ingredients (fewest first)</option>
               </select>
             </form>
             <form id="filter-form">
