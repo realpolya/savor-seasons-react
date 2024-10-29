@@ -1,11 +1,11 @@
 /* --------------------------------Imports--------------------------------*/
 
+import RatingComponent from './Rating.jsx';
+
 // css
 import './RecipeCard.css';
 
 /* --------------------------------Function--------------------------------*/
-
-//TODO: work on the star package for recipe.rating
 
 function RecipeCard({ recipe }) {
 
@@ -27,6 +27,7 @@ function RecipeCard({ recipe }) {
 
           <div className="recipe-card-div-info">
             <h3 className="recipe-card-h3">{recipe.name}</h3>
+            < RatingComponent rating={recipe.rating}/>
             <p className="recipe-card-rating">Rating: {recipe.rating}</p>
             <p className="recipe-card-holiday">
               {recipe.holiday}

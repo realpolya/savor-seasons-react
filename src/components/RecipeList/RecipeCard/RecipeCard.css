@@ -35,3 +35,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+.stars-rating {
+    height: 1.6rem;
+}

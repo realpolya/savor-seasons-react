@@ -1,5 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
+import RatingForm from './RatingForm';
 
 // css
 import './ReviewForm.css';
