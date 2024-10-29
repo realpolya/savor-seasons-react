@@ -1,6 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
-import axios from 'axios';
+import axios from "axios";
 
 /* --------------------------------Variables--------------------------------*/
 
@@ -8,8 +8,8 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Helper Functions--------------------------------*/
 
-
 /* --------------------------------Functions--------------------------------*/
+
 
 const getAllIngredients = async (token) => {
 
