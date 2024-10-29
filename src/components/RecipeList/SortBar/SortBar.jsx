@@ -1,7 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
-import { Link } from 'react-router-dom';
 
 import { sortRecipes, searchRecipes } from '../../../services/sortService.js';
 

@@ -80,8 +80,6 @@ function App() {
     <>
     
       <AuthContext.Provider value={contextObject}>
-
-        <h1>Savor the Seasons</h1>
         
         < NavBar user={user} /> 
 
@@ -89,18 +87,17 @@ function App() {
 
           {/* protected Routes */}
           <>
+            < Route path="/home" element={< Dashboard />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser} />} />
             <Route path="/edit-recipe/:recipeId" element={< RecipeForm setUser={setUser} />} />
-            {/* route for editing form */}
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
           </>
 
           {/* Public Routes */}
-
-          { user ? (< Route path="/" element={< Dashboard />} />) : (< Route path="/" element={< RecipeList />} />)}
+          < Route path="/" element={< RecipeList />} />
           < Route path="/sign-up" element={< SignUpForm />} />
           < Route path="/sign-in" element={< SignInForm />} />
           
