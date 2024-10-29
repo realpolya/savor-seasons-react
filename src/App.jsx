@@ -52,8 +52,10 @@ function App() {
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
+
     const recipesData = await recipesService.index();
     setRecipes(recipesData);
+    
   };
 
   const fetchAllIngredients = async () => {
