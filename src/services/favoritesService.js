@@ -9,14 +9,11 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 /* --------------------------------GET Servies--------------------------------*/
 export const getFavorites = async (token) => {
   try {
-    const response = await axios.get(
-      `${BACKEND_URL}/favorites/${recipeId}`,
-      {
-        headers: {
-          Authorization: `Bearer${token}`,
-        },
-      }
-    );
+    const response = await axios.get(`${BACKEND_URL}/favorites/${recipeId}`, {
+      headers: {
+        Authorization: `Bearer${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(
@@ -69,9 +66,3 @@ export const removeRecipeFromFavorites = async (recipeId, token) => {
 };
 
 /* --------------------------------Exports--------------------------------*/
-
-export {
-  get,
-  post,
-  delete
-};

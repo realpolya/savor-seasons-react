@@ -9,7 +9,7 @@
 // /* --------------------------------Functions--------------------------------*/
 // export const saveIngredients = async (recipeId, token) => {
 //   try {
-//     const response = await axios.get(`${BACKEND_URL}/favorites/${recipeId}`, {
+//     const response = await axios.get(`${BACKEND_URL} ${recipeId}`, {
 //       headers: {
 //         Authorization: `Bearer${token}`,
 //       },
