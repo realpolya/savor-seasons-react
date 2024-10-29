@@ -1,10 +1,3 @@
-/* --------------------------------Imports--------------------------------*/
-
-/* --------------------------------Variables--------------------------------*/
-
-const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
-
-/* --------------------------------Helper Functions--------------------------------*/
 
 /* --------------------------------Functions--------------------------------*/
 
@@ -39,7 +32,19 @@ const sortRecipes = (sortValue, recipes) => {
 
 }
 
+const searchRecipes = (searchValue, recipes) => {
+
+    let searched = recipes.filter(recipe => {
+        return (recipe.name.toLowerCase().includes(searchValue.toLowerCase())
+                || recipe.author.username.toLowerCase().includes(searchValue.toLowerCase())
+                || recipe.description.toLowerCase().includes(searchValue.toLowerCase())
+                || recipe.holiday.toLowerCase().includes(searchValue.toLowerCase()));
+    });
+
+    return searched;
+}
+
 
 /* --------------------------------Exports--------------------------------*/
 
-export { sortRecipes };
+export { sortRecipes, searchRecipes };

@@ -1,9 +1,9 @@
 /* --------------------------------Imports--------------------------------*/
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
 import { Link } from 'react-router-dom';
 
-import { sortRecipes } from '../../../services/sortService.js';
+import { sortRecipes, searchRecipes } from '../../../services/sortService.js';
 
 // css
 import './SortBar.css';
@@ -12,12 +12,16 @@ import './SortBar.css';
 
 function SortBar() {
 
+    const [searchData, setSearchData] = useState('');
     const {user, allRecipes, recipes, setRecipes} = useContext(AuthContext);
 
+    // variable for storing filtered recipes
     let filtered;
 
+    /* RESET FUNCTION */
     const restoreRecipes = () => setRecipes(allRecipes);
 
+    /* SUBMIT FUNCTIONS */
     const handleSubmit = e => {
 
       e.preventDefault();
@@ -25,6 +29,15 @@ function SortBar() {
 
     }
 
+    const handleSearchSubmit = e => {
+
+      e.preventDefault();
+      filtered = searchRecipes(searchData, allRecipes);
+      setRecipes(filtered);
+
+    }
+
+    /* CHANGE FUNCTIONS */
     const handleSortChange = e => {
 
       filtered = sortRecipes(e.target.value, allRecipes);
@@ -42,9 +55,7 @@ function SortBar() {
 
     }
 
-    const handleSearchChange = e => {
-      console.log(e)
-    }
+    const handleSearchChange = e => setSearchData(e.target.value);
 
 
     return (
@@ -75,8 +86,13 @@ function SortBar() {
           </div>
           
           <div id="search-div">
-            <form id="search-form" onSubmit={handleSubmit}>
-              <input type="text" placeholder="e.g. mashed potatoes" name="search" onChange={handleSearchChange}/>
+            <form id="search-form" onSubmit={handleSearchSubmit}>
+              <input required 
+                      type="text" 
+                      placeholder="e.g. mashed potatoes" 
+                      name="search" 
+                      value={searchData}
+                      onChange={handleSearchChange}/>
               <button className="search-form-button" type="submit">Search</button>
             </form>
           </div>
