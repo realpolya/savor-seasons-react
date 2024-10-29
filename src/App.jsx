@@ -39,17 +39,16 @@ const AuthContext = createContext(null);
 function App() {
 
   /* STATES */
-
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(null); // FIXME: change to null
-  const [favorites, setFavorites] = useState(null);
+  const [user, setUser] = useState(null);
+  const [favorites, setFavorites] = useState(null); 
 
   // all recipes are a constant, recipes can get sorted / filtered
   const [allRecipes, setAllRecipes] = useState(dummyRecipes);
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [ingredients, setIngredients] = useState([]);
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(true); // tbd
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
