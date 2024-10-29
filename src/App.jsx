@@ -1,7 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
-import { useState, createContext } from 'react'
-import * as recipesService from './services/recipesService.js';
+import { useState, useEffect, createContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 // css
