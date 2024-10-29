@@ -26,7 +26,7 @@ const getAllRecipes = async () => {
 };
 
 // service to fetch a single recipe by id
-const getSingleRecipe = async (recipeId) => {
+const singleRecipe = async (recipeId) => {
     try {
         const response = await axios.get(`${BACKEND_URL}/recipes/${recipeId}`);
         return response.data;
@@ -130,5 +130,5 @@ const deleteReview = async(recipeId, reviewId)=> {
 
 /* --------------------------------Exports--------------------------------*/
 
-export { getAllRecipes, getSingleRecipe, getUserRecipes, createRecipe, updateRecipe,
+export { getAllRecipes, singleRecipe, getUserRecipes, createRecipe, updateRecipe,
     deleteRecipe, createReview, updateReview, deleteReview }
