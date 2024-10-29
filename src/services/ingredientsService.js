@@ -11,12 +11,28 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Functions--------------------------------*/
 
-const index = async () => {
+const index = async (token) => {
 
-    // retrieve all of the ingredients
-    console.log('hello');
+    try {
+      const response = await axios.get(`${BACKEND_URL}/ingredients`, {
+        headers: {
+          Authorization: `Bearer${token}`,
+        },
+      });
 
-}
+      return response.data;
+
+    } catch (error) {
+
+      console.error(
+        "Error removing from favorites:",
+        error.response?.data || error.message
+      );
+
+      throw error;
+      
+    }
+};
 
 /* --------------------------------Exports--------------------------------*/
 
