@@ -22,7 +22,7 @@ function NavBar() {
         <Link to="/" className="nav-bar-link">Recipes</Link>
       </li>
       <li className="nav-bar-li"> 
-        <Link to="/recipe-form" className="nav-bar-link">New Recipe</Link>
+        <Link to="/home" className="nav-bar-link">Dashboard</Link>
       </li>
       <li className="nav-bar-li">
         <Link to="/" onClick={handleSignOut} className="nav-bar-link">Sign out</Link>
