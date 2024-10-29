@@ -1,29 +1,34 @@
-// /* --------------------------------Imports--------------------------------*/
-// import axios from "axios";
-// /* --------------------------------Variables--------------------------------*/
+/* --------------------------------Imports--------------------------------*/
 
-// const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
+import axios from "axios";
 
-// /* --------------------------------Helper Functions--------------------------------*/
+/* --------------------------------Variables--------------------------------*/
 
-// /* --------------------------------Functions--------------------------------*/
-// export const saveIngredients = async (recipeId, token) => {
-//   try {
-//     const response = await axios.get(`${BACKEND_URL} ${recipeId}`, {
-//       headers: {
-//         Authorization: `Bearer${token}`,
-//       },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.error(
-//       "Error removing from favorites:",
-//       error.response?.data || error.message
-//     );
-//     throw error;
-//   }
-// };
+const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
-// /* --------------------------------Exports--------------------------------*/
+/* --------------------------------Helper Functions--------------------------------*/
 
-// export {};
+/* --------------------------------Functions--------------------------------*/
+
+const index = async (token) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/ingredients`, {
+      headers: {
+        Authorization: `Bearer${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error removing from favorites:",
+      error.response?.data || error.message
+    );
+
+    throw error;
+  }
+};
+
+/* --------------------------------Exports--------------------------------*/
+
+export { index };

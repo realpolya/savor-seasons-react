@@ -1,4 +1,26 @@
 #my-favorites-table-section {
-    height: 80%;
-    background-color: var(--dark-color);
+    height: 70%;
+    background-color: var(--light-color);
+    border-radius: 2rem;
+}
+
+#my-favorites-table-h2 {
+    padding-top: 1rem;
+    font-family: var(--decor-font);
+    margin: 0;
+}
+
+#my-favorites-table-h2,
+#my-favorites-table-h2-link {
+    font-family: var(--decor-font);
+    color: var(--text-color);
+}
+
+#my-favorites-table-h2-link:hover {
+    color: var(--accent-color);
+}
+
+#my-favorites-table-ul {
+    list-style-type: none;
+    padding: 0;
 }

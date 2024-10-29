@@ -42,7 +42,7 @@ function App() {
 
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(true); // FIXME: change to null
+  const [user, setUser] = useState(null); // FIXME: change to null
   const [favorites, setFavorites] = useState(null);
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [ingredients, setIngredients] = useState([]);
@@ -91,12 +91,8 @@ function App() {
           </>
 
           {/* Public Routes */}
-          { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList 
-          recipes={recipes} setRecipes={setRecipes}/>} />)}
 
-          < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
-          < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
-          { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList/>} />)}
+          { user ? (< Route path="/" element={< Dashboard />} />) : (< Route path="/" element={< RecipeList />} />)}
           < Route path="/sign-up" element={< SignUpForm />} />
           < Route path="/sign-in" element={< SignInForm />} />
           

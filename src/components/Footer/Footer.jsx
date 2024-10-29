@@ -12,7 +12,7 @@ function Footer() {
     <footer id='footer'>
       <ul>
         <li>
-          <Link to="/about-team"> about team </Link>
+          
         </li>
       </ul>
     </footer>

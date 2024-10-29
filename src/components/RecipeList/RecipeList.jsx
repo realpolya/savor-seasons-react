@@ -22,7 +22,7 @@ function RecipeList() {
           
           <h2>Recipes List</h2>
 
-          < SortBar recipes={recipes} setRecipes={setRecipes}/>
+          < SortBar />
 
           <section id="recipe-list-section">
             {recipes.map(recipe => {
