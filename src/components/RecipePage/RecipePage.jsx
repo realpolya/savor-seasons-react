@@ -10,15 +10,18 @@ import './RecipePage.css';
 
 function RecipePage() {
 
-    return (
-      <main id="recipe-page-main">
-          RecipePage
-          <RecipeDetails/>
-          <ReviewForm/>
-          <ReviewsList/>
-      </main>
-    )
-
+  return (
+    <main id="recipe-page-main">
+      <h1>Savor the seasons</h1>
+      <nav>
+        <a href="/recipes">Recipes</a>
+        <a href="/signout">Sign Out</a>
+      </nav>
+      <RecipeDetails />
+      <ReviewForm />
+      <ReviewsList />
+    </main>
+  );
 }
 
 /* --------------------------------Exports--------------------------------*/

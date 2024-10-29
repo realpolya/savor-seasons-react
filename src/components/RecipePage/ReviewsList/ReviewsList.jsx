@@ -10,8 +10,12 @@ import './ReviewsList.css';
 function ReviewsList() {
 
     return (
-      <section id="reviews-list-section">
-          ReviewsList
+      <section className="reviews-list">
+        <div className="review">
+          <p className="review-text">
+            
+          </p>
+          </div>
       </section>
     )
 
