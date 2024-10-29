@@ -91,6 +91,9 @@ function App() {
           <>
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
+            {/* route for editing form */}
+            {/* route for viewing favorites */}
+            {/* route for viewing my recipes */}
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
           </>
 
