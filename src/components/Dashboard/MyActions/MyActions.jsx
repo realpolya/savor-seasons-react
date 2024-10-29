@@ -21,7 +21,8 @@ function MyActions() {
             <p>Your email: </p>
           </div>
           <div id="my-actions-buttons-div">
-
+            <Link><button>New Recipe</button></Link>
+            <Link><button>Sign Out</button></Link>
           </div>
       </section>
     )
