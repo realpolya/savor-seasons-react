@@ -1,62 +1,61 @@
 /* --------------------------------Imports--------------------------------*/
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
-import { Link } from 'react-router-dom';
+
+import { sortRecipes, searchRecipes } from '../../../services/sortService.js';
 
 // css
 import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-// TODO: asynchronous useState (filter) does not work 2 times in a row
-
 function SortBar() {
 
-    // const [action, setAction] = useState(null);
+    const [searchData, setSearchData] = useState('');
     const {user, allRecipes, recipes, setRecipes} = useContext(AuthContext);
 
+    // variable for storing filtered recipes
     let filtered;
 
+    /* RESET FUNCTION */
     const restoreRecipes = () => setRecipes(allRecipes);
 
+    /* SUBMIT FUNCTIONS */
     const handleSubmit = e => {
 
       e.preventDefault();
-      console.log(e)
       setRecipes(filtered);
 
     }
 
-    const handleSortChange = e => {
-      console.log(e)
+    const handleSearchSubmit = e => {
+
+      e.preventDefault();
+      filtered = searchRecipes(searchData, allRecipes);
+      setRecipes(filtered);
+
     }
 
-    const handleFilterChange = async (e) => {
+    /* CHANGE FUNCTIONS */
+    const handleSortChange = e => {
 
-      // console.log('all recipes are ', allRecipes)
-      await restoreRecipes();
-      // console.log('recipes are ', recipes)
-      // console.log(filtered);
+      filtered = sortRecipes(e.target.value, allRecipes);
+      handleSubmit(e);
 
-      filtered = recipes.filter(recipe => {
-        // console.log(recipe.holiday, e.target.value)
+    }
+
+    const handleFilterChange = (e) => {
+
+      filtered = allRecipes.filter(recipe => {
         return recipe.holiday === e.target.value
       });
-
-      // console.log(filtered);
 
       handleSubmit(e);
 
     }
 
-    const handleSearchChange = e => {
-      console.log(e)
-    }
+    const handleSearchChange = e => setSearchData(e.target.value);
 
-    // useEffect(() => {
-    //   console.log('use effect in action')
-    //   setRecipes(allRecipes);
-    // }, [action])
 
     return (
       <section id="sort-bar-section">
@@ -67,7 +66,6 @@ function SortBar() {
                     <option value="" disabled selected>---Sort---</option>
                     <option value="rating">By rating (best first)</option>
                     <option value="prepTime">By prep time (shortest first)</option>
-                    <option value="ingredients">By number of ingredients (fewest first)</option>
               </select>
             </form>
             <form id="filter-form">
@@ -80,11 +78,20 @@ function SortBar() {
                     <option value="Halloween">Halloween recipes</option>
               </select>
             </form>
+
+            <form id="sort-filter-form-button" onSubmit={restoreRecipes}>
+              <button className="search-form-button" type="submit">Reset</button>
+            </form>
           </div>
           
           <div id="search-div">
-            <form id="search-form" onSubmit={handleSubmit}>
-              <input type="text" placeholder="e.g. mashed potatoes" name="search" onChange={handleSearchChange}/>
+            <form id="search-form" onSubmit={handleSearchSubmit}>
+              <input required 
+                      type="text" 
+                      placeholder="e.g. mashed potatoes" 
+                      name="search" 
+                      value={searchData}
+                      onChange={handleSearchChange}/>
               <button className="search-form-button" type="submit">Search</button>
             </form>
           </div>

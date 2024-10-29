@@ -9,7 +9,7 @@ import './RecipeCard.css';
 
 function RecipeCard({ recipe }) {
 
-    // calculated recipe.rating
+    // calculate recipe.rating
     recipe.rating = 0;
     if (recipe.reviews.length > 0) {
 

@@ -53,13 +53,13 @@ function App() {
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
 
-    const recipesData = await recipesService.index();
+    const recipesData = await recipesService.getAllRecipes();
     setRecipes(recipesData);
     
   };
 
   const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.index();
+    const ingredientsData = await ingredientsService.getAllIngredients();
     setIngredients(ingredientsData);
   };
 
@@ -75,9 +75,15 @@ function App() {
   };
 
   /* USE EFFECT */
-  // useEffect(() => {
-  //   fetchAllRecipes();
-  // }, [recipes]);
+  useEffect(() => {
+
+    fetchAllRecipes();
+    let retrieveUser = authService.getUser();
+    if (retrieveUser) {
+      setUser(retrieveUser);
+    }
+  
+  }, []);
 
   /* USE CONTEXT */
   const contextObject = { user, setUser, allRecipes, recipes, setRecipes };
@@ -87,8 +93,6 @@ function App() {
     <>
     
       <AuthContext.Provider value={contextObject}>
-
-        <h1>Savor the Seasons</h1>
         
         < NavBar user={user} /> 
 
@@ -96,7 +100,9 @@ function App() {
 
           {/* protected Routes */}
           <>
+            < Route path="/home" element={< Dashboard />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
+
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             {/* route for viewing favorites */}
@@ -105,8 +111,7 @@ function App() {
           </>
 
           {/* Public Routes */}
-
-          { user ? (< Route path="/" element={< Dashboard />} />) : (< Route path="/" element={< RecipeList />} />)}
+          < Route path="/" element={< RecipeList />} />
           < Route path="/sign-up" element={< SignUpForm />} />
           < Route path="/sign-in" element={< SignInForm />} />
           

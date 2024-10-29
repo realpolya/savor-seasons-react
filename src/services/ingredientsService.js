@@ -10,7 +10,6 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Functions--------------------------------*/
 
-
 const getAllIngredients = async (token) => {
 
     try {

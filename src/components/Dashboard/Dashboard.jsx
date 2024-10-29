@@ -14,7 +14,8 @@ import './Dashboard.css';
 
 function Dashboard() {
 
-    const {user} = useContext(AuthContext);
+    const {user, setUser} = useContext(AuthContext);
+    console.log(user);
 
     return (
       <main id="dashboard-main">
