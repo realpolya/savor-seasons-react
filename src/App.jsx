@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, createContext } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 // css
 import './App.css'
@@ -38,48 +38,63 @@ const AuthContext = createContext(null);
 
 function App() {
 
+  /* LOCATION */
+  const location = useLocation();
+
   /* STATES */
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(authService.getUser());
   const [favorites, setFavorites] = useState(null); 
 
   // all recipes are a constant, recipes can get sorted / filtered
   const [allRecipes, setAllRecipes] = useState(dummyRecipes);
   const [recipes, setRecipes] = useState(dummyRecipes);
+  const [userRecipes, setUserRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [toggle, setToggle] = useState(true); // tbd
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
-
-    const recipesData = await recipesService.index();
+    const recipesData = await recipesService.getAllRecipes();
     setRecipes(recipesData);
-    
   };
 
   const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.index();
+    const ingredientsData = await ingredientsService.getAllIngredients();
     setIngredients(ingredientsData);
   };
+
+  const fetchUserRecipes = async () => {
+    const userRecipesData = await ingredientsService.getUserRecipes();
+    console.log('user recipes are ', userRecipesData)
+    setUserRecipes(userRecipesData);
+  }
 
   const handleListCondition = condition => {
     setListCondition(condition);
   }
+  const handleUpdateRecipe = async (recipeId, recipeFormData) => {
+    const updatedRecipe = await recipesService.update(recipeId, recipeFormData);
+
+    setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
+
+    navigate(`recipes/${recipeId}`);
+  };
 
   /* USE EFFECT */
   useEffect(() => {
 
-    // fetchAllRecipes();
-    let retrieveUser = authService.getUser();
-    if (retrieveUser) {
-      setUser(retrieveUser);
+    fetchAllRecipes();
+    if (user) {
+      fetchUserRecipes();
     }
   
-  }, []);
+  }, [location.pathname]);
 
   /* USE CONTEXT */
-  const contextObject = { user, setUser, allRecipes, recipes, setRecipes };
+  const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes };
+  console.log(user);
 
   /* RETURN */
   return (
@@ -95,8 +110,9 @@ function App() {
           <>
             < Route path="/home" element={< Dashboard />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
-            <Route path="/recipe-form" element={< RecipeForm setUser={setUser} />} />
-            <Route path="/edit-recipe/:recipeId" element={< RecipeForm setUser={setUser} />} />
+
+            <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
+            <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />

@@ -9,22 +9,24 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Helper Functions--------------------------------*/
 
-
-
 /* --------------------------------Functions--------------------------------*/
 //service to fetch all recipes
-export const getAllRecipes = async () => {
+const getAllRecipes = async () => {
     try{
+
         const response = await axios.get(`${BACKEND_URL}/recipes`);
         return response.data;
+
 } catch(error) {
-      console.error('Error fetching recipes:', error);
-      throw error;
+
+        console.error('Error fetching recipes:', error);
+        throw error;
+
     }
 };
 
 // service to fetch a single recipe by id
-export const singleRecipe = async (recipeId) => {
+const getSingleRecipe = async (recipeId) => {
     try {
         const response = await axios.get(`${BACKEND_URL}/recipes/${recipeId}`);
         return response.data;
@@ -33,19 +35,25 @@ export const singleRecipe = async (recipeId) => {
         throw error;
     }
 };
+
+// FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
-export const getUserRecipes= async (userId) => {
-    try{
-        const response = await axios.get(`${BACKEND_URL}/recipes/${userId}`);
+
+const getUserRecipes= async (userId) => {
+    
+  try{
+        const response = await axios.get(`${BACKEND_URL}/my-recipes`);
         return response.data;
 
     }catch (error) {
         console.error('Error fetching user recipes:', error);
         throw error;
     }
-}
+};
+
+
 //service to create a new recipe
-export const createRecipe = async (recipeData, token) => {
+const createRecipe = async (recipeData, token) => {
     try {
         console.log("calling backend");
         const response = await axios.post(
@@ -64,8 +72,9 @@ export const createRecipe = async (recipeData, token) => {
         throw error;
     }
 };
+
 //service to update a recipe by id
-export const updateRecipe = async(recipeId,  updatedData)=> {
+const updateRecipe = async(recipeId,  updatedData)=> {
     try {
         const response = await axios.put(`${BACKEND_URL}/recipes/${recipeId}/`, updatedData);
         return response.data;
@@ -74,8 +83,9 @@ export const updateRecipe = async(recipeId,  updatedData)=> {
         throw error;
     }
 };
+
 // service to delete a recipe by Id
-export  const deleteRecipe = async (recipeId) => {
+const deleteRecipe = async (recipeId) => {
     try{
         const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}`);
         return response.data;
@@ -86,7 +96,7 @@ export  const deleteRecipe = async (recipeId) => {
 };
 
 //service to add a review to a recipe
-export const createReview= async(recipeId, reviewData ) => {
+const createReview = async(recipeId, reviewData ) => {
     try {
         const response = await axios.post(`${BACKEND_URL}/recipes/${recipeId}/reviews`, reviewData);
         return response.data;
@@ -95,8 +105,9 @@ export const createReview= async(recipeId, reviewData ) => {
         throw error;
     }
 };
+
 // service to update a review to a recipe
-export const updateReview= async(recipeId, reviewId, updatedReview) => {
+const updateReview = async(recipeId, reviewId, updatedReview) => {
     try{
         const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview);
         return response.data;
@@ -105,8 +116,9 @@ export const updateReview= async(recipeId, reviewId, updatedReview) => {
         throw error;
     }
 };
+
 // service to delete a review from a recipe
-export const delteReview= async(recipeId, reviewId)=> {
+const deleteReview = async(recipeId, reviewId)=> {
     try{
         const response= await axios(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`);
         return response.data;
@@ -116,4 +128,7 @@ export const delteReview= async(recipeId, reviewId)=> {
     }
 };
 
+/* --------------------------------Exports--------------------------------*/
 
+export { getAllRecipes, getSingleRecipe, getUserRecipes, createRecipe, updateRecipe,
+    deleteRecipe, createReview, updateReview, deleteReview }
