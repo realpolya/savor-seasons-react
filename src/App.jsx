@@ -116,7 +116,7 @@ function App() {
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
-            <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
+            <Route path="/recipes/:recipeId" element={<RecipePage setUser={setUser} /> } />
           </>
 
           {/* Public Routes */}
