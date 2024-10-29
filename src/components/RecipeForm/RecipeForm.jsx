@@ -78,6 +78,22 @@ function RecipeForm() {
                     <label>Holiday:
                         <input type="text" name="holiday" value={formData.holiday} onChange={handleChange} required />
                     </label>
+
+                    {/* Polina's form below */}
+                    
+                    <form id="filter-form">
+                        <select id="filter-select" name="filter">
+                                <option value="" disabled selected>---Holiday---</option>
+                                <option value="Not a Holiday">Everyday recipes</option>
+                                <option value="Christmas">Christmas recipes</option>
+                                <option value="Thanksgiving">Thanksgiving recipes</option>
+                                <option value="Easter">Easter recipes</option>
+                                <option value="Halloween">Halloween recipes</option>
+                        </select>
+                    </form>
+
+                    {/* Polina's form above */}
+
                     <label>Image URL:
                         <input type="url" name="image" value={formData.image} onChange={handleChange} required />
                     </label>
