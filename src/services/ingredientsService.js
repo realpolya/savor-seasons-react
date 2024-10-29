@@ -16,7 +16,7 @@ const getAllIngredients = async (token) => {
     try {
       const response = await axios.get(`${BACKEND_URL}/ingredients`, {
         headers: {
-          Authorization: `Bearer${token}`,
+          Authorization: `Bearer${token}`, //added file there
         },
       });
 
