@@ -8,7 +8,10 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
 // services
+import * as authService from "./services/authService.js";
+import * as favoritesService from "./services/favoritesService.js";
 import * as ingredientsService from "./services/ingredientsService.js";
+import * as recipesService from "./services/recipesService.js";
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
