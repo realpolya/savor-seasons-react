@@ -1,13 +1,22 @@
+/* --------------------------------Imports--------------------------------*/
+
 import './RecipeForm.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getAllIngredients } from '../../services/ingredientsService.js';
 import { createRecipe, updateRecipe, singleRecipe } from '../../services/recipesService.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { AuthContext } from '../../App.jsx';
+
+/* --------------------------------Function--------------------------------*/
+
 function RecipeForm() {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhb2xhIiwiX2lkIjoiNjcxZDVkMzRkZTAwNzNlYzgxNTJmNDA4IiwiaWF0IjoxNzMwMTgzMTU5fQ.Srso2zOywXsxgQInDtkNOEHAMhDYFGFt8ZZ4NlpuSGU"; // Replace with valid token logic
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhb2xhIiwiX2lkIjoiNjcxZDVkMzRkZTAwNzNlYzgxNTJmNDA4IiwiaWF0IjoxNzMwMTgzMTU5fQ.Srso2zOywXsxgQInDtkNOEHAMhDYFGFt8ZZ4NlpuSGU"; // Replace with valid token logic
     const navigate = useNavigate();
     const { recipeId } = useParams(); // Get recipe ID from URL params
+    const { user } = useContext(AuthContext);
+
+    const token = localStorage.getItem('token');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -27,6 +36,7 @@ function RecipeForm() {
         async function fetchIngredients() {
             try {
                 const data = await getAllIngredients(token);
+                console.log(data);
                 setIngredientsList(data);
             } catch (error) {
                 console.error('Error fetching ingredients:', error);
@@ -70,7 +80,7 @@ function RecipeForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const body = { ...formData, author: "671d5d34de0073ec8152f408" };
+            const body = { ...formData, author: user._id };
 
             if (recipeId) {
                 // Update existing recipe
@@ -104,7 +114,7 @@ function RecipeForm() {
                     </label>
 
                     <label>
-                        Preparation Time:
+                        Preparation Time (in minutes)
                         <input
                             type="text"
                             name="prepTime"
@@ -118,6 +128,7 @@ function RecipeForm() {
                         Description:
                         <textarea
                             name="description"
+                            className="description-text-area"
                             value={formData.description}
                             onChange={handleChange}
                             required
