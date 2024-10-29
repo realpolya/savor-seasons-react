@@ -1,0 +1,28 @@
+#sort-bar-section {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--light-color);
+    padding: .5rem;
+    border-radius: 1rem;
+}
+
+#sort-filter-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#sort-form, #filter-form {
+    margin: 0 .2rem;
+}
+
+.search-form-button {
+    height: 2.5rem;
+    padding: 0.5rem;
+    text-align: center;
+}
