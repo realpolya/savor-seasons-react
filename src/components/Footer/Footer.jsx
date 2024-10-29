@@ -10,9 +10,7 @@ import './Footer.css';
 function Footer() {
   return (
     <footer id='footer'>
-      <div>
-        <p>&copy; { new Date().getFullYear() } Savor the Seasons. All rights reserved.</p>
-      </div>
+      <p id="footer-p">&copy; { new Date().getFullYear() } Savor the Seasons. All rights reserved.</p>
     </footer>
   )
 }
