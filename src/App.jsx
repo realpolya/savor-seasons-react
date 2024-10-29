@@ -91,6 +91,7 @@ function App() {
           </>
 
           {/* Public Routes */}
+
           { user ? (< Route path="/" element={< Dashboard />} />) : (< Route path="/" element={< RecipeList />} />)}
           < Route path="/sign-up" element={< SignUpForm />} />
           < Route path="/sign-in" element={< SignInForm />} />
