@@ -22,18 +22,21 @@ function SignInForm() {
 
   const { setUser } = useContext(AuthContext);
 
+  const updateMessage = (data) => setMessage(data);
+
   const handleChange = (e) => {
-    updateMessage('');
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const user = await authService.signin(formData);
-      console.log(user);
-      setUser(user);
-      navigate('/');
+      const retrievedUser = await authService.signIn(formData);
+      console.log(retrievedUser);
+      setUser(retrievedUser);
+      navigate('/home');
+
     } catch (err) {
       updateMessage(err.message);
     }
@@ -44,6 +47,7 @@ function SignInForm() {
         <h1>Log In</h1>
         {message && <p className="error-message">{message}</p>}
         <form autoComplete="off" onSubmit={handleSubmit}>
+
           <div>
             <label htmlFor="username">Username:</label>
             <input
@@ -55,6 +59,7 @@ function SignInForm() {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <label htmlFor="password">Password:</label>
             <input
@@ -66,12 +71,15 @@ function SignInForm() {
               onChange={handleChange}
             />
           </div>
+
           <div>
             <button type='submit'>Log In</button>
+
             <Link to="/">
               <button type='button'>Cancel</button>
             </Link>
           </div>
+
         </form>
       </main>
     );

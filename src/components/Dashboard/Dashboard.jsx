@@ -19,7 +19,7 @@ function Dashboard() {
 
     return (
       <main id="dashboard-main">
-          <h2 id="dashboard-h2">Welcome !</h2>
+          <h2 id="dashboard-h2">Welcome {user.username}!</h2>
           <div id="dashboard-div">
             < MyRecipesCard />
             <div id="actions-favorites">
