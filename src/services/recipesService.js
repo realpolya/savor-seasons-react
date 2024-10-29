@@ -13,11 +13,15 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 //service to fetch all recipes
 const getAllRecipes = async () => {
     try{
+
         const response = await axios.get(`${BACKEND_URL}/recipes`);
         return response.data;
+
 } catch(error) {
-      console.error('Error fetching recipes:', error);
-      throw error;
+
+        console.error('Error fetching recipes:', error);
+        throw error;
+
     }
 };
 
@@ -32,17 +36,18 @@ const getSingleRecipe = async (recipeId) => {
     }
 };
 
+// FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
-// const getUserRecipes= async (userId) => {
-//     try{
-//         const response = await axios.get(`${BACKEND_URL}/recipes/${userId}`);
-//         return response.data;
+const getUserRecipes= async (userId) => {
+    try{
+        const response = await axios.get(`${BACKEND_URL}/my-recipes`);
+        return response.data;
 
-//     }catch (error) {
-//         console.error('Error fetching user recipes:', error);
-//         throw error;
-//     }
-// };
+    }catch (error) {
+        console.error('Error fetching user recipes:', error);
+        throw error;
+    }
+};
 
 //service to create a new recipe
 const createRecipe = async (recipeData, token) => {
@@ -122,5 +127,5 @@ const deleteReview = async(recipeId, reviewId)=> {
 
 /* --------------------------------Exports--------------------------------*/
 
-export {getAllRecipes, getSingleRecipe, createRecipe, updateRecipe,
-    deleteRecipe, createReview, updateReview, deleteReview}
+export { getAllRecipes, getSingleRecipe, getUserRecipes, createRecipe, updateRecipe,
+    deleteRecipe, createReview, updateReview, deleteReview }
