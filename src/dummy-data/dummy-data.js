@@ -2,7 +2,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9423398e8be04251cc6a",
         "name": "Apple Pie",
-        "prepTime": "2 hour",
+        "prepTime": "5",
         "author": {
             "_id": "671c54008b3a694e3a89f582",
             "username": "Vasya",
@@ -21,7 +21,7 @@ export const dummyRecipes = [
     {
         "_id": "671e947c398e8be04251cc6f",
         "name": "Carrot Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -40,7 +40,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9510f8643dcb840d3001",
         "name": "Carrot Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -59,7 +59,7 @@ export const dummyRecipes = [
     {
         "_id": "671e959dc254f77efcc00d53",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "3",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -78,7 +78,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9631174160a8afe7783c",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -97,7 +97,7 @@ export const dummyRecipes = [
     {
         "_id": "671e965567fda41ff97df9a1",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -116,7 +116,7 @@ export const dummyRecipes = [
     {
         "_id": "671f04f3e7306264e1939ca3",
         "name": "Random Cake 2",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -136,7 +136,7 @@ export const dummyRecipes = [
     {
         "_id": "671f0b3cc1e7a43c111dd3a5",
         "name": "Random Dish 3",
-        "prepTime": "1 hour",
+        "prepTime": "10",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
