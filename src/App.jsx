@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, createContext } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 // css
 import './App.css'
@@ -38,30 +38,38 @@ const AuthContext = createContext(null);
 
 function App() {
 
+  /* LOCATION */
+  const location = useLocation();
+
   /* STATES */
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(authService.getUser());
   const [favorites, setFavorites] = useState(null); 
 
   // all recipes are a constant, recipes can get sorted / filtered
   const [allRecipes, setAllRecipes] = useState(dummyRecipes);
   const [recipes, setRecipes] = useState(dummyRecipes);
+  const [userRecipes, setUserRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [toggle, setToggle] = useState(true); // tbd
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
-
     const recipesData = await recipesService.getAllRecipes();
     setRecipes(recipesData);
-    
   };
 
   const fetchAllIngredients = async () => {
     const ingredientsData = await ingredientsService.getAllIngredients();
     setIngredients(ingredientsData);
   };
+
+  const fetchUserRecipes = async () => {
+    const userRecipesData = await ingredientsService.getUserRecipes();
+    console.log('user recipes are ', userRecipesData)
+    setUserRecipes(userRecipesData);
+  }
 
   const handleListCondition = condition => {
     setListCondition(condition);
@@ -78,15 +86,15 @@ function App() {
   useEffect(() => {
 
     fetchAllRecipes();
-    let retrieveUser = authService.getUser();
-    if (retrieveUser) {
-      setUser(retrieveUser);
+    if (user) {
+      fetchUserRecipes();
     }
   
-  }, []);
+  }, [location.pathname]);
 
   /* USE CONTEXT */
-  const contextObject = { user, setUser, allRecipes, recipes, setRecipes };
+  const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes };
+  console.log(user);
 
   /* RETURN */
   return (

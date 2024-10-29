@@ -11,13 +11,13 @@ import './MyRecipesCard.css';
 
 function MyRecipesCard() {
 
-    const {user, recipes, setRecipes} = useContext(AuthContext);
+    const {user, recipes, setRecipes, userRecipes } = useContext(AuthContext);
 
-    // const myRecipes = recipes.filter(recipe => JSON.stringify(recipe.author._id) === JSON.stringify(user._id) )
-    recipes.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    console.log('user recipes on my recipes card are ', userRecipes);
+    userRecipes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
     // show the most recent 4 recipes
-    const myRecipesShort = [...recipes];
+    const myRecipesShort = [...userRecipes];
     myRecipesShort.length = 4;
 
     return (
