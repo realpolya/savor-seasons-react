@@ -42,7 +42,7 @@ function App() {
 
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(true); // FIXME: change to null
+  const [user, setUser] = useState(null); // FIXME: change to null
   const [favorites, setFavorites] = useState(null);
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [ingredients, setIngredients] = useState([]);

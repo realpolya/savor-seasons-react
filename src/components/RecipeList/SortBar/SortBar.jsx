@@ -1,5 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
-
+import { useContext } from 'react';
+import { AuthContext } from '../../../App.jsx';
 import { Link } from 'react-router-dom';
 
 // css
@@ -7,21 +8,41 @@ import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function SortBar({ recipes, setRecipes }) {
+function SortBar() {
+
+    const {user, recipes, setRecipes} = useContext(AuthContext);
+
+    // TODO: filter does not work 2 times in a row
+    let filtered;
+    const handleSubmit = e => {
+
+      e.preventDefault();
+      console.log(e)
+      setRecipes(filtered);
+
+    }
 
     const handleSortChange = e => {
       console.log(e)
     }
 
     const handleFilterChange = e => {
-      console.log(e)
+      
+      // move to normal
+      setRecipes(recipes);
+      console.log(filtered);
+
+      filtered = recipes.filter(recipe => {
+        return recipe.holiday === e.target.value
+      });
+
+      console.log(filtered);
+
+      handleSubmit(e);
+
     }
 
     const handleSearchChange = e => {
-      console.log(e)
-    }
-
-    const handleSubmit = e => {
       console.log(e)
     }
 
@@ -37,7 +58,7 @@ function SortBar({ recipes, setRecipes }) {
                     <option value="ingredients">By number of ingredients (fewest first)</option>
               </select>
             </form>
-            <form id="filter-form" onSubmit={handleSubmit}>
+            <form id="filter-form">
               <select id="filter-select" name="filter" onChange={handleFilterChange}>
                     <option value="" disabled selected>---Filter---</option>
                     <option value="Not a Holiday">Everyday recipes</option>
