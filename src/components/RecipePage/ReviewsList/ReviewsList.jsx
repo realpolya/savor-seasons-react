@@ -1,5 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
 
+import RatingsReviews from './RatingsReviews';
 
 // css
 import './ReviewsList.css';
