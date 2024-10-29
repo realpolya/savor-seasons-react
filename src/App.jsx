@@ -53,13 +53,13 @@ function App() {
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
 
-    const recipesData = await recipesService.index();
+    const recipesData = await recipesService.getAllRecipes();
     setRecipes(recipesData);
     
   };
 
   const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.index();
+    const ingredientsData = await ingredientsService.getAllIngredients();
     setIngredients(ingredientsData);
   };
 
@@ -70,7 +70,7 @@ function App() {
   /* USE EFFECT */
   useEffect(() => {
 
-    // fetchAllRecipes();
+    fetchAllRecipes();
     let retrieveUser = authService.getUser();
     if (retrieveUser) {
       setUser(retrieveUser);
