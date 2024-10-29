@@ -1,5 +1,5 @@
 /* --------------------------------Imports--------------------------------*/
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
 import { Link } from 'react-router-dom';
 
@@ -8,11 +8,8 @@ import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-// TODO: asynchronous useState (filter) does not work 2 times in a row
-
 function SortBar() {
 
-    // const [action, setAction] = useState(null);
     const {user, allRecipes, recipes, setRecipes} = useContext(AuthContext);
 
     let filtered;
@@ -22,7 +19,6 @@ function SortBar() {
     const handleSubmit = e => {
 
       e.preventDefault();
-      console.log(e)
       setRecipes(filtered);
 
     }
@@ -31,19 +27,11 @@ function SortBar() {
       console.log(e)
     }
 
-    const handleFilterChange = async (e) => {
+    const handleFilterChange = (e) => {
 
-      // console.log('all recipes are ', allRecipes)
-      await restoreRecipes();
-      // console.log('recipes are ', recipes)
-      // console.log(filtered);
-
-      filtered = recipes.filter(recipe => {
-        // console.log(recipe.holiday, e.target.value)
+      filtered = allRecipes.filter(recipe => {
         return recipe.holiday === e.target.value
       });
-
-      // console.log(filtered);
 
       handleSubmit(e);
 
@@ -53,10 +41,6 @@ function SortBar() {
       console.log(e)
     }
 
-    // useEffect(() => {
-    //   console.log('use effect in action')
-    //   setRecipes(allRecipes);
-    // }, [action])
 
     return (
       <section id="sort-bar-section">
@@ -79,6 +63,10 @@ function SortBar() {
                     <option value="Easter">Easter recipes</option>
                     <option value="Halloween">Halloween recipes</option>
               </select>
+            </form>
+
+            <form id="sort-filter-form-button" onSubmit={restoreRecipes}>
+              <button className="search-form-button" type="submit">Reset</button>
             </form>
           </div>
           

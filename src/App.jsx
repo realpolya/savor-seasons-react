@@ -90,7 +90,8 @@ function App() {
           {/* protected Routes */}
           <>
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
-            <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
+            <Route path="/recipe-form" element={< RecipeForm setUser={setUser} />} />
+            <Route path="/edit-recipe/:recipeId" element={< RecipeForm setUser={setUser} />} />
             {/* route for editing form */}
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
