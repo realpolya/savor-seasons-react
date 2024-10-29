@@ -38,8 +38,10 @@ const getSingleRecipe = async (recipeId) => {
 
 // FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
+
 const getUserRecipes= async (userId) => {
-    try{
+    
+  try{
         const response = await axios.get(`${BACKEND_URL}/my-recipes`);
         return response.data;
 
@@ -48,6 +50,7 @@ const getUserRecipes= async (userId) => {
         throw error;
     }
 };
+
 
 //service to create a new recipe
 const createRecipe = async (recipeData, token) => {

@@ -74,6 +74,13 @@ function App() {
   const handleListCondition = condition => {
     setListCondition(condition);
   }
+  const handleUpdateRecipe = async (recipeId, recipeFormData) => {
+    const updatedRecipe = await recipesService.update(recipeId, recipeFormData);
+
+    setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
+
+    navigate(`recipes/${recipeId}`);
+  };
 
   /* USE EFFECT */
   useEffect(() => {
@@ -103,8 +110,9 @@ function App() {
           <>
             < Route path="/home" element={< Dashboard />} />
             <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
-            <Route path="/recipe-form" element={< RecipeForm setUser={setUser} />} />
-            <Route path="/edit-recipe/:recipeId" element={< RecipeForm setUser={setUser} />} />
+
+            <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
+            <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
