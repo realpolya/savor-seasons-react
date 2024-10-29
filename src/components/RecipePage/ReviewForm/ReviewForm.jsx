@@ -10,9 +10,12 @@ import './ReviewForm.css';
 function ReviewForm() {
 
     return (
-      <form id="review-form">
-          ReviewForm
-      </form>
+      <section id="review-form">
+        <textarea placeholder="Type your review here..."></textarea>
+        <div className="review-action">
+          <button type="button">Leave Review</button>
+        </div>
+      </section>
     )
 
   }
