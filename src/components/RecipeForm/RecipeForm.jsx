@@ -2,10 +2,9 @@
 
 import './RecipeForm.css';
 import {useState, useEffect, useContext} from 'react';
-import {getAllIngredients} from '../../services/ingredientsService.js';
-import {createRecipe, updateRecipe, getSingleRecipe} from '../../services/recipesService.js';
 import {useNavigate, useParams} from 'react-router-dom';
-import * as recipeService from "../../services/recipesService.js";
+
+import services from "../../services/index.js";
 
 import {AuthContext} from '../../App.jsx';
 
@@ -35,7 +34,7 @@ function RecipeForm() {
     useEffect(() => {
         async function fetchIngredients() {
             try {
-                const data = await getAllIngredients(token);
+                const data = await services.getAllIngredients(token);
                 setIngredientsList(data);
             } catch (error) {
                 console.error('Error fetching ingredients:', error);
@@ -45,7 +44,7 @@ function RecipeForm() {
 
         async function fetchSingleRecipe(recipeId) {
             try {
-                const recipe = await recipeService.getSingleRecipe(recipeId, token)
+                const recipe = await services.getSingleRecipe(recipeId, token)
                 const recipeToEdit = {
                     name: recipe.name,
                     prepTime: recipe.prepTime,
@@ -71,7 +70,7 @@ function RecipeForm() {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const recipeData = await getSingleRecipe(recipeId);
+                const recipeData = await services.getSingleRecipe(recipeId);
                 setFormData(recipeData);
             } catch (error) {
                 console.error('Error fetching the recipe:', error);
@@ -105,10 +104,10 @@ function RecipeForm() {
 
             if (recipeId) {
                 // Update existing recipe
-                await updateRecipe(recipeId, body, token);
+                await services.updateRecipe(recipeId, body, token);
             } else {
                 // Create new recipe
-                await createRecipe(body, token);
+                await services.createRecipe(body, token);
             }
 
             navigate('/'); // Redirect to home page
