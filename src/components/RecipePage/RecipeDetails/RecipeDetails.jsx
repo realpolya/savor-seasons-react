@@ -11,6 +11,8 @@ import ReviewForm from "../ReviewForm/ReviewForm.jsx";
 
 function RecipeDetails({ recipe }) {
 
+    console.log('inside recipe details');
+
     const {user, recipes, setRecipes} = useContext(AuthContext);
 
     // calculate recipe.rating
@@ -49,7 +51,7 @@ function RecipeDetails({ recipe }) {
               By <span>{recipe.author.username}</span>
             </p>
             <p id="details-time">🕒 {recipe.prepTime} min</p>
-            {/* <p id="details-time">🥕 {recipe.ingredients.length} ingredients</p> */}
+            {/* <p id="details-time">🥕 {recipe.ingredients} ingredients</p> */}
             <p id="details-details">{recipe.description}</p>
 
             { user ? <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link> : <></>}
