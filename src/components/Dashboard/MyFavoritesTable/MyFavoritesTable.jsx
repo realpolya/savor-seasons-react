@@ -35,7 +35,7 @@ function MyFavoritesTable() {
           <Link id="my-favorites-table-h2-link">Your Favorites</Link>
         </h2>
             <ul id="my-favorites-table-ul">
-                {favorites.map(recipe => {
+                {favorites.map(recipe => (
                   <li key={recipe._id} className="favorite-item">
                     <Link to={`/recipes/${recipe._id}`}>
                       <img src={recipe.name} alt={recipe.name} className="favorite-item-img" />
@@ -45,7 +45,7 @@ function MyFavoritesTable() {
                       </div>
                     </Link>
                   </li>
-                })}
+                ))}
             </ul>
         </section>
     )

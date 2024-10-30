@@ -2,6 +2,7 @@
     height: 70%;
     background-color: var(--light-color);
     border-radius: 2rem;
+    overflow-y: scroll;
 }
 
 #my-favorites-table-h2 {
