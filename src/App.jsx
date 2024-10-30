@@ -22,6 +22,7 @@ import Footer from './components/Footer/Footer.jsx';
 
 // delete later
 import {dummyRecipes} from './dummy-data/dummy-data.js';
+import MyFavoritesTable from './components/Dashboard/MyFavoritesTable/MyFavoritesTable.jsx';
 
 /* --------------------------------Variables--------------------------------*/
 
@@ -103,7 +104,7 @@ function App() {
 
             <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
-            {/* route for viewing favorites */}
+            <Route path="/favorites" element={< MyFavoritesTable />}/>{/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipes/:recipeId" element={<RecipePage setUser={setUser} /> } />
           </>
