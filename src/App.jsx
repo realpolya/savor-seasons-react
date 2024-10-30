@@ -1,16 +1,16 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, createContext } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 
 // css
 import './App.css'
 
 // services
 import * as authService from "./services/authService.js";
-import * as favoritesService from "./services/favoritesService.js";
-import * as ingredientsService from "./services/ingredientsService.js";
-import * as recipesService from "./services/recipesService.js";
+
+// example
+// import services from './index.js'
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
@@ -25,6 +25,8 @@ import Footer from './components/Footer/Footer.jsx';
 
 // delete later
 import {dummyRecipes} from './dummy-data/dummy-data.js';
+import * as recipesService from "./services/recipesService.js";
+import * as favoritesService from "./services/favoritesService.js";
 
 /* --------------------------------Variables--------------------------------*/
 
@@ -40,19 +42,21 @@ function App() {
 
   /* LOCATION */
   const location = useLocation();
-
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
   /* STATES */
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
-  const [listCondition, setListCondition] = useState('all');
+  // const [listCondition, setListCondition] = useState('all');
   const [user, setUser] = useState(authService.getUser());
-  const [favorites, setFavorites] = useState(null); 
+  // const [favorites, setFavorites] = useState(null);
 
   // all recipes are a constant, recipes can get sorted / filtered
   const [allRecipes, setAllRecipes] = useState(dummyRecipes);
   const [recipes, setRecipes] = useState(dummyRecipes);
   const [userRecipes, setUserRecipes] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
-  const [toggle, setToggle] = useState(true); // tbd
+  const [favorites, setFavorites] = useState([]);
+  // const [ingredients, setIngredients] = useState([]);
+  // const [toggle, setToggle] = useState(true); // tbd
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
@@ -60,21 +64,25 @@ function App() {
     setRecipes(recipesData);
   };
 
-  const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.getAllIngredients();
-    setIngredients(ingredientsData);
-  };
+  const fetchUserFavorites = async () => {
+    const userFavorites = await favoritesService.getFavorites(token)
+    setFavorites(userFavorites.recipes);
+  }
 
-  // FIXME:
+  // const fetchAllIngredients = async () => {
+  //   const ingredientsData = await ingredientsService.getAllIngredients();
+  //   setIngredients(ingredientsData);
+  // };
+
   const fetchUserRecipes = async () => {
-    const userRecipesData = await recipesService.getUserRecipes();
-    console.log('user recipes are ', userRecipesData)
+    const userRecipesData = await recipesService.getUserRecipes(token);
     setUserRecipes(userRecipesData)
   }
 
-  const handleListCondition = condition => {
-    setListCondition(condition);
-  }
+  // const handleListCondition = condition => {
+  //   setListCondition(condition);
+  // }
+
   const handleUpdateRecipe = async (recipeId, recipeFormData) => {
     const updatedRecipe = await recipesService.update(recipeId, recipeFormData);
 
@@ -89,13 +97,13 @@ function App() {
     fetchAllRecipes();
     if (user) {
       fetchUserRecipes();
+      fetchUserFavorites()
     }
   
   }, [location.pathname]);
 
   /* USE CONTEXT */
-  const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes };
-  console.log(user);
+  const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes, favorites };
 
   /* RETURN */
   return (

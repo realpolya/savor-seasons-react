@@ -5,6 +5,7 @@ import './RecipeDetails.css';
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
+import ReviewForm from "../ReviewForm/ReviewForm.jsx";
 
 /* --------------------------------Function--------------------------------*/
 
@@ -24,23 +25,26 @@ function RecipeDetails({ recipe }) {
     return (
       <section id="recipe-details-section">
 
-          <div className="recipe-card-div-img">
-            <img loading="eager" className="recipe-card-img" alt={recipe.name} src={recipe.image} />
+          <div id="details-div-img">
+            <img loading="eager"
+            id="details-img" alt={recipe.name} src={recipe.image} />
           </div>
 
-          <div className="recipe-card-div-info">
-            <h3 className="recipe-card-h3">{recipe.name}</h3>
-            < RatingComponent rating={recipe.rating}/>
-            <p className="recipe-card-rating">Rating: {recipe.rating}</p>
-            <p className="recipe-card-holiday">
+          <div id="details-div-info">
+            <h3 id="details-h3">{recipe.name}</h3>
+            <div id="details-rating-div">
+              < RatingComponent rating={recipe.rating}/>
+              <p id="details-rating">Rating: {recipe.rating}</p>
+            </div>
+            <p id="details-holiday">
               {recipe.holiday}
             </p>
-            <p className="recipe-card-author">
+            <p id="details-author">
               By <span>{recipe.author.username}</span>
             </p>
-            <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
-            {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
-            <p className="recipe-card-details">{recipe.description}</p>
+            <p id="details-time">🕒 {recipe.prepTime} min</p>
+            {/* <p id="details-time">🥕 {recipe.ingredients.length} ingredients</p> */}
+            <p id="details-details">{recipe.description}</p>
 
             { user ? <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link> : <></>}
 

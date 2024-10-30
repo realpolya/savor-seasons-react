@@ -13,7 +13,6 @@ function MyRecipesCard() {
 
     const {user, recipes, setRecipes, userRecipes } = useContext(AuthContext);
 
-    console.log('user recipes on my recipes card are ', userRecipes);
     userRecipes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
     // show the most recent 4 recipes
