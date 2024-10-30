@@ -52,7 +52,7 @@ function RecipeForm() {
                     description: recipe.description,
                     holiday: recipe.holiday,
                     image: recipe.image,
-                    ingredients: recipe.ingredients,
+                    ingredients: recipe.ingredients.map((ingredient)=>ingredient.id),
                 }
                 setFormData(recipeToEdit);
             } catch (error) {
@@ -92,7 +92,7 @@ function RecipeForm() {
         setFormData((prevData) => {
             const newIngredients = checked
                 ? [...prevData.ingredients, value]
-                : prevData.ingredients.filter((ingredient) => ingredient !== value);
+                : prevData.ingredients.filter((id) => id !== value);
             return {...prevData, ingredients: newIngredients};
         });
     };
@@ -194,8 +194,8 @@ function RecipeForm() {
                                         <input
                                             type="checkbox"
                                             id={ingredient._id}
-                                            value={ingredient.name}
-                                            checked={formData.ingredients.includes(ingredient.name)}
+                                            value={ingredient._id}
+                                            checked={formData.ingredients.includes(ingredient._id)}
                                             onChange={handleCheckboxChange}
                                         />
                                         <label htmlFor={ingredient._id}>{ingredient.name}</label>
