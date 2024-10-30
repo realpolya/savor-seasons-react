@@ -131,7 +131,7 @@ function RecipeForm() {
                             onChange={handleChange}
                             required
                         />
-                    </label> //label goes here
+                    </label> 
 
                     <label>
                         Preparation Time (in minutes)

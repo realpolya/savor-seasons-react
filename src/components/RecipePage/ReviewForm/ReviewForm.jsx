@@ -56,9 +56,6 @@ const ReviewForm = ({ onSubmitReview }) => {
   );
 };
 
-
-
-
 /* --------------------------------Exports--------------------------------*/
 
 export default ReviewForm;
