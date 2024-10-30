@@ -43,8 +43,8 @@ function App() {
   // const [favorites, setFavorites] = useState(null);
 
   // all recipes are a constant, recipes can get sorted / filtered
-  const [allRecipes, setAllRecipes] = useState(dummyRecipes);
-  const [recipes, setRecipes] = useState(dummyRecipes);
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [userRecipes, setUserRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   // const [toggle, setToggle] = useState(true); // tbd
@@ -52,6 +52,7 @@ function App() {
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
     const recipesData = await services.getAllRecipes();
+    setAllRecipes(recipesData);
     setRecipes(recipesData);
   };
 
@@ -100,13 +101,13 @@ function App() {
           {/* protected Routes */}
           <>
             < Route path="/home" element={< Dashboard />} />
-            <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
+            <Route path="/about-team" element={< AboutTeam />} />
 
-            <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
+            <Route path="/recipe-form" element={< RecipeForm />} />
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             <Route path="/favorites" element={< MyFavoritesTable />}/>{/* route for viewing favorites */}
             {/* route for viewing my recipes */}
-            <Route path="/recipes/:recipeId" element={<RecipePage setUser={setUser} /> } />
+            <Route path="/recipes/:recipeId" element={<RecipePage /> } />
           </>
 
           {/* Public Routes */}
