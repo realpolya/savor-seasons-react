@@ -15,6 +15,7 @@ function MyFavoritesTable() {
   const { favorites } = useContext(AuthContext);
   
   // TODO: define maximum number of favorites shown at once 
+
   // If there are no favorites, show a message
   if (!favorites || favorites.length === 0) {
 
@@ -33,7 +34,6 @@ function MyFavoritesTable() {
         <h2 id="my-favorites-table-h2">
           <Link id="my-favorites-table-h2-link">Your Favorites</Link>
         </h2>
-        <p>No favorites yet.</p>
             <ul id="my-favorites-table-ul">
                 {favorites.map(recipe => {
                   <li key={recipe._id} className="favorite-item">
