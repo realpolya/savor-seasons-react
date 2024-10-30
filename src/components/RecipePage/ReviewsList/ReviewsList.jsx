@@ -9,6 +9,10 @@ import './ReviewsList.css';
 
 function ReviewsList({ recipe }) {
 
+    // review logic buttons logic:
+    // AUTHOR & LOGGED IN: Edit Review, Delete Review
+    // --> once you click Edit – form for edit appears!
+
     return (
 
       <section className="reviews-list">
