@@ -37,16 +37,9 @@ function RecipePage() {
 
   }, [recipes])
 
-  // const handleAddReview = (newReview) => {
-  //   const updateRecipe = {
-  //     ...recipe,
-  //     review: [...recipe.review, { ...newReview, reviewer: user.username }]
-  //   };
-  //   const updateRecipes = recipes.map(r =>
-  //     r._id === recipe._id ? updateRecipe : r
-  //   );
-  //   setRecipes(updateRecipes);
-  // };
+  const handleAddReview = (newReview) => {
+    console.log('ok');
+  };
 
   // --Mandy's version below--
   // const handleAddReview = (newReview) => {
