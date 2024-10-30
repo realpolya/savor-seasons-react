@@ -24,7 +24,7 @@ function RecipePage() {
     <main id="recipe-page-main">
       <RecipeDetails recipe={recipe} />
       <ReviewForm />
-      <ReviewsList />
+      <ReviewsList recipe={recipe} />
     </main>
   );
 }

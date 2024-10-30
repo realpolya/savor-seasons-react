@@ -1,6 +1,6 @@
 /* colors */
 :root {
-  --dark-color: #31135A; /* */
+  --dark-color: #31135A;
   --light-color: #CEBBC9;
   --background-color: #F9FFCA;
   --accent-color: #CE2D4F;
@@ -12,6 +12,9 @@
 
   --main-font: "Montserrat", sans-serif;
   --decor-font: "Fredericka the Great", sans-serif;
+
+  /* max-width for mobile */
+  --mobile-width: 820px;
 }
 
 :root {
