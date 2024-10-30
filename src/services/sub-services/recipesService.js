@@ -106,9 +106,13 @@ const deleteRecipe = async (recipeId) => {
 };
 
 //service to add a review to a recipe
-const createReview = async(recipeId, reviewData ) => {
+const createReview = async(recipeId, reviewData) => {
     try {
-        const response = await axios.post(`${BACKEND_URL}/recipes/${recipeId}/reviews`, reviewData);
+        const response = await axios.post(`${BACKEND_URL}/recipes/${recipeId}/reviews`, reviewData, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error creating review:', error);

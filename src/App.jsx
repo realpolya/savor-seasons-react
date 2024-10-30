@@ -57,22 +57,27 @@ function App() {
   };
 
   const fetchUserFavorites = async () => {
+
     const userFavorites = await services.getFavorites(token)
     setFavorites(userFavorites.recipes);
+
   }
 
   const fetchUserRecipes = async () => {
+
     const userRecipesData = await services.getUserRecipes(token);
     setUserRecipes(userRecipesData)
+
   }
 
-  const handleUpdateRecipe = async (recipeId, recipeFormData) => {
+  /* commented out as this function is not being used anywhere atm */
+  // const handleUpdateRecipe = async (recipeId, recipeFormData) => {
 
-    const updatedRecipe = await services.updateRecipe(recipeId, recipeFormData);
-    setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
-    navigate(`recipes/${recipeId}`);
+  //   const updatedRecipe = await services.updateRecipe(recipeId, recipeFormData);
+  //   setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
+  //   navigate(`recipes/${recipeId}`);
 
-  };
+  // };
 
   /* USE EFFECT */
   useEffect(() => {
@@ -104,8 +109,8 @@ function App() {
             <Route path="/about-team" element={< AboutTeam />} />
 
             <Route path="/recipe-form" element={< RecipeForm />} />
-            <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
-            <Route path="/favorites" element={< MyFavoritesTable />}/>{/* route for viewing favorites */}
+            <Route path="/recipes/:recipeId/edit" element={<RecipeForm />} />
+            {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipes/:recipeId" element={<RecipePage /> } />
           </>
