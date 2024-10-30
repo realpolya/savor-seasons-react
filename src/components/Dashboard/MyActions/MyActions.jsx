@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
 
-import { signOut } from '../../../services/authService.js';
+import { signOut } from '../../../services/index.js';
 
 // css
 import './MyActions.css';

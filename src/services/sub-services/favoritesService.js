@@ -6,7 +6,7 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 /* --------------------------------Helper Functions--------------------------------*/
 /* --------------------------------Functions--------------------------------*/
 /* --------------------------------GET Services--------------------------------*/
-export const getFavorites = async (token) => {
+const getFavorites = async (token) => {
   try {
     const response = await axios.get(`${BACKEND_URL}/favorites`, {
       headers: {
@@ -25,7 +25,7 @@ export const getFavorites = async (token) => {
 
 /* --------------------------------POST Services--------------------------------*/
 
-export const createFavorite = async (recipeId, token) => {
+const createFavorite = async (recipeId, token) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/favorites/${recipeId}`, {
       headers: {
@@ -44,7 +44,7 @@ export const createFavorite = async (recipeId, token) => {
 
 /* --------------------------------PUT Services--------------------------------*/
 
-export const removeFavorite = async (recipeId, token) => {
+const removeFavorite = async (recipeId, token) => {
   try {
     const response = await axios.put(`${BACKEND_URL}/favorites/${recipeId}`, {
       headers: {
@@ -61,4 +61,6 @@ export const removeFavorite = async (recipeId, token) => {
   }
 };
 
+/* --------------------------------Exports--------------------------------*/
 
+export { getFavorites, createFavorite, removeFavorite };

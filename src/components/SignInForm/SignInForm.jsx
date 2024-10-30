@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 // contexts & services
 import { AuthContext } from '../../App.jsx';
-import * as authService from '../../services/authService';
+import {signIn} from '../../services/index.js';
 
 // css
 import './SignInForm.css';
@@ -32,7 +32,7 @@ function SignInForm() {
     e.preventDefault();
 
     try {
-      const retrievedUser = await authService.signIn(formData);
+      const retrievedUser = await signIn(formData);
       console.log(retrievedUser);
       setUser(retrievedUser);
       navigate('/home');
