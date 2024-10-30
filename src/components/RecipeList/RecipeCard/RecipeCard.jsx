@@ -38,7 +38,7 @@ function RecipeCard({ recipe }) {
             <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
             {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
             <p className="recipe-card-details">{recipe.description}</p>
-            <button className="recipe-card-button">View {recipe.name}</button>
+            <button className="recipe-card-button">View</button>
           </div>
       </section>
     )
