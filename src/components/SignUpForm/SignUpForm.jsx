@@ -122,4 +122,4 @@ function SignUpForm() {
 
 /* --------------------------------Exports--------------------------------*/
 
-export default SignUpForm
+export default SignUpForm;

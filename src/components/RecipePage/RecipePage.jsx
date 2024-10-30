@@ -20,10 +20,22 @@ function RecipePage() {
 
   const recipe = recipes.find(recipe => JSON.stringify(recipe._id) === JSON.stringify(recipeId))
   console.log(recipe);
+  // Funtion to handle Adding a new Review
+  const handleAddReview = (newReview) => {
+    const updateRecipe = {
+      ...recipe,
+      review: [...recipe.review, { ...newReview, reviewer: user.username }]
+    };
+    const updateRecipes = recipes.map(r =>
+      r._id === recipe._id ? updateRecipe : r
+    );
+    setRecipes(updateRecipes);
+  };
+  
   return (
     <main id="recipe-page-main">
       <RecipeDetails recipe={recipe} />
-      <ReviewForm />
+      <ReviewForm onSubmitReview={handleAddReview}/>
       <ReviewsList recipe={recipe} />
     </main>
   );
