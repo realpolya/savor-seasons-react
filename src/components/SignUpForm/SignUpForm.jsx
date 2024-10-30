@@ -34,11 +34,8 @@ function SignUpForm() {
     e.preventDefault();
     try {
 
-      console.log(formData);
-
       const newUserResponse = await signUp(formData);
-      console.log(newUserResponse.user)
-      setUser(newUserResponse.user);
+      setUser(newUserResponse);
       navigate('/home');
 
     } catch (err) {

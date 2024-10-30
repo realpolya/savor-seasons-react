@@ -22,6 +22,12 @@ function RecipeDetails({ recipe }) {
 
     }
 
+    // recipe details logic buttons logic:
+    // AUTHOR & LOGGED IN: Edit, Delete
+    // NOT AUTHOR & LOGGED IN: add to favorites
+    // NOT AUTHOR & LOGGED IN & IN FAVORITES: remove from favorites
+    // everyone should: BACK TO RECIPES
+
     return (
       <section id="recipe-details-section">
 

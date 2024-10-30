@@ -33,7 +33,6 @@ function SignInForm() {
 
     try {
       const retrievedUser = await signIn(formData);
-      console.log(retrievedUser);
       setUser(retrievedUser);
       navigate('/home');
 
