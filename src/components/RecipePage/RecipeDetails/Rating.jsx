@@ -10,7 +10,7 @@ function RatingComponent({ rating }) {
     <div className='stars-rating'>
       <Rating initialValue={rating}
         size='25' fillClassName='stars-icon'
-        emptyColor='#F9FFCA' fillColor='#CE2D4F'
+        emptyColor='#F9FFCA' readonly fillColor='#CE2D4F'
         allowFraction />
     </div>
   );

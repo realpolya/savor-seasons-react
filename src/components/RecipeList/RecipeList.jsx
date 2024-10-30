@@ -1,5 +1,6 @@
 /* --------------------------------Imports--------------------------------*/
-import { useContext } from 'react';
+
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../App.jsx';
 
@@ -11,11 +12,23 @@ import './RecipeList.css';
 
 /* --------------------------------Function--------------------------------*/
 
-// TODO: pass the listCondition prop to know which list to render (landing page, favorites, my recipes)
-
 function RecipeList() {
 
+    const [loading, setLoading] = useState(true);
     const {user, recipes, setRecipes} = useContext(AuthContext);
+
+    
+    useEffect(() => {
+
+      if (recipes.length > 0) {
+        console.log('loaded');
+        console.log(recipes);
+        setLoading(false);
+      } else {
+        console.log('not loaded');
+      }
+  
+    }, [recipes, user])
 
     return (
       <main id="recipe-list-main">
@@ -23,13 +36,14 @@ function RecipeList() {
           <h2>Recipes List</h2>
 
           < SortBar />
-          <section id="recipe-list-section">
-            {recipes.map(recipe => {
-              return <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-card-link">
-                < RecipeCard recipe={recipe}/>
-              </Link>
-            })}
-          </section>
+
+          { loading ? (<div>Still loading...</div>) : (<section id="recipe-list-section">
+          {recipes.map(recipe => {
+          return <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-card-link">
+            < RecipeCard recipe={recipe}/>
+          </Link>
+          })}
+        </section>) }
           
       </main>
     )
