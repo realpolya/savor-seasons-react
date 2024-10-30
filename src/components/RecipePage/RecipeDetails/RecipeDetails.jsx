@@ -11,27 +11,28 @@ import { AuthContext } from '../../../App.jsx';
 function RecipeDetails({ recipe }) {
 
     const [loading, setLoading] = useState(true);
+    const [recipeRating, setRecipeRating] = useState(0);
     const {user, recipes, setRecipes} = useContext(AuthContext);
+
 
     useEffect(() => {
       
       if (recipe.author && recipe.ingredients) {
-        console.log('loaded');
+        if (recipe.reviews.length > 0) {
+          
+          let newRating = 0;
+          recipe.reviews.forEach(review => newRating += +review.rating);
+          newRating = newRating / recipe.reviews.length;
+          setRecipeRating(newRating);
+    
+        }
         setLoading(false);
       } else {
         console.log('not loaded')
       }
   
-    }, [recipe, recipe.author, recipe.ingredients])
+    }, [recipe])
 
-    // calculate recipe.rating
-    recipe.rating = 0;
-    if (recipe.reviews.length > 0) {
-
-      recipe.reviews.forEach(review => recipe.rating += +review.rating);
-      recipe.rating = recipe.rating / recipe.reviews.length;
-
-    }
 
     // recipe details logic buttons logic:
     // AUTHOR & LOGGED IN: Edit, Delete
@@ -50,23 +51,23 @@ function RecipeDetails({ recipe }) {
           <div id="details-div-info">
             <h3 id="details-h3">{recipe.name}</h3>
             <div id="details-rating-div">
-              < RatingComponent rating={recipe.rating}/>
-              <p id="details-rating">Rating: {recipe.rating}</p>
+              < RatingComponent rating={recipeRating}/>
+              <p id="details-rating">Rating: {recipeRating}</p>
             </div>
             <p id="details-holiday">
               {recipe.holiday}
             </p>
 
-            { loading ? (<p>Author loading...</p>) : (<p id="details-author">
-              By <span>{recipe.author.username}</span>
+            { loading && !recipe.author ? (<p>Author loading...</p>) : (<p id="details-author">
+              By <span>{recipe.author?.username}</span>
             </p>) }
 
             <p id="details-time">🕒 {recipe.prepTime} min</p>
             <div id="details-ingredients">
               <h5 id="details-ingredients-h5">Ingredients:</h5>
 
-            { loading ? (<p>Ingredients loading...</p>) : (<div id="details-ingredients-list">
-              {recipe.ingredients.map(ingredient => {
+            { loading && !recipe.ingredients ? (<p>Ingredients loading...</p>) : (<div id="details-ingredients-list">
+              {recipe.ingredients?.map(ingredient => {
                 return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
               })}
             </div>) }

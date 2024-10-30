@@ -6,34 +6,61 @@ import { AuthContext } from '../../../App.jsx';
 import RatingsReviews from './RatingsReviews';
 import ReviewForm from './ReviewForm/ReviewForm.jsx';
 
+import services from '../../../services/index.js';
+
 // css
 import './ReviewsList.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function ReviewsList({ recipe }) {
+function ReviewsList({ recipe, setRecipe }) {
 
-    // review logic buttons logic:
+    const [loading, setLoading] = useState(true);
+    const [reviews, setReviews] = useState(recipe.reviews);
+    const {recipeId} = useParams();
+
+    // TODO: review logic buttons logic:
     // AUTHOR & LOGGED IN: Edit Review, Delete Review
     // --> once you click Edit – form for edit appears!
 
     const {user, recipes, setRecipes} = useContext(AuthContext);
 
-    const handleAddReview = (newReview) => {
-      console.log('ok');
+    const handleAddReview = async (recipeId, data) => {
+      try {
+        const newReview = await services.createReview(recipeId, data);
+        setReviews((prev) => {return {...prev, newReview}});
+        return newReview;
+      } catch(err) {
+        console.log(err)
+      }
     };
+
+    useEffect(() => {
+
+      try {
+        const fetchRecipe = async (id, token) => {
+          try {
+
+            const foundRecipe = await services.getSingleRecipe(id, token);
+            setRecipe(foundRecipe);
   
-    // --Mandy's version below--
-    // const handleAddReview = (newReview) => {
-    //   const updateRecipe = {
-    //     ...recipe,
-    //     review: [...recipe.review, { ...newReview, reviewer: user.username }]
-    //   };
-    //   const updateRecipes = recipes.map(r =>
-    //     r._id === recipe._id ? updateRecipe : r
-    //   );
-    //   setRecipes(updateRecipes);
-    // };
+            if (foundRecipe && Object.keys(foundRecipe).includes('prepTime')) {
+              console.log('changing the loading')
+              setLoading(false);
+            }
+  
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        
+        fetchRecipe(recipeId, localStorage.getItem('token'));
+
+      } catch(err) {
+        console.log(err);
+      }
+      
+    }, [reviews])
 
     return (
 
@@ -41,11 +68,11 @@ function ReviewsList({ recipe }) {
 
         <h2 id="reviews-list-h2">Reviews</h2>
 
-        { user ? (< ReviewForm />) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
+        { user ? (< ReviewForm handleAddReview={handleAddReview}/>) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
 
-        <div className="reviews-list">
-          {recipe.reviews.map(review => {
-            return <div className="review-div">
+        { loading ? (<p>Reviews are loading...</p>) : (<div className="reviews-list">
+          {recipe?.reviews.map(review => {
+            return <div className="review-div" key={review._id}>
                 <h3 className="review-h3">{review.name}</h3>
                 <div className="review-author-rating">
                   <p><span>by</span> {review.reviewer.username}</p>
@@ -59,7 +86,8 @@ function ReviewsList({ recipe }) {
                 </p>
               </div>
           })}
-        </div>
+        </div>)}
+        
       </section>
 
     )
@@ -83,3 +111,15 @@ export default ReviewsList;
 //   required: true,
 //   enum: [1, 2, 3, 4, 5],
 // },
+
+// --Mandy's version below--
+// const handleAddReview = (newReview) => {
+//   const updateRecipe = {
+//     ...recipe,
+//     review: [...recipe.review, { ...newReview, reviewer: user.username }]
+//   };
+//   const updateRecipes = recipes.map(r =>
+//     r._id === recipe._id ? updateRecipe : r
+//   );
+//   setRecipes(updateRecipes);
+// };

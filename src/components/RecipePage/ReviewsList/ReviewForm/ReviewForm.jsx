@@ -16,7 +16,7 @@ const initialForm = {
   rating: 0
 }
 
-const ReviewForm = ({ onSubmitReview }) => {
+const ReviewForm = ({ handleAddReview }) => {
 
     const {recipeId} = useParams();
   
@@ -27,21 +27,12 @@ const ReviewForm = ({ onSubmitReview }) => {
     const[error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    // create review in mongo db
-    const handleAddReview = async (recipeId, data) => {
-      try {
-        const newReview = await services.createReview(recipeId, data);
-        return newReview;
-      } catch(err) {
-        console.log(err)
-      }
-    }
-
     const handleChange = (e) => {
       setFormData({...formData, [e.target.name]: e.target.value});
     };
   
     const handleSubmit = (e) => {
+
       e.preventDefault();
 
       if (!formData.text || !formData.name || formData.rating === 0) { //handleAddReview
@@ -51,7 +42,6 @@ const ReviewForm = ({ onSubmitReview }) => {
 
       handleAddReview(recipeId, formData);
       setError(null);
-      // onSubmitReview(formData);
       setFormData(initialForm);
       setSuccessMessage("Review submitted successfully");
 

@@ -22,26 +22,29 @@ function RecipePage() {
 
   useEffect(() => {
 
-    if (recipes.length > 0) {
-      console.log('loaded');
-      const newRecipe = recipes.find(recipe => {
-        return JSON.stringify(recipe._id) === JSON.stringify(recipeId)}
-      );
-      setRecipe(newRecipe);
-      setLoading(false)
+      const fetchRecipe = async (id, token) => {
+        try {
+          const foundRecipe = await services.getSingleRecipe(id, token);
+          setRecipe(foundRecipe);
 
-    } else {
-      console.log('not loaded')
-    }
+          if (foundRecipe && Object.keys(foundRecipe).includes('prepTime')) {
+            console.log('changing the loading')
+            setLoading(false);
+          }
 
-  }, [recipes])
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      
+      fetchRecipe(recipeId, localStorage.getItem('token'));
 
-  
+  }, [recipeId])
   
   return (
     <main id="recipe-page-main">
       { loading ? <div>Recipe Details not loaded yet</div> : <RecipeDetails recipe={recipe} />}
-      { loading ? <div>Reviews not loaded yet</div> : <ReviewsList recipe={recipe} /> }
+      { loading ? <div>Reviews not loaded yet</div> : <ReviewsList recipe={recipe} setRecipe={setRecipe}/> }
     </main>
   );
 }
@@ -49,3 +52,16 @@ function RecipePage() {
 /* --------------------------------Exports--------------------------------*/
 
 export default RecipePage;
+
+
+// if (recipes.length > 0) {
+    //   console.log('loaded');
+    //   const newRecipe = recipes.find(recipe => {
+    //     return JSON.stringify(recipe._id) === JSON.stringify(recipeId)}
+    //   );
+    //   setRecipe(newRecipe);
+    //   setLoading(false)
+
+    // } else {
+    //   console.log('not loaded')
+    // }
