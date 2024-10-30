@@ -1,20 +1,20 @@
 /* --------------------------------Imports--------------------------------*/
 
 import './RecipeForm.css';
-import { useState, useEffect, useContext } from 'react';
-import { getAllIngredients } from '../../services/ingredientsService.js';
-import { createRecipe, updateRecipe, singleRecipe } from '../../services/recipesService.js';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useState, useEffect, useContext} from 'react';
+import {getAllIngredients} from '../../services/ingredientsService.js';
+import {createRecipe, updateRecipe, getSingleRecipe} from '../../services/recipesService.js';
+import {useNavigate, useParams} from 'react-router-dom';
+import * as recipeService from "../../services/recipesService.js";
 
-import { AuthContext } from '../../App.jsx';
+import {AuthContext} from '../../App.jsx';
 
 /* --------------------------------Function--------------------------------*/
 
 function RecipeForm() {
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhb2xhIiwiX2lkIjoiNjcxZDVkMzRkZTAwNzNlYzgxNTJmNDA4IiwiaWF0IjoxNzMwMTgzMTU5fQ.Srso2zOywXsxgQInDtkNOEHAMhDYFGFt8ZZ4NlpuSGU"; // Replace with valid token logic
     const navigate = useNavigate();
-    const { recipeId } = useParams(); // Get recipe ID from URL params
-    const { user } = useContext(AuthContext);
+    const {recipeId} = useParams(); // Get recipe ID from URL params
+    const {user} = useContext(AuthContext);
 
     const token = localStorage.getItem('token');
 
@@ -36,21 +36,42 @@ function RecipeForm() {
         async function fetchIngredients() {
             try {
                 const data = await getAllIngredients(token);
-                console.log(data);
                 setIngredientsList(data);
             } catch (error) {
                 console.error('Error fetching ingredients:', error);
                 setError('Failed to load ingredients');
             }
         }
+
+        async function fetchSingleRecipe(recipeId) {
+            try {
+                const recipe = await recipeService.getSingleRecipe(recipeId, token)
+                const recipeToEdit = {
+                    name: recipe.name,
+                    prepTime: recipe.prepTime,
+                    author: recipe.author,
+                    description: recipe.description,
+                    holiday: recipe.holiday,
+                    image: recipe.image,
+                    ingredients: recipe.ingredients,
+                }
+                setFormData(recipeToEdit);
+            } catch (error) {
+                console.error('Error fetching single recipe:', error);
+            }
+        }
+
         fetchIngredients();
+        if (recipeId) {
+            fetchSingleRecipe(recipeId);
+        }
     }, [token]);
 
     // Fetch recipe if editing
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const recipeData = await singleRecipe(recipeId);
+                const recipeData = await getSingleRecipe(recipeId);
                 setFormData(recipeData);
             } catch (error) {
                 console.error('Error fetching the recipe:', error);
@@ -60,7 +81,7 @@ function RecipeForm() {
     }, [recipeId]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -68,23 +89,23 @@ function RecipeForm() {
     };
 
     const handleCheckboxChange = (e) => {
-        const { value, checked } = e.target;
+        const {value, checked} = e.target;
         setFormData((prevData) => {
             const newIngredients = checked
                 ? [...prevData.ingredients, value]
                 : prevData.ingredients.filter((ingredient) => ingredient !== value);
-            return { ...prevData, ingredients: newIngredients };
+            return {...prevData, ingredients: newIngredients};
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const body = { ...formData, author: user._id };
+            const body = {...formData, author: user._id};
 
             if (recipeId) {
                 // Update existing recipe
-                await updateRecipe(recipeId, body);
+                await updateRecipe(recipeId, body, token);
             } else {
                 // Create new recipe
                 await createRecipe(body, token);
@@ -92,7 +113,7 @@ function RecipeForm() {
 
             navigate('/'); // Redirect to home page
         } catch (error) {
-            console.log('Error while submitting form:', error);
+            console.error('Error while submitting form:', error);
         }
     };
 

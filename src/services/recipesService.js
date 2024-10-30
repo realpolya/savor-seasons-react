@@ -25,9 +25,13 @@ export const getAllRecipes = async () => {
 };
 
 // service to fetch a single recipe by id
-export const singleRecipe = async (recipeId) => {
+export const getSingleRecipe = async (recipeId, token) => {
     try {
-        const response = await axios.get(`${BACKEND_URL}/recipes/${recipeId}`);
+        const response = await axios.get(`${BACKEND_URL}/recipes/recipe/${recipeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching the recipe:', error);
@@ -77,9 +81,13 @@ export const createRecipe = async (recipeData, token) => {
 };
 
 //service to update a recipe by id
-export const updateRecipe = async(recipeId,  updatedData)=> {
+export const updateRecipe = async(recipeId,  updatedData, token)=> {
     try {
-        const response = await axios.put(`${BACKEND_URL}/recipes/${recipeId}/`, updatedData);
+        const response = await axios.put(`${BACKEND_URL}/recipes/${recipeId}/`, updatedData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error updating recipe:', error);
