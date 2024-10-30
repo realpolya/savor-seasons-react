@@ -56,13 +56,17 @@ function App() {
   };
 
   const fetchUserFavorites = async () => {
+
     const userFavorites = await services.getFavorites(token)
     setFavorites(userFavorites.recipes);
+    
   }
 
   const fetchUserRecipes = async () => {
+
     const userRecipesData = await services.getUserRecipes(token);
     setUserRecipes(userRecipesData)
+
   }
 
   const handleUpdateRecipe = async (recipeId, recipeFormData) => {

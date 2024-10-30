@@ -5,13 +5,10 @@ import './RecipeDetails.css';
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
-import ReviewForm from "../ReviewForm/ReviewForm.jsx";
 
 /* --------------------------------Function--------------------------------*/
 
 function RecipeDetails({ recipe }) {
-
-    console.log('inside recipe details');
 
     const {user, recipes, setRecipes} = useContext(AuthContext);
 
@@ -29,8 +26,6 @@ function RecipeDetails({ recipe }) {
     // NOT AUTHOR & LOGGED IN: add to favorites
     // NOT AUTHOR & LOGGED IN & IN FAVORITES: remove from favorites
     // everyone should: BACK TO RECIPES
-
-    console.log(recipe.ingredients);
 
     return (
       <section id="recipe-details-section">
@@ -57,7 +52,7 @@ function RecipeDetails({ recipe }) {
               <h5 id="details-ingredients-h5">Ingredients:</h5>
               <div id="details-ingredients-list">
                 {recipe.ingredients.map(ingredient => {
-                  return <p className="ingredient-p">🥕 {ingredient.name}</p>
+                  return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
                 })}
               </div>
             </div>

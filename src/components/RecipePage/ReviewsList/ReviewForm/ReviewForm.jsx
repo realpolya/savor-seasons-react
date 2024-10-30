@@ -3,6 +3,7 @@ import RatingForm from './RatingForm';
 // css
 import './ReviewForm.css';
 import {useState, useEffect} from "react";
+
 /* --------------------------------Function--------------------------------*/
 
 const ReviewForm = ({ onSubmitReview }) => {
@@ -13,59 +14,56 @@ const ReviewForm = ({ onSubmitReview }) => {
       rating: 0
     });
 
-    const [rating, setRating] = useState(0)
-
-    const handleRating = (rate) => {
-      setRating(rate);
-    }
+    const [rating, setRating] = useState(0);
 
     const[error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-  const handleRatingChange = (e) => {
-    console.log(e.target.value)
-    // setFormData({ ...formData, rating: newRating });
-  };
+    const handleChange = (e) => {
+      console.log(e.target.value)
+      console.log(formData);
+      setFormData({...formData, [e.target.name]: e.target.value});
+    };
   
-  const handleChange = (e) => {
-    console.log(e.target.value)
-    setFormData({...formData, [e.target.name]: e.target.value});
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-    if (!formData.text || formData.rating === 0) { //handleAddReview
-      setError("Please enter a review text and select a reating");
-      return;
-    }
-    setError(null);
-    onSubmitReview(formData);
-    setFormData({ text: '', rating: 0 });
-    setSuccessMessage("Review submitted successfully");
+      if (!formData.text || formData.rating === 0) { //handleAddReview
+        setError("Please enter a review text and select a rating");
+        return;
+      }
+      setError(null);
+      onSubmitReview(formData);
+      setFormData({ text: '', rating: 0 });
+      setSuccessMessage("Review submitted successfully");
 
-    setTimeout(() => {
-      setSuccessMessage(""), 3000;
-    }, timeout);
-  };
+      setTimeout(() => {
+        setSuccessMessage(""), 3000;
+      }, timeout);
+    };
+
+    useEffect(() => {
+      setFormData((prev) => {return {...prev, rating}})
+    }, [rating])
 
 
   return (
     <form onSubmit={handleSubmit} id="review-form">
+
+      <h3>Leave a Review</h3>
 
       <div>
         <label htmlFor="">
         Title:
         </label>
         <input type="text"
-          name="prepTime"
-          value={formData.prepTime}
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           required />
       </div>
 
-      < RatingForm rating={formData.rating} 
-      onRatingChange={handleRatingChange} />
+      < RatingForm setRating={setRating} />
       
       <div id="review-form-text-div">
         <label htmlFor="text-input"> Your Review: </label>
