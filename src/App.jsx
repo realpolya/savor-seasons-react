@@ -9,6 +9,9 @@ import './App.css'
 // services
 import * as authService from "./services/authService.js";
 
+// example
+// import services from './index.js'
+
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
 import RecipeList from './components/RecipeList/RecipeList.jsx';
