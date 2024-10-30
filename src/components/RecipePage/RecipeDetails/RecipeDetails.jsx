@@ -30,6 +30,8 @@ function RecipeDetails({ recipe }) {
     // NOT AUTHOR & LOGGED IN & IN FAVORITES: remove from favorites
     // everyone should: BACK TO RECIPES
 
+    console.log(recipe.ingredients);
+
     return (
       <section id="recipe-details-section">
 
@@ -51,7 +53,14 @@ function RecipeDetails({ recipe }) {
               By <span>{recipe.author.username}</span>
             </p>
             <p id="details-time">🕒 {recipe.prepTime} min</p>
-            {/* <p id="details-time">🥕 {recipe.ingredients} ingredients</p> */}
+            <div id="details-ingredients">
+              <h5 id="details-ingredients-h5">Ingredients:</h5>
+              <div id="details-ingredients-list">
+                {recipe.ingredients.map(ingredient => {
+                  return <p className="ingredient-p">🥕 {ingredient.name}</p>
+                })}
+              </div>
+            </div>
             <p id="details-details">{recipe.description}</p>
 
             { user ? <Link to={`/recipes/${recipe._id}/edit`}>Edit</Link> : <></>}
