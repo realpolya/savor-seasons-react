@@ -44,16 +44,7 @@ function RecipeForm() {
 
         async function fetchSingleRecipe(recipeId) {
             try {
-                const recipe = await services.getSingleRecipe(recipeId, token)
-                const recipeToEdit = {
-                    name: recipe.name,
-                    prepTime: recipe.prepTime,
-                    author: recipe.author,
-                    description: recipe.description,
-                    holiday: recipe.holiday,
-                    image: recipe.image,
-                    ingredients: recipe.ingredients,
-                }
+                const recipeToEdit = await services.getSingleRecipe(recipeId, token)
                 setFormData(recipeToEdit);
             } catch (error) {
                 console.error('Error fetching single recipe:', error);
@@ -194,8 +185,8 @@ function RecipeForm() {
                                         <input
                                             type="checkbox"
                                             id={ingredient._id}
-                                            value={ingredient.name}
-                                            checked={formData.ingredients.includes(ingredient.name)}
+                                            value={ingredient._id}
+                                            checked={formData.ingredients.includes(ingredient._id)}
                                             onChange={handleCheckboxChange}
                                         />
                                         <label htmlFor={ingredient._id}>{ingredient.name}</label>
