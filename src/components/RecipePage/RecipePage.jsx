@@ -23,7 +23,7 @@ function RecipePage() {
   return (
     <main id="recipe-page-main">
       <RecipeDetails recipe={recipe} />
-      <ReviewForm />
+      <ReviewForm onSubmitReview={handleAddReview}/>
       <ReviewsList recipe={recipe} />
     </main>
   );
