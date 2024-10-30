@@ -65,10 +65,11 @@ function App() {
     setIngredients(ingredientsData);
   };
 
+  // FIXME:
   const fetchUserRecipes = async () => {
-    const userRecipesData = await ingredientsService.getUserRecipes();
+    const userRecipesData = await recipesService.getUserRecipes();
     console.log('user recipes are ', userRecipesData)
-    setUserRecipes(userRecipesData);
+    setUserRecipes(userRecipesData)
   }
 
   const handleListCondition = condition => {
@@ -115,7 +116,7 @@ function App() {
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={ handleUpdateRecipe} />} />
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
-            <Route path="/recipe-page" element={<RecipePage setUser={setUser} /> } />
+            <Route path="/recipes/:recipeId" element={<RecipePage setUser={setUser} /> } />
           </>
 
           {/* Public Routes */}
