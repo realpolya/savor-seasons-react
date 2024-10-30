@@ -1,11 +1,8 @@
 /* --------------------------------Imports--------------------------------*/
-
 import RatingComponent from './Rating';
-
 // css
 import './RecipeDetails.css';
 import {Link} from 'react-router-dom'
-
 
 /* --------------------------------Function--------------------------------*/
 
