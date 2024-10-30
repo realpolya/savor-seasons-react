@@ -1,6 +1,5 @@
 /* --------------------------------Imports--------------------------------*/
 import RecipeDetails from './RecipeDetails/RecipeDetails.jsx';
-import ReviewForm from './ReviewForm/ReviewForm.jsx';
 import ReviewsList from './ReviewsList/ReviewsList.jsx';
 
 import services from '../../services/index.js';
@@ -23,41 +22,29 @@ function RecipePage() {
 
   useEffect(() => {
 
-    if (recipes.length > 0) {
-      console.log('loaded');
-      const newRecipe = recipes.find(recipe => {
-        return JSON.stringify(recipe._id) === JSON.stringify(recipeId)}
-      );
-      setRecipe(newRecipe);
-      setLoading(false)
+      const fetchRecipe = async (id, token) => {
+        try {
+          const foundRecipe = await services.getSingleRecipe(id, token);
+          setRecipe(foundRecipe);
 
-    } else {
-      console.log('not loaded')
-    }
+          if (foundRecipe && Object.keys(foundRecipe).includes('prepTime')) {
+            console.log('changing the loading')
+            setLoading(false);
+          }
 
-  }, [recipes])
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      
+      fetchRecipe(recipeId, localStorage.getItem('token'));
 
-  const handleAddReview = (newReview) => {
-    console.log('ok');
-  };
-
-  // --Mandy's version below--
-  // const handleAddReview = (newReview) => {
-  //   const updateRecipe = {
-  //     ...recipe,
-  //     review: [...recipe.review, { ...newReview, reviewer: user.username }]
-  //   };
-  //   const updateRecipes = recipes.map(r =>
-  //     r._id === recipe._id ? updateRecipe : r
-  //   );
-  //   setRecipes(updateRecipes);
-  // };
+  }, [recipeId])
   
   return (
     <main id="recipe-page-main">
       { loading ? <div>Recipe Details not loaded yet</div> : <RecipeDetails recipe={recipe} />}
-      { loading ? <div>Review form not loaded yet</div> : <ReviewForm onSubmitReview={handleAddReview}/>}
-      { loading ? <div>Reviews not loaded yet</div> : <ReviewsList recipe={recipe} /> }
+      { loading ? <div>Reviews not loaded yet</div> : <ReviewsList recipe={recipe} setRecipe={setRecipe}/> }
     </main>
   );
 }
@@ -65,3 +52,16 @@ function RecipePage() {
 /* --------------------------------Exports--------------------------------*/
 
 export default RecipePage;
+
+
+// if (recipes.length > 0) {
+    //   console.log('loaded');
+    //   const newRecipe = recipes.find(recipe => {
+    //     return JSON.stringify(recipe._id) === JSON.stringify(recipeId)}
+    //   );
+    //   setRecipe(newRecipe);
+    //   setLoading(false)
+
+    // } else {
+    //   console.log('not loaded')
+    // }
