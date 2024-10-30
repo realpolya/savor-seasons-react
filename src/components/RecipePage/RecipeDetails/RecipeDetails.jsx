@@ -2,7 +2,7 @@
 import RatingComponent from './Rating';
 // css
 import './RecipeDetails.css';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
 
@@ -10,7 +10,19 @@ import { AuthContext } from '../../../App.jsx';
 
 function RecipeDetails({ recipe }) {
 
+    const [loading, setLoading] = useState(true);
     const {user, recipes, setRecipes} = useContext(AuthContext);
+
+    useEffect(() => {
+      
+      if (recipe.author && recipe.ingredients) {
+        console.log('loaded');
+        setLoading(false);
+      } else {
+        console.log('not loaded')
+      }
+  
+    }, [recipe, recipe.author, recipe.ingredients])
 
     // calculate recipe.rating
     recipe.rating = 0;
@@ -44,17 +56,21 @@ function RecipeDetails({ recipe }) {
             <p id="details-holiday">
               {recipe.holiday}
             </p>
-            <p id="details-author">
+
+            { loading ? (<p>Author loading...</p>) : (<p id="details-author">
               By <span>{recipe.author.username}</span>
-            </p>
+            </p>) }
+
             <p id="details-time">🕒 {recipe.prepTime} min</p>
             <div id="details-ingredients">
               <h5 id="details-ingredients-h5">Ingredients:</h5>
-              <div id="details-ingredients-list">
-                {recipe.ingredients.map(ingredient => {
-                  return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
-                })}
-              </div>
+
+            { loading ? (<p>Ingredients loading...</p>) : (<div id="details-ingredients-list">
+              {recipe.ingredients.map(ingredient => {
+                return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
+              })}
+            </div>) }
+
             </div>
             <p id="details-details">{recipe.description}</p>
 

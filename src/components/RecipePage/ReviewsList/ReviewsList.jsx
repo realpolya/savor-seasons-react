@@ -48,7 +48,7 @@ function ReviewsList({ recipe }) {
             return <div className="review-div">
                 <h3 className="review-h3">{review.name}</h3>
                 <div className="review-author-rating">
-                  <p><span>by</span> {review.reviewer}</p>
+                  <p><span>by</span> {review.reviewer.username}</p>
                   <div className="review-rating-div">
                     <p className="review-rating-text">{review.rating} out of 5</p>
                     < RatingsReviews rating={review.rating}/>

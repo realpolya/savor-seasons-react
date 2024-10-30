@@ -1,47 +1,67 @@
+/* --------------------------------Imports--------------------------------*/
+import {useState, useEffect} from "react";
+import { useParams } from 'react-router-dom';
 import RatingForm from './RatingForm';
+
+import services from '../../../../services/index.js'
 
 // css
 import './ReviewForm.css';
-import {useState, useEffect} from "react";
 
 /* --------------------------------Function--------------------------------*/
 
+const initialForm = {
+  name: '', 
+  text: '',
+  rating: 0
+}
+
 const ReviewForm = ({ onSubmitReview }) => {
+
+    const {recipeId} = useParams();
   
-    const [formData, setFormData] = useState({
-      name: '', 
-      text: '',
-      rating: 0
-    });
+    const [formData, setFormData] = useState(initialForm);
 
     const [rating, setRating] = useState(0);
 
     const[error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
+    // create review in mongo db
+    const handleAddReview = async (recipeId, data) => {
+      try {
+        const newReview = await services.createReview(recipeId, data);
+        return newReview;
+      } catch(err) {
+        console.log(err)
+      }
+    }
+
     const handleChange = (e) => {
-      console.log(e.target.value)
-      console.log(formData);
       setFormData({...formData, [e.target.name]: e.target.value});
     };
   
     const handleSubmit = (e) => {
       e.preventDefault();
 
-      if (!formData.text || formData.rating === 0) { //handleAddReview
+      if (!formData.text || !formData.name || formData.rating === 0) { //handleAddReview
         setError("Please enter a review text and select a rating");
         return;
       }
+
+      handleAddReview(recipeId, formData);
       setError(null);
-      onSubmitReview(formData);
-      setFormData({ text: '', rating: 0 });
+      // onSubmitReview(formData);
+      setFormData(initialForm);
       setSuccessMessage("Review submitted successfully");
 
       setTimeout(() => {
-        setSuccessMessage(""), 3000;
-      }, timeout);
+        setSuccessMessage("")
+      }, 3000);
+
     };
 
+    // set rating
     useEffect(() => {
       setFormData((prev) => {return {...prev, rating}})
     }, [rating])
