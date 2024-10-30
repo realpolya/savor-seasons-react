@@ -1,12 +1,12 @@
 /* --------------------------------Imports--------------------------------*/
 
 import RatingComponent from './Rating';
-
 // css
 import './RecipeDetails.css';
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
+import ReviewForm from "../ReviewForm/ReviewForm.jsx";
 
 
 /* --------------------------------Function--------------------------------*/

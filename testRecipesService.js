@@ -1,4 +1,5 @@
-import {getAllRecipes} from "./src/services/recipesService.js";
+// import {getAllRecipes} from "./src/services/recipesService.js";
+import {getAllRecipes} from "./src/services/";
 
 const runTests= async ()=> {
     console.log("Running tests");
