@@ -2,7 +2,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../../App.jsx';
 
-import { sortRecipes, searchRecipes } from '../../../services/sortService.js';
+import { sortRecipes, searchRecipes } from '../../../services/index.js';
 
 // css
 import './SortBar.css';

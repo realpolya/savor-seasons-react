@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../App'
 import { useContext } from 'react'
 
-import { signOut } from '../../services/authService.js'
+import { signOut } from '../../services/index.js'
 
 import './NavBar.css'
 /* --------------------------------Function--------------------------------*/

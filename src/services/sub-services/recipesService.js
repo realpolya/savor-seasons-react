@@ -10,7 +10,7 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 /* --------------------------------Functions--------------------------------*/
 //service to fetch all recipes
-export const getAllRecipes = async () => {
+const getAllRecipes = async () => {
     try{
 
         const response = await axios.get(`${BACKEND_URL}/recipes`);
@@ -25,7 +25,7 @@ export const getAllRecipes = async () => {
 };
 
 // service to fetch a single recipe by id
-export const getSingleRecipe = async (recipeId, token) => {
+const getSingleRecipe = async (recipeId, token) => {
     try {
         const response = await axios.get(`${BACKEND_URL}/recipes/recipe/${recipeId}`, {
             headers: {
@@ -41,8 +41,7 @@ export const getSingleRecipe = async (recipeId, token) => {
 
 // FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
-
-export const getUserRecipes = async (token) => {
+const getUserRecipes = async (token) => {
     
   try{
         const response = await axios.get(`${BACKEND_URL}/recipes//my-recipes`, {
@@ -60,7 +59,7 @@ export const getUserRecipes = async (token) => {
 
 
 //service to create a new recipe
-export const createRecipe = async (recipeData, token) => {
+const createRecipe = async (recipeData, token) => {
     try {
         console.log("calling backend");
         const response = await axios.post(
@@ -81,7 +80,7 @@ export const createRecipe = async (recipeData, token) => {
 };
 
 //service to update a recipe by id
-export const updateRecipe = async(recipeId,  updatedData, token)=> {
+const updateRecipe = async(recipeId,  updatedData, token)=> {
     try {
         const response = await axios.put(`${BACKEND_URL}/recipes/${recipeId}/`, updatedData, {
             headers: {
@@ -96,7 +95,7 @@ export const updateRecipe = async(recipeId,  updatedData, token)=> {
 };
 
 // service to delete a recipe by Id
-export const deleteRecipe = async (recipeId) => {
+const deleteRecipe = async (recipeId) => {
     try{
         const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}`);
         return response.data;
@@ -107,7 +106,7 @@ export const deleteRecipe = async (recipeId) => {
 };
 
 //service to add a review to a recipe
-export const createReview = async(recipeId, reviewData ) => {
+const createReview = async(recipeId, reviewData ) => {
     try {
         const response = await axios.post(`${BACKEND_URL}/recipes/${recipeId}/reviews`, reviewData);
         return response.data;
@@ -118,7 +117,7 @@ export const createReview = async(recipeId, reviewData ) => {
 };
 
 // service to update a review to a recipe
-export const updateReview = async(recipeId, reviewId, updatedReview) => {
+const updateReview = async(recipeId, reviewId, updatedReview) => {
     try{
         const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview);
         return response.data;
@@ -129,7 +128,7 @@ export const updateReview = async(recipeId, reviewId, updatedReview) => {
 };
 
 // service to delete a review from a recipe
-export const deleteReview = async(recipeId, reviewId)=> {
+const deleteReview = async(recipeId, reviewId)=> {
     try{
         const response= await axios(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`);
         return response.data;
@@ -138,3 +137,15 @@ export const deleteReview = async(recipeId, reviewId)=> {
         throw error;
     }
 };
+
+/* --------------------------------Exports--------------------------------*/
+
+export { getAllRecipes, 
+    getSingleRecipe, 
+    getUserRecipes, 
+    createRecipe,
+    updateRecipe, 
+    deleteRecipe, 
+    createReview, 
+    updateReview, 
+    deleteReview };

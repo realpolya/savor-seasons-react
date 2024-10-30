@@ -3,7 +3,7 @@ import { useState, useContext  } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 // contexts & services
 import { AuthContext } from '../../App.jsx';
-import * as authService from '../../services/authService.js';
+import { signUp } from '../../services/index.js';
 
 // css
 import './SignUpForm.css';
@@ -36,7 +36,7 @@ function SignUpForm() {
 
       console.log(formData);
 
-      const newUserResponse = await authService.signUp(formData);
+      const newUserResponse = await signUp(formData);
       console.log(newUserResponse.user)
       setUser(newUserResponse.user);
       navigate('/home');
