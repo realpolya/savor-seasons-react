@@ -12,6 +12,9 @@ import * as favoritesService from "./services/favoritesService.js";
 import * as ingredientsService from "./services/ingredientsService.js";
 import * as recipesService from "./services/recipesService.js";
 
+// example
+// import services from './index.js'
+
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
 import RecipeList from './components/RecipeList/RecipeList.jsx';
