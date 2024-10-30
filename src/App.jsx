@@ -66,7 +66,7 @@ function App() {
 
   const handleUpdateRecipe = async (recipeId, recipeFormData) => {
 
-    const updatedRecipe = await services.update(recipeId, recipeFormData);
+    const updatedRecipe = await services.updateRecipe(recipeId, recipeFormData);
     setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
     navigate(`recipes/${recipeId}`);
 

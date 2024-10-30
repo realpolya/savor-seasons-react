@@ -11,8 +11,6 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 /* --------------------------------Functions--------------------------------*/
 
 const signUp = async (formData) => {
-
-    console.log('trying to sign up')
     
     try {
 
@@ -79,6 +77,7 @@ const signOut = () => {
     localStorage.removeItem('token');
 
 }
+
 
 /* --------------------------------Exports--------------------------------*/
 
