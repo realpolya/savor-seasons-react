@@ -112,7 +112,7 @@ function RecipeDetails({recipe}) {
                     {loading && !recipe.ingredients ? (<p>Ingredients loading...</p>) : (
                         <div id="details-ingredients-list">
                             {recipe.ingredients?.map(ingredient => {
-                                return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
+                                return <p key={ingredient._id} className="ingredient-p">{ingredient.name}</p>
                             })}
                         </div>)}
 
