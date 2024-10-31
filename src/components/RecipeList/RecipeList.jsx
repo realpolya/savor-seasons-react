@@ -15,9 +15,14 @@ import './RecipeList.css';
 function RecipeList({ condition }) {
 
     const [loading, setLoading] = useState(true);
+    const [sorting, setSorting] = useState(true);
     const [listRecipes, setListRecipes]  = useState(null);
-    const {user, recipes, userRecipes, favorites, setRecipes} = useContext(AuthContext);
+    const {user, recipes, userRecipes, favorites} = useContext(AuthContext);
     
+    // useEffect(() => {
+
+    // }, []);
+
     useEffect(() => {
       try {
 
@@ -36,14 +41,17 @@ function RecipeList({ condition }) {
         console.log(err)
       }
       
-    }, [condition, recipes, userRecipes, favorites])
+    }, [condition, recipes, userRecipes, favorites, sorting])
 
     return (
       <main id="recipe-list-main">
           
           <h2>Recipes List</h2>
 
-          < SortBar />
+          < SortBar listRecipes={listRecipes} 
+          setListRecipes={setListRecipes} 
+          setSorting={setSorting}
+          condition={condition}/>
 
           { loading ? (<div>Recipes not there yet...</div>) : (<section id="recipe-list-section">
           {listRecipes.map(recipe => {
