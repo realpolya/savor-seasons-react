@@ -28,7 +28,7 @@ function NavBar() {
         <Link to="/" onClick={handleSignOut} className="nav-bar-link">Sign out</Link>
       </li>
       <li className="nav-bar-li">
-        <Link to="/about-team" className="nav-bar-link">About</Link>
+        <Link to="/about-team" className="nav-bar-link">About Team</Link>
       </li>
   </ul>
 
