@@ -45,10 +45,10 @@ function SignInForm() {
       <main>
         <h1>Log In</h1>
         {message && <p className="error-message">{message}</p>}
-        <form autoComplete="off" onSubmit={handleSubmit}>
+        <form autoComplete="off" onSubmit={handleSubmit} className="sign-form">
 
-          <div>
-            <label htmlFor="username">Username:</label>
+          <div className="sign-form-div">
+            <label className="sign-form-label" htmlFor="username">Username:</label>
             <input
               type="text"
               id="username"
@@ -59,8 +59,8 @@ function SignInForm() {
             />
           </div>
 
-          <div>
-            <label htmlFor="password">Password:</label>
+          <div className="sign-form-div">
+            <label className="sign-form-label" htmlFor="password">Password:</label>
             <input
               type="password"
               id="password"
@@ -71,7 +71,7 @@ function SignInForm() {
             />
           </div>
 
-          <div>
+          <div className="sign-form-div-buttons">
             <button type='submit'>Log In</button>
 
             <Link to="/">

@@ -46,9 +46,9 @@ function RecipeList({ condition }) {
     return (
       <main id="recipe-list-main">
 
-          {condition==="all"? ( <h2>Savour the Season Recipes</h2>): null}
-          {condition==="my-recipes"? (<h2>My Recipe list</h2>): null}
-          {condition==="favorites"? (<h2> My favorites</h2>): null}
+          {condition==="all"? ( <h2 id="main-title" className="recipe-list-h2">Savor the Season Recipes</h2>): null}
+          {condition==="my-recipes"? (<h2 className="recipe-list-h2">My Recipes</h2>): null}
+          {condition==="favorites"? (<h2 className="recipe-list-h2"> My Favorites</h2>): null}
 
           < SortBar listRecipes={listRecipes} 
           setListRecipes={setListRecipes} 
