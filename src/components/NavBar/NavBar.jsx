@@ -21,6 +21,9 @@ function NavBar() {
       <li className="nav-bar-li">
         <Link to="/" className="nav-bar-link">Recipes</Link>
       </li>
+      <li className= "nav-bar-li">
+          <Link to='/recipe-form' className='nav-bar-link'>New Recipe</Link>
+      </li>
       <li className="nav-bar-li"> 
         <Link to="/home" className="nav-bar-link">Dashboard</Link>
       </li>
