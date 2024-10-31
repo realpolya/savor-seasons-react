@@ -1,7 +1,8 @@
 /* --------------------------------Imports--------------------------------*/
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import { useParams } from 'react-router-dom';
 import RatingForm from './RatingForm';
+import { ReviewContext } from '../ReviewsList.jsx';
 
 import services from '../../../../services/index.js'
 
@@ -16,8 +17,9 @@ const initialForm = {
   rating: 0
 }
 
-const ReviewForm = ({ handleAddReview }) => {
+const ReviewForm = () => {
 
+    const {handleAddReview} = useContext(ReviewContext);
     const {recipeId} = useParams();
   
     const [formData, setFormData] = useState(initialForm);

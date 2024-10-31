@@ -1,9 +1,8 @@
 /* --------------------------------Imports--------------------------------*/
-import { useContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
 
-import RatingsReviews from './RatingsReviews';
 import ReviewForm from './ReviewForm/ReviewForm.jsx';
 import ReviewCard from './ReviewCard/ReviewCard.jsx';
 
@@ -11,6 +10,10 @@ import services from '../../../services/index.js';
 
 // css
 import './ReviewsList.css';
+
+/* --------------------------------Variables--------------------------------*/
+
+const ReviewContext = createContext(null);
 
 /* --------------------------------Function--------------------------------*/
 
@@ -22,10 +25,12 @@ function ReviewsList({ recipe, setRecipe }) {
   const [sortedReviews, setSortedReviews] = useState([]);
   const {recipeId} = useParams();
 
-  const {user, recipes, setRecipes} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
 
   const showEditForm = () => setEditForm(true);
 
+
+  /* FUNCTIONS FOR REVIEWS */
   const handleAddReview = async (recipeId, data) => {
     try {
       const newReview = await services.createReview(recipeId, data);
@@ -77,8 +82,6 @@ function ReviewsList({ recipe, setRecipe }) {
 
       }
 
-      console.log('recipe.reviews are ', recipe.reviews);
-
     } catch(err) {
       console.error(err);
     }
@@ -113,74 +116,42 @@ function ReviewsList({ recipe, setRecipe }) {
     
   }, [reviews])
 
+  /* USE CONTEXT */
+  const reviewObject = { recipeId, handleAddReview, handleDeleteReview, handleUpdateReview };
 
   return (
 
-    <section className="reviews-list-section">
+    <ReviewContext.Provider value={reviewObject}>
+      <section className="reviews-list-section">
 
-      <h2 id="reviews-list-h2">Reviews</h2>
+        <h2 id="reviews-list-h2">Reviews</h2>
 
-      { user ? (< ReviewForm handleAddReview={handleAddReview}/>) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
+        { user ? (< ReviewForm />) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
 
-      { loading ? (<p>Reviews are loading...</p>) : (<div className="reviews-list">
-        
-        { sortedReviews.map(review => {
-
-          let match = false;
-
-          try {
-              if (review.reviewer && user) {
-                  if (JSON.stringify(review.reviewer._id) === JSON.stringify(user._id)) {
-                      match = true;
-                  }
-              }
-          } catch(err) {
-              console.log(err);
-          }
-
-          return ( 
+        { loading ? (<p>Reviews are loading...</p>) : (<div className="reviews-list">
           
-          <div className="review-div" key={review._id}>
+          { sortedReviews.map(review => {
 
-              < ReviewCard />
+            let match = false;
 
-              <h3 className="review-h3">{review.name}</h3>
+            try {
+                if (review.reviewer && user) {
+                    if (JSON.stringify(review.reviewer._id) === JSON.stringify(user._id)) {
+                        match = true;
+                    }
+                }
+            } catch(err) {
+                console.log(err);
+            }
 
-              <div className="review-author-rating">
-                <p><span>by</span> {review.reviewer.username}</p>
-                <div className="review-rating-div">
-                  <p className="review-rating-text">{review.rating} out of 5</p>
-                  < RatingsReviews rating={review.rating}/>
-                </div>
-              </div>
+            return (<ReviewCard key={review._id} match={match} review={review}/>)
 
-              <p className="review-text">
-                {review.text}
-              </p>
+          })}
 
-              {/* use a ternary for showing buttons */}
-              { match ? (<div className="review-card-buttons">
-
-                <button onClick={() => handleUpdateReview(recipeId, review._id)}
-                className="delete-review-button">Delete Review</button>
-
-                <button onClick={() => handleDeleteReview(recipeId, review._id)}
-                className="edit-review-button">Edit Review</button>
-
-              </div>) : null }
-
-              <p className="review-date">
-                {new Date(review.createdAt).toLocaleString()}
-              </p>
-              
-          </div>)
-
-
-        })}
-
-      </div>)}
-      
-    </section>
+        </div>)}
+        
+      </section>
+    </ReviewContext.Provider>
 
   )
 
@@ -188,6 +159,7 @@ function ReviewsList({ recipe, setRecipe }) {
 
 /* --------------------------------Exports--------------------------------*/
 
+export { ReviewContext };
 export default ReviewsList;
 
 // name: {
