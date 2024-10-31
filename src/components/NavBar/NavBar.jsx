@@ -53,9 +53,13 @@ function NavBar() {
     <nav id='nav-bar'>
 
       <div id='nav-bar-logo'>
-        <h1 id="nav-bar-h1-mobile">StS</h1>
-        <h1 id="nav-bar-h1">Savor the Seasons</h1>
-        <p id="nav-bar-p">seasonal recipes website</p>
+        <Link to="/" className="nav-bar-logo-link">
+          <h1 id="nav-bar-h1-mobile">StS</h1>
+        </Link>
+        <Link to="/" className="nav-bar-logo-link">
+          <h1 id="nav-bar-h1">Savor the Seasons</h1>
+          <p id="nav-bar-p">seasonal recipes website</p>
+        </Link>
       </div>
 
       {user ? userNav : outNav}

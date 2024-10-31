@@ -4,7 +4,7 @@
 }
 
 .recipe-list-h2 {
-    margin: 1.5rem 0.7rem 1.5rem 0.5rem;
+    margin: 1.5rem 0.5rem;
 }
 
 #recipe-list-section {
@@ -26,7 +26,7 @@
     }
 
     .recipe-list-h2 {
-        margin: 0.2rem 2rem 0.5rem 0.5rem;
+        margin: 0.5rem 0.5rem 2rem 0.5rem;
     }
 
 }
