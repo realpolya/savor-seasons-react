@@ -24,7 +24,7 @@ function MyRecipesCard() {
     return (
       <section id="my-recipes-card-section">
 
-          <Link id="my-recipes-view-link">
+          <Link to ="/my-recipes"id="my-recipes-view-link">
             <h2 id="my-recipes-card-h2">Your Recent Recipes</h2>
             <p id="my-recipes-card-p-link">View All</p>
           </Link>
