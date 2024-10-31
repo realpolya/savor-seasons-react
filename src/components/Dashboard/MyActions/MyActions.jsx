@@ -26,8 +26,8 @@ function MyActions() {
       <section id="my-actions-section">
           <div id="my-actions-account-div">
             <h4>Your Account</h4>
-            <p>Your username: {user.username}</p>
-            <p>Your email: {user.email}</p>
+            <p>Your username: <span className="my-actions-span">{user.username}</span></p>
+            <p>Your email: <span className="my-actions-span">{user.email}</span></p>
           </div>
           <div id="my-actions-buttons-div">
             <Link to='/recipe-form' className="my-actions-link"><button>New Recipe</button></Link>
