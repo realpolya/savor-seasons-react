@@ -17,13 +17,13 @@ const initialForm = {
   rating: 0
 }
 
-const ReviewForm = () => {
+const ReviewForm = ({ condition, data }) => {
 
-    const {handleAddReview} = useContext(ReviewContext);
+    const {handleAddReview, handleUpdateReview} = useContext(ReviewContext);
+
     const {recipeId} = useParams();
   
     const [formData, setFormData] = useState(initialForm);
-
     const [rating, setRating] = useState(0);
 
     const[error, setError] = useState(null);
@@ -38,18 +38,22 @@ const ReviewForm = () => {
       e.preventDefault();
 
       if (!formData.text || !formData.name || formData.rating === 0) { //handleAddReview
-        setError("Please enter a review text and select a rating");
+        setError("Please enter a review title, text, and rating");
         return;
       }
 
-      handleAddReview(recipeId, formData);
-      setError(null);
-      setFormData(initialForm);
-      setSuccessMessage("Review submitted successfully");
+      if (!data) {
+        handleAddReview(recipeId, formData);
+        setSuccessMessage("Review submitted successfully");
+        setTimeout(() => {
+          setSuccessMessage("")
+        }, 3000);
+        setFormData(initialForm);
+      } else {
+        handleUpdateReview(recipeId, data._id, formData);
+      }
 
-      setTimeout(() => {
-        setSuccessMessage("")
-      }, 3000);
+      setError(null);
 
     };
 
@@ -58,11 +62,20 @@ const ReviewForm = () => {
       setFormData((prev) => {return {...prev, rating}})
     }, [rating])
 
+    useEffect(() => {
+
+      if (data) {
+        setFormData(data);
+        setRating(data.rating);
+      }
+      
+    }, [data])
+
 
   return (
     <form onSubmit={handleSubmit} id="review-form">
 
-      <h3>Leave a Review</h3>
+      {condition === "new" ? <h3>Leave a Review</h3> : <h3>Edit Review</h3>}
 
       <div>
         <label htmlFor="">
@@ -75,7 +88,7 @@ const ReviewForm = () => {
           required />
       </div>
 
-      < RatingForm setRating={setRating} />
+      < RatingForm setRating={setRating} rating={rating}/>
       
       <div id="review-form-text-div">
         <label htmlFor="text-input"> Your Review: </label>
@@ -91,7 +104,11 @@ const ReviewForm = () => {
 
       {error && <p className="error-message">{error}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
-      <button type="submit">Submit Review</button>
+
+      {condition === "new" ? 
+      (<button type="submit">Submit Review</button>) : 
+      (<button type="submit">Edit Review</button>)}
+
     </form>
   );
 };
