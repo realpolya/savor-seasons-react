@@ -14,8 +14,7 @@ function MyFavoritesTable() {
 
   const { favorites } = useContext(AuthContext);
   
-  // TODO: define maximum number of favorites shown at once 
-  // If there are favorites, display them
+  // TODO: define maximum number of favorites shown at once
     return (
         <section id="my-favorites-table-section">
         <h2 id="my-favorites-table-h2">
