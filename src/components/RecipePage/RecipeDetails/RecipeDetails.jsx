@@ -98,7 +98,7 @@ function RecipeDetails({recipe}) {
                     <p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>
                 </div>
                 <p id="details-holiday">
-                    {recipe.holiday}
+                    <span>Holiday:</span> {recipe.holiday}
                 </p>
 
                 {loading && !recipe.author ? (<p>Author loading...</p>) : (<p id="details-author">
