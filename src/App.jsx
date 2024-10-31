@@ -109,13 +109,16 @@ function App() {
 
             <Route path="/recipe-form" element={< RecipeForm />} />
             <Route path="/recipes/:recipeId/edit" element={<RecipeForm />} />
+            < Route path="/my-recipes" element={< RecipeList condition={"my-recipes"} />} />
+            < Route path="/favorites" element={< RecipeList condition={"favorites"} />} />
+
             {/* route for viewing favorites */}
             {/* route for viewing my recipes */}
             <Route path="/recipes/:recipeId" element={<RecipePage /> } />
           </>
 
           {/* Public Routes */}
-          < Route path="/" element={< RecipeList />} />
+          < Route path="/" element={< RecipeList condition={"all"}/>} />
           < Route path="/sign-up" element={< SignUpForm />} />
           < Route path="/sign-in" element={< SignInForm />} />
           
