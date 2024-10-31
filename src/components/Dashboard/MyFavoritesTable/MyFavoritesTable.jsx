@@ -18,7 +18,7 @@ function MyFavoritesTable() {
     <section id="my-favorites-table-section">
 
       <h2 id="my-favorites-table-h2">
-        <Link id="my-favorites-table-h2-link">Your Favorites</Link>
+        <Link to="/favorites" id="my-favorites-table-h2-link">Your Favorites</Link>
       </h2>
 
       { !favorites || favorites.length === 0 ? (<p>No favorites yet.</p>) : (<ul id="my-favorites-table-ul">
