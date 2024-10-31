@@ -28,7 +28,7 @@ function ReviewsList({ recipe, setRecipe }) {
     const handleAddReview = async (recipeId, data) => {
       try {
         const newReview = await services.createReview(recipeId, data);
-        setReviews((prev) => {return {...prev, newReview}});
+        setReviews((prev) => {return [...prev, newReview]});
         return newReview;
       } catch(err) {
         console.log(err)
@@ -38,7 +38,10 @@ function ReviewsList({ recipe, setRecipe }) {
     const handleDeleteReview = async (recipeId, reviewId) => {
       try {
         const deletedReview = await services.deleteReview(recipeId, reviewId);
-        setReviews((prev) => (prev.filter(review => review._id !== deletedReview._id)));
+        setReviews((prev) => {
+          console.log(prev);
+          prev.filter(review => review._id !== deletedReview._id)
+        });
         console.log('this is being deleted ', deletedReview);
         return deletedReview;
       } catch(err) {
