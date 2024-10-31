@@ -13,45 +13,62 @@ function RecipeDetails({recipe}) {
 // adding stuff
 
     const [loading, setLoading] = useState(true);
+    const [isUserTheAuthor, setIsUserTheAuthor] = useState(false);
     const [recipeRating, setRecipeRating] = useState(0);
     const {user, favorites} = useContext(AuthContext);
     const {recipeId} = useParams()
     const token = localStorage.getItem('token');
     const navigate=useNavigate();
 
-    const initialIsThisRecipeInFavorites = favorites.some((item) => item._id === recipeId) // boolean
-    const [isThisRecipeInFavorites, setIsThisRecipeInFavorites] = useState(initialIsThisRecipeInFavorites);
-
-    console.log(user, recipe)
-
-    const isUserTheAuthor = recipe.author._id === user._id;
+    const initialInFavorites = favorites.some((item) => item._id === recipeId) // boolean
+    const [isInFavorites, setIsInFavorites] = useState(initialInFavorites);
 
     useEffect(() => {
 
-        if (recipe.author && recipe.ingredients) {
-            if (recipe.reviews.length > 0) {
+        try {
 
-                let newRating = 0;
-                recipe.reviews.forEach(review => newRating += +review.rating);
-                newRating = newRating / recipe.reviews.length;
-                setRecipeRating(newRating);
+            if (recipe.author && recipe.ingredients) {
+                
+                if (recipe.reviews.length > 0) {
+    
+                    let newRating = 0;
+                    recipe.reviews.forEach(review => newRating += +review.rating);
+                    newRating = newRating / recipe.reviews.length;
+                    setRecipeRating(newRating);
+    
+                }
+
+                setLoading(false);
+
+                if (recipe.author._id === user._id) {
+
+                    setIsUserTheAuthor(true);
+
+                }
+
+            } else {
+
+                console.log('not loaded')
 
             }
-            setLoading(false);
-        } else {
-            console.log('not loaded')
+
+        } catch(err) {
+
+            console.error(err);
+
         }
+
 
     }, [recipe])
 
     const handleAddToFavorites = () => {
         addRecipeToFavorites(recipeId, token)
-        setIsThisRecipeInFavorites(!isThisRecipeInFavorites)
+        setIsInFavorites(!isInFavorites)
     }
 
     const handleRemoveFromFavorites = () => {
         removeRecipeFromFavorites(recipeId, token)
-        setIsThisRecipeInFavorites(!isThisRecipeInFavorites)
+        setIsInFavorites(!isInFavorites)
 
     }
 
@@ -102,9 +119,9 @@ function RecipeDetails({recipe}) {
                 </div>
                 <p id="details-details">{recipe.description}</p>
 
-                {isUserTheAuthor? <button><Link to={`/recipes/${recipe._id}/edit`}>Edit</Link></button> : <></>}
-                {isUserTheAuthor? <button onClick={handleDeleteRecipe}>Delete</button> : <></>}
-                {isThisRecipeInFavorites ? <button onClick={handleRemoveFromFavorites}>Remove from favorites</button> :
+                {isUserTheAuthor ? <button><Link to={`/recipes/${recipe._id}/edit`}>Edit</Link></button> : <></>}
+                {isUserTheAuthor ? <button onClick={handleDeleteRecipe}>Delete</button> : <></>}
+                {isInFavorites ? <button onClick={handleRemoveFromFavorites}>Remove from favorites</button> :
                     <button onClick={handleAddToFavorites}>Add to favorites</button>}
 
                 <button><Link to='/'>Back to Recipes</Link></button>
