@@ -66,16 +66,27 @@ Our Flow chart using Figma.
 
 ERD was made using Figma.
 
-We have five models. The user, favorite and recipes are refrencing each other. the engredents are only refrence with recipes.
+We have five models. The User, Favorite and Recipes are refrencing each other. The Ingredents are only refrenced with the Recipes. The Review is enbedded and only refrenced with User.
 ![alt text](image-8.png)
 
 ### Components
 
+We used a image to map our flies and worked through our components.
 ![alt text](image-10.png)
 
 ### Trello
 
+Visit the [Trello board](https://trello.com/b/AMCXx13r/seasonal-recipes-app) for the projects layout.
+
 ### Technologies used
+
+- Node.js
+- Express
+- MongoDB, Monoose
+- HTML
+- CSS
+- JavaScript
+- npm packges:
 
 ```javascript
 
@@ -102,6 +113,30 @@ We have five models. The user, favorite and recipes are refrencing each other. t
 ```
 
 ### Routes
+
+### User Routes
+
+![alt text](image-9.png)
+
+### Recipes RoutesS
+
+![alt text](image-11.png)
+
+### Favorite Routes
+
+![alt text](image-12.png)
+
+### Ingredents Routes
+
+![alt text](image-13.png)
+
+### Review Routes
+
+![alt text](image-14.png)
+
+### JS Models Files
+
+-
 
 ### Sources
 
