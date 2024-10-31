@@ -16,7 +16,7 @@ const getAllRecipes = async () => {
         const response = await axios.get(`${BACKEND_URL}/recipes`);
         return response.data;
 
-} catch(error) {
+    } catch(error) {
 
         console.error('Error fetching recipes:', error);
         throw error;
@@ -42,8 +42,8 @@ const getSingleRecipe = async (recipeId, token) => {
 // FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
 const getUserRecipes = async (token) => {
-    
-  try{
+
+    try{
         const response = await axios.get(`${BACKEND_URL}/recipes//my-recipes`, {
             headers: {
                 Authorization: `Bearer ${token}`, // Include the Bearer token
@@ -95,18 +95,22 @@ const updateRecipe = async(recipeId,  updatedData, token)=> {
 };
 
 // service to delete a recipe by Id
-const deleteRecipe = async (recipeId) => {
+const deleteRecipe = async (recipeId, token) => {
     try{
-        const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}`);
+        const response = await axios.delete(`${BACKEND_URL}/recipes/recipe/${recipeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         return response.data;
     }catch (error) {
-     console.error('Error deleting recipe:', error);
-     throw error;
+        console.error('Error deleting recipe:', error);
+        throw error;
     }
 };
 
 //service to add a review to a recipe
-const createReview = async(recipeId, reviewData) => {
+const createReview = async(recipeId, reviewData ) => {
     try {
         const response = await axios.post(`${BACKEND_URL}/recipes/${recipeId}/reviews`, reviewData, {
             headers: {
@@ -123,7 +127,11 @@ const createReview = async(recipeId, reviewData) => {
 // service to update a review to a recipe
 const updateReview = async(recipeId, reviewId, updatedReview) => {
     try{
-        const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview);
+        const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
         return response.data;
     } catch(error){
         console.error('Error updating review:', error);
@@ -134,7 +142,11 @@ const updateReview = async(recipeId, reviewId, updatedReview) => {
 // service to delete a review from a recipe
 const deleteReview = async(recipeId, reviewId)=> {
     try{
-        const response= await axios(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`);
+        const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
         return response.data;
     }catch(error){
         console.error('Error deleting review:', error);
@@ -144,12 +156,12 @@ const deleteReview = async(recipeId, reviewId)=> {
 
 /* --------------------------------Exports--------------------------------*/
 
-export { getAllRecipes, 
-    getSingleRecipe, 
-    getUserRecipes, 
+export { getAllRecipes,
+    getSingleRecipe,
+    getUserRecipes,
     createRecipe,
-    updateRecipe, 
-    deleteRecipe, 
-    createReview, 
-    updateReview, 
+    updateRecipe,
+    deleteRecipe,
+    createReview,
+    updateReview,
     deleteReview };

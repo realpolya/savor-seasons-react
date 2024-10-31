@@ -12,23 +12,31 @@ import './RecipeList.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function RecipeList() {
+function RecipeList({ condition }) {
 
     const [loading, setLoading] = useState(true);
-    const {user, recipes, setRecipes} = useContext(AuthContext);
-
+    const [listRecipes, setListRecipes]  = useState(null);
+    const {user, recipes, userRecipes, favorites, setRecipes} = useContext(AuthContext);
     
     useEffect(() => {
+      try {
 
-      if (recipes.length > 0) {
-        console.log('loaded');
-        console.log(recipes);
-        setLoading(false);
-      } else {
-        console.log('not loaded');
+        if (condition === "all" && recipes.length > 0) {
+          setListRecipes(recipes);
+          setLoading(false);
+        } else if (condition === "my-recipes" && user && userRecipes.length > 0) {
+          setListRecipes(userRecipes);
+          setLoading(false);
+        } else if (condition === "favorites" && user && favorites.length > 0) {
+          setListRecipes(favorites);
+          setLoading(false);
+        }
+
+      } catch(err) {
+        console.log(err)
       }
-  
-    }, [recipes, user])
+      
+    }, [condition, recipes, userRecipes, favorites])
 
     return (
       <main id="recipe-list-main">
@@ -37,8 +45,8 @@ function RecipeList() {
 
           < SortBar />
 
-          { loading ? (<div>Still loading...</div>) : (<section id="recipe-list-section">
-          {recipes.map(recipe => {
+          { loading ? (<div>Recipes not there yet...</div>) : (<section id="recipe-list-section">
+          {listRecipes.map(recipe => {
           return <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-card-link">
             < RecipeCard recipe={recipe}/>
           </Link>

@@ -15,6 +15,8 @@ function MyActions() {
 
     const {user, setUser} = useContext(AuthContext);
 
+    console.log(user);
+
     const handleSignOut = () => {
       signOut();
       setUser(null);

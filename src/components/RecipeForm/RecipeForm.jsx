@@ -44,7 +44,9 @@ function RecipeForm() {
 
         async function fetchSingleRecipe(recipeId) {
             try {
+              
                 const recipeToEdit = await services.getSingleRecipe(recipeId, token)
+
                 setFormData(recipeToEdit);
             } catch (error) {
                 console.error('Error fetching single recipe:', error);
@@ -83,7 +85,7 @@ function RecipeForm() {
         setFormData((prevData) => {
             const newIngredients = checked
                 ? [...prevData.ingredients, value]
-                : prevData.ingredients.filter((ingredient) => ingredient !== value);
+                : prevData.ingredients.filter((id) => id !== value);
             return {...prevData, ingredients: newIngredients};
         });
     };
