@@ -4,6 +4,10 @@
     margin-bottom: 0;
 }
 
+#review-form-log-in-link {
+    padding-bottom: 7rem;
+}
+
 .review-div {
     background-color: var(--light-color);
     border-radius: 2rem;

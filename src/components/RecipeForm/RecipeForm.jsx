@@ -44,16 +44,9 @@ function RecipeForm() {
 
         async function fetchSingleRecipe(recipeId) {
             try {
-                const recipe = await services.getSingleRecipe(recipeId, token)
-                const recipeToEdit = {
-                    name: recipe.name,
-                    prepTime: recipe.prepTime,
-                    author: recipe.author,
-                    description: recipe.description,
-                    holiday: recipe.holiday,
-                    image: recipe.image,
-                    ingredients: recipe.ingredients.map((ingredient)=>ingredient.id),
-                }
+              
+                const recipeToEdit = await services.getSingleRecipe(recipeId, token)
+
                 setFormData(recipeToEdit);
             } catch (error) {
                 console.error('Error fetching single recipe:', error);

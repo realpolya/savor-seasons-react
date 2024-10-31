@@ -1,6 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
-
+import { useState, useEffect } from 'react';
 import RatingComponent from './Rating.jsx';
+
 
 // css
 import './RecipeCard.css';
@@ -8,6 +9,21 @@ import './RecipeCard.css';
 /* --------------------------------Function--------------------------------*/
 
 function RecipeCard({ recipe }) {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      if (recipe.author) {
+
+        console.log('loaded');
+        setLoading(false);
+
+      } else {
+
+        console.log('not loaded');
+
+      }
+    }, [recipe.author]);
 
     // calculate recipe.rating
     recipe.rating = 0;
@@ -33,7 +49,7 @@ function RecipeCard({ recipe }) {
               {recipe.holiday}
             </p>
             <p className="recipe-card-author">
-              By <span>{recipe.author.username}</span>
+              {loading ? <span>User not loaded yet</span> : <span>By {recipe.author.username}</span> }
             </p>
             <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
             {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
