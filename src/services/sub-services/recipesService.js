@@ -119,7 +119,11 @@ const createReview = async(recipeId, reviewData ) => {
 // service to update a review to a recipe
 const updateReview = async(recipeId, reviewId, updatedReview) => {
     try{
-        const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview);
+        const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
         return response.data;
     } catch(error){
         console.error('Error updating review:', error);
@@ -130,7 +134,11 @@ const updateReview = async(recipeId, reviewId, updatedReview) => {
 // service to delete a review from a recipe
 const deleteReview = async(recipeId, reviewId)=> {
     try{
-        const response= await axios(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`);
+        const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
         return response.data;
     }catch(error){
         console.error('Error deleting review:', error);
