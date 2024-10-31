@@ -13,8 +13,8 @@ const {
 
 const {
     getFavorites,
-    createFavorite,
-    removeFavorite
+    addRecipeToFavorites,
+    removeRecipeFromFavorites
 } = favorites;
 
 const {
@@ -42,8 +42,8 @@ const services = {
     getUser,
     signOut,
     getFavorites,
-    createFavorite,
-    removeFavorite,
+    addRecipeToFavorites,
+    removeRecipeFromFavorites,
     getAllIngredients,
     getAllRecipes, 
     getSingleRecipe, 
@@ -65,8 +65,8 @@ export {
     getUser,
     signOut,
     getFavorites,
-    createFavorite,
-    removeFavorite,
+    addRecipeToFavorites,
+    removeRecipeFromFavorites,
     getAllIngredients,
     getAllRecipes, 
     getSingleRecipe, 
