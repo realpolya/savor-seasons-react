@@ -27,7 +27,7 @@ function ReviewsList({ recipe, setRecipe }) {
 
   const {user} = useContext(AuthContext);
 
-  const showEditForm = () => setEditForm(true);
+  const showEditForm = (id) => setEditForm(id);
 
 
   /* FUNCTIONS FOR REVIEWS */
@@ -117,7 +117,7 @@ function ReviewsList({ recipe, setRecipe }) {
   }, [reviews])
 
   /* USE CONTEXT */
-  const reviewObject = { recipeId, handleAddReview, handleDeleteReview, handleUpdateReview };
+  const reviewObject = { recipeId, handleAddReview, handleDeleteReview, showEditForm };
 
   return (
 
@@ -144,7 +144,16 @@ function ReviewsList({ recipe, setRecipe }) {
                 console.log(err);
             }
 
-            return (<ReviewCard key={review._id} match={match} review={review}/>)
+            // editForm ? 
+
+            let card = (<ReviewCard key={review._id} match={match} review={review}/>)
+            let form = (<ReviewForm/>)
+
+            if (editForm === review._id) {
+              return form;
+            } 
+
+            return card;
 
           })}
 

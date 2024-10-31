@@ -14,7 +14,7 @@ import './ReviewCard.css';
 
 function ReviewCard({ match, review }) {
 
-    const {recipeId, handleDeleteReview, handleUpdateReview} = useContext(ReviewContext);
+    const {recipeId, handleDeleteReview, showEditForm} = useContext(ReviewContext);
   
     return (
     
@@ -40,7 +40,7 @@ function ReviewCard({ match, review }) {
                 <button onClick={() => handleDeleteReview(recipeId, review._id)}
                 className="delete-review-button">Delete Review</button>
 
-                <button onClick={() => handleUpdateReview(recipeId, review._id)}
+                <button onClick={() => showEditForm(review._id)}
                 className="edit-review-button">Edit Review</button>
 
               </div>) : null }
