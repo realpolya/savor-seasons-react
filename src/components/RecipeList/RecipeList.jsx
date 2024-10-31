@@ -32,14 +32,6 @@ function RecipeList({ condition }) {
           setLoading(false);
         }
 
-        // if (recipes.length > 0) {
-        //   console.log('loaded');
-        //   console.log(recipes);
-        //   setLoading(false);
-        // } else {
-        //   console.log('not loaded');
-        // }
-
       } catch(err) {
         console.log(err)
       }

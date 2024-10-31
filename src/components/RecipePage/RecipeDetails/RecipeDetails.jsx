@@ -30,7 +30,6 @@ function RecipeDetails({recipe}) {
             if (recipe.author && recipe.ingredients) {
                 
                 if (recipe.reviews.length > 0) {
-                    console.log('inside reviews')
                     let newRating = 0;
                     recipe.reviews.forEach(review => newRating += +review.rating);
                     newRating = newRating / recipe.reviews.length;
@@ -39,9 +38,6 @@ function RecipeDetails({recipe}) {
                 }
 
                 setLoading(false);
-                console.log('author info ', recipe.author._id);
-                console.log('recipe is ', recipe);
-                console.log('user is ', user);
                 if (user) {
                     if (recipe.author._id === user._id) {
 
