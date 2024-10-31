@@ -91,7 +91,7 @@ function ReviewsList({ recipe, setRecipe }) {
 
             // check if the logged in user is the reviewer
             let match = false;
-            if (JSON.stringify(review.reviewer._id) === JSON.stringify(user._id)) match = true;
+            if (review.reviewer && JSON.stringify(review.reviewer._id) === JSON.stringify(user._id)) match = true;
 
             return <div className="review-div" key={review._id}>
 
