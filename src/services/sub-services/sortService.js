@@ -8,7 +8,7 @@ const sortRecipes = (sortValue, recipes) => {
     if (sortValue === 'rating') {
 
         // calculate ratings for each recipe
-        sorted = recipes.map(recipe => {
+        sorted = [...recipes].map(recipe => {
 
             let rating = recipe.reviews.reduce((arg, review) => {
                 return arg += review.rating
@@ -24,7 +24,12 @@ const sortRecipes = (sortValue, recipes) => {
 
     } else if (sortValue === 'prepTime') {
 
-        sorted = recipes.sort((a, b) => a.prepTime - b.prepTime);
+        console.log('in sort service now')
+
+        sorted = [...recipes].sort((a, b) => {
+            console.log('prep times', a.prepTime, b.prepTime);
+            return Number(a.prepTime) - Number(b.prepTime)
+        });
 
     }
 

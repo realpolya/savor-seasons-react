@@ -9,44 +9,51 @@ import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function SortBar() {
+function SortBar({ listRecipes, setListRecipes }) {
 
     const [searchData, setSearchData] = useState('');
-    const {user, allRecipes, recipes, setRecipes} = useContext(AuthContext);
+    const {user, allRecipes, recipes, userRecipes, favorites, setRecipes} = useContext(AuthContext);
 
     // variable for storing filtered recipes
     let filtered;
 
     /* RESET FUNCTION */
-    const restoreRecipes = () => setRecipes(allRecipes);
+    const restoreRecipes = () => setListRecipes(allRecipes); // TODO: fix based on condition
 
     /* SUBMIT FUNCTIONS */
     const handleSubmit = e => {
 
       e.preventDefault();
-      setRecipes(filtered);
+      // setRecipes(filtered);
+      setListRecipes(filtered)
 
     }
 
     const handleSearchSubmit = e => {
 
       e.preventDefault();
-      filtered = searchRecipes(searchData, allRecipes);
-      setRecipes(filtered);
+      filtered = searchRecipes(searchData, listRecipes);
+      // setRecipes(filtered);
+      setListRecipes(filtered);
 
     }
 
     /* CHANGE FUNCTIONS */
     const handleSortChange = e => {
 
-      filtered = sortRecipes(e.target.value, allRecipes);
+      console.log('in sorted', e.target.value);
+      console.log('before', listRecipes)
+
+      filtered = sortRecipes(e.target.value, listRecipes);
+      console.log('after', filtered)
+      
       handleSubmit(e);
 
     }
 
     const handleFilterChange = (e) => {
 
-      filtered = allRecipes.filter(recipe => {
+      filtered = listRecipes.filter(recipe => {
         return recipe.holiday === e.target.value
       });
 
