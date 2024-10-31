@@ -136,7 +136,161 @@ Visit the [Trello board](https://trello.com/b/AMCXx13r/seasonal-recipes-app) for
 
 ### JS Models Files
 
--
+- Models user.js
+
+```javascript
+export default mongoose.model(
+  "User",
+  new mongoose.Schema(
+    {
+      username: {
+        type: String,
+        require: true,
+      },
+      hashedPassword: {
+        type: String,
+        require: true,
+      },
+      email: {
+        type: String,
+        require: true,
+      },
+    },
+    { timestamps: true }
+  ).set("toJSON", {
+    transform: (document, returned) => {
+      delete returned.hashedPassword;
+    },
+  })
+);
+```
+
+- models recipe.js
+
+```javascript
+export default mongoose.model(
+  "Recipe",
+  new mongoose.Schema(
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      prepTime: {
+        type: Number,
+        required: true,
+      },
+      author: {
+        type: mongoose.Schema.Types.ObjectID,
+        required: true,
+        ref: "User",
+      },
+      ingredients: [
+        {
+          type: mongoose.Schema.Types.ObjectId, // We need to reference the ingredient model if not there is no relationship
+          ref: "Ingredient",
+        },
+      ],
+      description: {
+        type: String,
+        required: true,
+      },
+      holiday: {
+        type: String,
+        required: true,
+        enum: [
+          "Not a Holiday",
+          "Christmas",
+          "Thanksgiving",
+          "Easter",
+          "Halloween",
+        ],
+      },
+      image: {
+        type: String,
+      },
+      reviews: [reviewSchema],
+    },
+    { timestamps: true }
+  )
+);
+```
+
+- models favorite.js
+
+```javascript
+export default mongoose.model(
+  "Favorites",
+  new mongoose.Schema(
+    {
+      owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
+      recipes: {
+        type: Array,
+        default: [],
+        ref: "Recipe",
+      },
+    },
+    { timestamps: true }
+  )
+);
+```
+
+- models ingredents.js
+
+```javascript
+export default mongoose.model(
+  "Ingredient",
+  new mongoose.Schema(
+    {
+      name: {
+        type: String,
+      },
+    },
+    { timestamps: true }
+  )
+);
+```
+
+### JS Controllers Files
+
+- Controllers auth.js
+
+| Route                 | Method | Description                                                                |
+| --------------------- | ------ | -------------------------------------------------------------------------- |
+| `/users/:userId/auth` | GET    | Checks if authenticated user matches userId, returns profile if authorized |
+| `/auth/sign-up`       | POST   | Registers a new user and generates a token                                 |
+| `/auth/sign-in`       | POST   | Authenticates user and returns a token                                     |
+
+- Controllers favorite.js
+
+| Route                  | Method | Description                                   |
+| ---------------------- | ------ | --------------------------------------------- |
+| `/favorites`           | GET    | Retrieves the user's list of favorite recipes |
+| `/favorites/:recipeId` | POST   | Adds a recipe to the user's favorites         |
+| `/favorites/:recipeId` | PUT    | Removes a recipe from the user's favorites    |
+
+- Controllers ingredents.js
+  | Route | Method | Description |
+  | --------------| ------ | ------------------------------------- |
+  |`/ingredients` | GET | Returns all ingredients to the client |
+
+- Controllers recipe.js
+
+| Route                                 | Method | Description                                                                       |
+| ------------------------------------- | ------ | --------------------------------------------------------------------------------- |
+| `/recipes`                            | GET    | Retrieves all recipes, including author, ingredients, and reviews                 |
+| `/recipes/:recipeId`                  | GET    | Retrieves a single recipe by recipeId, including author, ingredients, and reviews |
+| `/recipes/user`                       | GET    | Retrieves recipes created by the authenticated user                               |
+| `/recipes`                            | POST   | Creates a new recipe for the authenticated user                                   |
+| `/recipes/:recipeId`                  | PUT    | Updates a recipe by recipeId for the authenticated user                           |
+| `/recipes/:recipeId`                  | DELETE | Deletes a recipe by recipeId for the authenticated user                           |
+| `/recipes/:recipeId/review`           | POST   | Adds a review to a recipe                                                         |
+| `/recipes/:recipeId/review/:reviewId` | PUT    | Updates a specific review by reviewId for a recipe                                |
+| `/recipes/:recipeId/review/:reviewId` | DELETE | Deletes a specific review by reviewId from a recipe                               |
 
 ### Sources
 
