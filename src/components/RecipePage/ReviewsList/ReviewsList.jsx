@@ -35,6 +35,17 @@ function ReviewsList({ recipe, setRecipe }) {
       }
     };
 
+    const handleDeleteReview = async (recipeId, reviewId) => {
+      try {
+        const deletedReview = await services.deleteReview(recipeId, reviewId);
+        setReviews((prev) => (prev.filter(review => review._id !== deletedReview._id)));
+        console.log('this is being deleted ', deletedReview);
+        return deletedReview;
+      } catch(err) {
+        console.log(err)
+      }
+    };
+
     useEffect(() => {
 
       try {
@@ -62,6 +73,7 @@ function ReviewsList({ recipe, setRecipe }) {
       
     }, [reviews])
 
+
     return (
 
       <section className="reviews-list-section">
@@ -71,9 +83,17 @@ function ReviewsList({ recipe, setRecipe }) {
         { user ? (< ReviewForm handleAddReview={handleAddReview}/>) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
 
         { loading ? (<p>Reviews are loading...</p>) : (<div className="reviews-list">
+          
           {recipe?.reviews.map(review => {
+
+            // check if the logged in user is the reviewer
+            let match = false;
+            if (JSON.stringify(review.reviewer._id) === JSON.stringify(user._id)) match = true;
+
             return <div className="review-div" key={review._id}>
+
                 <h3 className="review-h3">{review.name}</h3>
+
                 <div className="review-author-rating">
                   <p><span>by</span> {review.reviewer.username}</p>
                   <div className="review-rating-div">
@@ -81,11 +101,22 @@ function ReviewsList({ recipe, setRecipe }) {
                     < RatingsReviews rating={review.rating}/>
                   </div>
                 </div>
+
                 <p className="review-text">
                   {review.text}
                 </p>
+
+                {/* use a ternary for showing buttons */}
+                { match ? (<div className="review-card-buttons">
+                  <button onClick={() => handleDeleteReview(recipeId, review._id)}
+                  className="delete-review-button">Delete Review</button>
+                  <button
+                  className="edit-review-button">Edit Review</button>
+                </div>) : null }
+                
               </div>
           })}
+
         </div>)}
         
       </section>

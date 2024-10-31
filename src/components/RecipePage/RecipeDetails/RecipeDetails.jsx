@@ -52,7 +52,7 @@ function RecipeDetails({ recipe }) {
             <h3 id="details-h3">{recipe.name}</h3>
             <div id="details-rating-div">
               < RatingComponent rating={recipeRating}/>
-              <p id="details-rating">Rating: {recipeRating}</p>
+              <p id="details-rating-p">{ Math.trunc(recipeRating * 100) / 100 } out of 5</p>
             </div>
             <p id="details-holiday">
               {recipe.holiday}
