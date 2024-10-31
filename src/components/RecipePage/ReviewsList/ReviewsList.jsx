@@ -123,7 +123,8 @@ function ReviewsList({ recipe, setRecipe }) {
   return (
 
     <ReviewContext.Provider value={reviewObject}>
-      <section className="reviews-list-section">
+
+      <section id="reviews-list-section">
 
         <h2 id="reviews-list-h2">Reviews</h2>
 
@@ -159,6 +160,7 @@ function ReviewsList({ recipe, setRecipe }) {
         </div>)}
         
       </section>
+
     </ReviewContext.Provider>
 
   )
@@ -169,29 +171,3 @@ function ReviewsList({ recipe, setRecipe }) {
 
 export { ReviewContext };
 export default ReviewsList;
-
-// name: {
-//   type: String,
-//   required: true,
-// },
-// text: {
-//   type: String,
-//   required: true,
-// },
-// rating: {
-//   type: Number,
-//   required: true,
-//   enum: [1, 2, 3, 4, 5],
-// },
-
-// --Mandy's version below--
-// const handleAddReview = (newReview) => {
-//   const updateRecipe = {
-//     ...recipe,
-//     review: [...recipe.review, { ...newReview, reviewer: user.username }]
-//   };
-//   const updateRecipes = recipes.map(r =>
-//     r._id === recipe._id ? updateRecipe : r
-//   );
-//   setRecipes(updateRecipes);
-// };

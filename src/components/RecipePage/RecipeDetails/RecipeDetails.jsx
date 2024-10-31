@@ -98,7 +98,7 @@ function RecipeDetails({recipe}) {
                     <p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>
                 </div>
                 <p id="details-holiday">
-                    {recipe.holiday}
+                    <span>Holiday:</span> {recipe.holiday}
                 </p>
 
                 {loading && !recipe.author ? (<p>Author loading...</p>) : (<p id="details-author">
@@ -112,7 +112,7 @@ function RecipeDetails({recipe}) {
                     {loading && !recipe.ingredients ? (<p>Ingredients loading...</p>) : (
                         <div id="details-ingredients-list">
                             {recipe.ingredients?.map(ingredient => {
-                                return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
+                                return <p key={ingredient._id} className="ingredient-p">{ingredient.name}</p>
                             })}
                         </div>)}
 
