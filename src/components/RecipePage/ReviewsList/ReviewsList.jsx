@@ -5,6 +5,7 @@ import { AuthContext } from '../../../App.jsx';
 
 import RatingsReviews from './RatingsReviews';
 import ReviewForm from './ReviewForm/ReviewForm.jsx';
+import ReviewCard from './ReviewCard/ReviewCard.jsx';
 
 import services from '../../../services/index.js';
 
@@ -20,10 +21,6 @@ function ReviewsList({ recipe, setRecipe }) {
   const [editForm, setEditForm] = useState(false);
   const [sortedReviews, setSortedReviews] = useState([]);
   const {recipeId} = useParams();
-
-  // TODO: review logic buttons logic:
-  // AUTHOR & LOGGED IN: Edit Review, Delete Review
-  // --> once you click Edit – form for edit appears!
 
   const {user, recipes, setRecipes} = useContext(AuthContext);
 
@@ -141,7 +138,11 @@ function ReviewsList({ recipe, setRecipe }) {
               console.log(err);
           }
 
-          return (<div className="review-div" key={review._id}>
+          return ( 
+          
+          <div className="review-div" key={review._id}>
+
+              < ReviewCard />
 
               <h3 className="review-h3">{review.name}</h3>
 
