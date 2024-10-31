@@ -1,5 +1,5 @@
 import * as auth from './sub-services/authService';
-import * as favorites from './sub-services/favoritesService';
+import { addRecipeToFavorites, removeRecipeFromFavorites, getFavorites} from './sub-services/favoritesService';
 import * as ingredients from './sub-services/ingredientsService';
 import * as recipes from './sub-services/recipesService';
 import * as sort from './sub-services/sortService';
@@ -10,12 +10,6 @@ const {
   getUser,
   signOut
 } = auth;
-
-const {
-    getFavorites,
-    createFavorite,
-    removeFavorite
-} = favorites;
 
 const {
     getAllIngredients
@@ -36,14 +30,13 @@ const { sortRecipes,
     searchRecipes 
 } = sort;
 
-const services = {
-    signUp,
+const services = { // we never re declare constants Re
     signIn,
     getUser,
     signOut,
     getFavorites,
-    createFavorite,
-    removeFavorite,
+    createFavorite: addRecipeToFavorites,
+    removeFavorite: removeRecipeFromFavorites,
     getAllIngredients,
     getAllRecipes, 
     getSingleRecipe, 
@@ -64,9 +57,6 @@ export {
     signIn,
     getUser,
     signOut,
-    getFavorites,
-    createFavorite,
-    removeFavorite,
     getAllIngredients,
     getAllRecipes, 
     getSingleRecipe, 
@@ -79,4 +69,10 @@ export {
     deleteReview,
     sortRecipes, 
     searchRecipes
+}
+
+export {
+    getFavorites,
+    addRecipeToFavorites,
+    removeRecipeFromFavorites
 }

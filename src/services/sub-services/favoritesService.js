@@ -25,11 +25,11 @@ const getFavorites = async (token) => {
 
 /* --------------------------------POST Services--------------------------------*/
 
-const createFavorite = async (recipeId, token) => {
+const addRecipeToFavorites = async (recipeId, token) => {
   try {
-    const response = await axios.post(`${BACKEND_URL}/favorites/${recipeId}`, {
+    const response = await axios.post(`${BACKEND_URL}/favorites/${recipeId}`, {}, {
       headers: {
-        Authorization: `Bearer${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data;
@@ -38,17 +38,17 @@ const createFavorite = async (recipeId, token) => {
       "Error adding to favorites:",
       error.response?.data || error.message
     );
-    throw error;
+    //throw error; // We never rethrow in a catch (There are very specific situations when we do)
   }
 };
 
 /* --------------------------------PUT Services--------------------------------*/
 
-const removeFavorite = async (recipeId, token) => {
+const removeRecipeFromFavorites = async (recipeId, token) => {
   try {
-    const response = await axios.put(`${BACKEND_URL}/favorites/${recipeId}`, {
-      headers: {
-        Authorization: `Bearer${token}`,
+    const response = await axios.put(`${BACKEND_URL}/favorites/${recipeId}`, {},
+        {headers: {
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data;
@@ -63,4 +63,4 @@ const removeFavorite = async (recipeId, token) => {
 
 /* --------------------------------Exports--------------------------------*/
 
-export { getFavorites, createFavorite, removeFavorite };
+export { getFavorites, addRecipeToFavorites, removeRecipeFromFavorites };

@@ -95,9 +95,13 @@ const updateRecipe = async(recipeId,  updatedData, token)=> {
 };
 
 // service to delete a recipe by Id
-const deleteRecipe = async (recipeId) => {
+const deleteRecipe = async (recipeId, token) => {
     try{
-        const response = await axios.delete(`${BACKEND_URL}/recipes/${recipeId}`);
+        const response = await axios.delete(`${BACKEND_URL}/recipes/recipe/${recipeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         return response.data;
     }catch (error) {
      console.error('Error deleting recipe:', error);

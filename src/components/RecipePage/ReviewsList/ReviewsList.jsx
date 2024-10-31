@@ -4,12 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../App.jsx';
 
 import RatingsReviews from './RatingsReviews';
-import ReviewForm from './ReviewForm/ReviewForm.jsx';
 
 import services from '../../../services/index.js';
 
 // css
 import './ReviewsList.css';
+import ReviewForm from "../ReviewForm/ReviewForm.jsx";
 
 /* --------------------------------Function--------------------------------*/
 
@@ -56,7 +56,6 @@ function ReviewsList({ recipe, setRecipe }) {
             setRecipe(foundRecipe);
 
             if (foundRecipe && Object.keys(foundRecipe).includes('prepTime')) {
-              console.log('changing the loading')
               setLoading(false);
             }
 
