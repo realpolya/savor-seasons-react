@@ -49,6 +49,7 @@ function ReviewsList({ recipe, setRecipe }) {
       setReviews((prev) => {
         return [...prev, updatedReview]
       });
+      setEditForm(false);
       return updatedReview;
     } catch(err) {
       console.log(err)
@@ -117,7 +118,7 @@ function ReviewsList({ recipe, setRecipe }) {
   }, [reviews])
 
   /* USE CONTEXT */
-  const reviewObject = { recipeId, handleAddReview, handleDeleteReview, showEditForm };
+  const reviewObject = { recipeId, handleAddReview, handleDeleteReview, showEditForm, handleUpdateReview };
 
   return (
 
@@ -126,7 +127,7 @@ function ReviewsList({ recipe, setRecipe }) {
 
         <h2 id="reviews-list-h2">Reviews</h2>
 
-        { user ? (< ReviewForm />) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
+        { user ? (< ReviewForm condition={'new'} data={null}/>) : (<Link to='/sign-in' id="review-form-log-in-link">Log in to leave review.</Link>)}
 
         { loading ? (<p>Reviews are loading...</p>) : (<div className="reviews-list">
           
@@ -144,10 +145,8 @@ function ReviewsList({ recipe, setRecipe }) {
                 console.log(err);
             }
 
-            // editForm ? 
-
             let card = (<ReviewCard key={review._id} match={match} review={review}/>)
-            let form = (<ReviewForm/>)
+            let form = (<ReviewForm key={review._id} condition={'edit'} data={review}/>)
 
             if (editForm === review._id) {
               return form;
