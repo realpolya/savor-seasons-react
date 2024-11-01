@@ -116,12 +116,12 @@ function RecipeDetails({recipe}) {
                 </div>
                 <p id="details-details">{recipe.description}</p>
 
-                {isUserTheAuthor ? <button><Link to={`/recipes/${recipe._id}/edit`}>Edit</Link></button> : <></>}
-                {isUserTheAuthor ? <button onClick={handleDeleteRecipe}>Delete</button> : <></>}
+                {isUserTheAuthor ? <button><Link to={`/recipes/${recipe._id}/edit`} id="details-edit-link">Edit</Link></button> : null}
+                {isUserTheAuthor ? <button onClick={handleDeleteRecipe}>Delete</button> : null}
                 {isInFavorites ? <button onClick={handleRemoveFromFavorites}>Remove from favorites</button> :
                     <button onClick={handleAddToFavorites}>Add to favorites</button>}
 
-                <button><Link to='/'>Back to Recipes</Link></button>
+                <button><Link to='/' id="details-back-link">Back to Recipes</Link></button>
 
             </div>
 
