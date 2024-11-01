@@ -1,16 +1,16 @@
 /* --------------------------------Imports--------------------------------*/
 import RatingComponent from './Rating';
-// css
-import './RecipeDetails.css';
 import {useContext, useState, useEffect} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../../App.jsx';
 import {addRecipeToFavorites, removeRecipeFromFavorites, deleteRecipe} from "../../../services/index.js";
 
+// css
+import './RecipeDetails.css';
+
 /* --------------------------------Function--------------------------------*/
 
 function RecipeDetails({recipe}) {
-// adding stuff
 
     const [loading, setLoading] = useState(true);
     const [isUserTheAuthor, setIsUserTheAuthor] = useState(false);
@@ -30,11 +30,12 @@ function RecipeDetails({recipe}) {
             if (recipe.author && recipe.ingredients) {
                 
                 if (recipe.reviews.length > 0) {
+
                     let newRating = 0;
                     recipe.reviews.forEach(review => newRating += +review.rating);
                     newRating = newRating / recipe.reviews.length;
                     setRecipeRating(newRating);
-    
+                    
                 }
 
                 setLoading(false);

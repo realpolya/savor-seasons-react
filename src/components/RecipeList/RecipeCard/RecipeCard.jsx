@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import RatingComponent from './Rating.jsx';
 
-
 // css
 import './RecipeCard.css';
 
@@ -36,6 +35,7 @@ function RecipeCard({ recipe }) {
     }
 
     return (
+
       <section className="recipe-card-section">
         
           <div className="recipe-card-div-img">
@@ -61,6 +61,7 @@ function RecipeCard({ recipe }) {
             <button className="recipe-card-button">View</button>
           </div>
       </section>
+      
     )
 
 }

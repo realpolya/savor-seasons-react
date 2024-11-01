@@ -1,13 +1,12 @@
 /* --------------------------------Imports--------------------------------*/
 import { useState, useContext  } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
-// contexts & services
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App.jsx';
 import { signUp } from '../../services/index.js';
 
 // css
 import './SignUpForm.css';
-import '../SignInForm/SignInForm.css' // reconfigure later
+import '../SignInForm/SignInForm.css' // reconfigure CSS later
 
 /* --------------------------------Function--------------------------------*/
 
@@ -49,11 +48,10 @@ function SignUpForm() {
   };
 
 
-  const { username, password, passwordConf } = formData;
+  const { username, email, password, passwordConf } = formData;
 
-  //TODO: check for email too
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(username && email && password && password === passwordConf);
   };
 
   return (

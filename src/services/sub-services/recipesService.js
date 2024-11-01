@@ -1,14 +1,14 @@
 
-import axios from 'axios';
+/* --------------------------------Imports--------------------------------*/
 
+import axios from 'axios';
 
 /* --------------------------------Variables--------------------------------*/
 
 const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
-/* --------------------------------Helper Functions--------------------------------*/
-
 /* --------------------------------Functions--------------------------------*/
+
 //service to fetch all recipes
 const getAllRecipes = async () => {
     try{
@@ -39,7 +39,6 @@ const getSingleRecipe = async (recipeId, token) => {
     }
 };
 
-// FIXME: user information is not properly being sent to the back end
 // service to fetch a recipe by the logged-in user
 const getUserRecipes = async (token) => {
 
@@ -61,7 +60,6 @@ const getUserRecipes = async (token) => {
 //service to create a new recipe
 const createRecipe = async (recipeData, token) => {
     try {
-        console.log("calling backend");
         const response = await axios.post(
             `${BACKEND_URL}/recipes`,
             recipeData,
@@ -71,7 +69,6 @@ const createRecipe = async (recipeData, token) => {
                 },
             }
         );
-        console.log("response", response);
         return response.data;
     } catch (error) {
         console.error('Error creating recipe:', error);
@@ -127,7 +124,7 @@ const createReview = async(recipeId, reviewData ) => {
 // service to update a review to a recipe
 const updateReview = async(recipeId, reviewId, updatedReview) => {
     try{
-        const response= await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview, {
+        const response = await axios.put(`${BACKEND_URL}/recipes/${recipeId}/reviews/${reviewId}`, updatedReview, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             }

@@ -11,9 +11,7 @@ import './MyRecipesCard.css';
 
 function MyRecipesCard() {
 
-    const {user, recipes, setRecipes, userRecipes } = useContext(AuthContext);
-
-    console.log('recipes are', recipes);
+    const { userRecipes } = useContext(AuthContext);
 
     userRecipes.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
@@ -22,6 +20,7 @@ function MyRecipesCard() {
     myRecipesShort.length = 4;
 
     return (
+
       <section id="my-recipes-card-section">
 
           <Link to ="/my-recipes"id="my-recipes-view-link">
@@ -39,6 +38,7 @@ function MyRecipesCard() {
           </div>
 
       </section>
+      
     )
 
   }
