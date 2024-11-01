@@ -20,9 +20,6 @@ import AboutTeam from './components/AboutTeam/AboutTeam.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
-// delete later
-import {dummyRecipes} from './dummy-data/dummy-data.js';
-
 /* --------------------------------Variables--------------------------------*/
 
 const AuthContext = createContext(null);
@@ -33,20 +30,17 @@ function App() {
 
   /* LOCATION */
   const location = useLocation();
-  const token = localStorage.getItem('token')
-  const navigate = useNavigate()
+  const token = localStorage.getItem('token');
 
   /* STATES */
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
   const [user, setUser] = useState(services.getUser());
-  // const [favorites, setFavorites] = useState(null);
 
   // all recipes are a constant, recipes can get sorted / filtered
   const [allRecipes, setAllRecipes] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [userRecipes, setUserRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  // const [toggle, setToggle] = useState(true); // tbd
 
   /* FUNCTIONS */
   const fetchAllRecipes = async () => {
@@ -69,15 +63,6 @@ function App() {
 
   }
 
-  /* commented out as this function is not being used anywhere atm */
-  // const handleUpdateRecipe = async (recipeId, recipeFormData) => {
-
-  //   const updatedRecipe = await services.updateRecipe(recipeId, recipeFormData);
-  //   setRecipes(recipes.map((recipe) => (recipeId === recipe._id ? updatedRecipe : recipe)));
-  //   navigate(`recipes/${recipeId}`);
-
-  // };
-
   /* USE EFFECT */
   useEffect(() => {
 
@@ -88,6 +73,7 @@ function App() {
     }
   
   }, [location.pathname]);
+
 
   /* USE CONTEXT */
   const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes, favorites };
@@ -102,20 +88,17 @@ function App() {
 
         <Routes>
 
-          {/* protected Routes */}
-          <>
-            < Route path="/home" element={< Dashboard />} />
-            <Route path="/about-team" element={< AboutTeam />} />
+          {/* Protected Routes */}
+          
+          < Route path="/home" element={< Dashboard />} />
+          < Route path="/about-team" element={< AboutTeam />} />
 
-            <Route path="/recipe-form" element={< RecipeForm />} />
-            <Route path="/recipes/:recipeId/edit" element={<RecipeForm />} />
-            < Route path="/my-recipes" element={< RecipeList condition={"my-recipes"} />} />
-            < Route path="/favorites" element={< RecipeList condition={"favorites"} />} />
-
-            {/* route for viewing favorites */}
-            {/* route for viewing my recipes */}
-            <Route path="/recipes/:recipeId" element={<RecipePage /> } />
-          </>
+          < Route path="/recipe-form" element={< RecipeForm />} />
+          < Route path="/recipes/:recipeId/edit" element={<RecipeForm />} />
+          < Route path="/my-recipes" element={< RecipeList condition={"my-recipes"} />} />
+          < Route path="/favorites" element={< RecipeList condition={"favorites"} />} />
+          < Route path="/recipes/:recipeId" element={<RecipePage /> } />
+          
 
           {/* Public Routes */}
           < Route path="/" element={< RecipeList condition={"all"}/>} />
