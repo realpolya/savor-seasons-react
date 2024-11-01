@@ -307,12 +307,13 @@ export default mongoose.model(
 
 ### Post-MVP goals
 
-- Create auto-complete input bar for ingredients instead of checkb-box. The ingredients database would serve as an API library fetching suggestions for the user as they type.
+- Create auto-complete input bar for ingredients instead of check-box. The ingredients database would serve as an API library fetching suggestions for the user as they type.
 - Create POST route for ingredients. User would be able to type their own ingredient, and it would automatically expand the database of ingredients.
 - Create a recipe social media platform where users can follow other users and get notifications when their favorite chefs post new recipes.
 - Work on CSS for mobile and add a "hamburger" bar functionality.
+- Create an email authentication check.
 
 ### Sources
 
 - Unsplash (stock photo)
-- chatGPT
+- chatGPT (ingredient array generation)
