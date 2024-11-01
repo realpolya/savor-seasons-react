@@ -1,15 +1,31 @@
 /* --------------------------------Imports--------------------------------*/
+import { useState, useEffect } from 'react';
+import RatingComponent from './Rating.jsx';
 
 // css
 import './RecipeCard.css';
 
 /* --------------------------------Function--------------------------------*/
 
-//TODO: work on the star package for recipe.rating
-
 function RecipeCard({ recipe }) {
 
-    // calculated recipe.rating
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+
+      if (recipe.author) {
+
+        console.log('loaded');
+        setLoading(false);
+
+      } else {
+
+        console.log('not loaded');
+
+      }
+    }, [recipe.author]);
+
+    // calculate recipe.rating
     recipe.rating = 0;
     if (recipe.reviews.length > 0) {
 
@@ -19,6 +35,7 @@ function RecipeCard({ recipe }) {
     }
 
     return (
+
       <section className="recipe-card-section">
         
           <div className="recipe-card-div-img">
@@ -27,19 +44,24 @@ function RecipeCard({ recipe }) {
 
           <div className="recipe-card-div-info">
             <h3 className="recipe-card-h3">{recipe.name}</h3>
-            <p className="recipe-card-rating">Rating: {recipe.rating}</p>
+            <div className="recipe-card-rating-div">
+              < RatingComponent rating={recipe.rating}/>
+              {recipe.rating === 0 
+              ? (<p className="recipe-card-rating">Not rated yet</p>)
+              : (<p className="recipe-card-rating">{Math.trunc(recipe.rating * 100) / 100} out of 5</p>)}
+            </div>
             <p className="recipe-card-holiday">
               {recipe.holiday}
             </p>
-            <p className="recipe-card-author">
-              By <span>{recipe.author.username}</span>
-            </p>
+            <div className="recipe-card-author">
+              {loading ? <p className="recipe-card-author-p">User not loaded yet</p> : <p className="recipe-card-author-p">By <span>{recipe.author.username}</span></p> }
+            </div>
             <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
-            {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
             <p className="recipe-card-details">{recipe.description}</p>
-            <button className="recipe-card-button">View {recipe.name}</button>
+            <button className="recipe-card-button">View</button>
           </div>
       </section>
+      
     )
 
 }

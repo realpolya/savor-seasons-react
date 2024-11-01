@@ -1,29 +1,57 @@
 /* --------------------------------Imports--------------------------------*/
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../../App.jsx';
 
-import { Link } from 'react-router-dom';
+import { sortRecipes, searchRecipes } from '../../../services/index.js';
 
 // css
 import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function SortBar({ recipes, setRecipes }) {
+function SortBar({ condition, setListRecipes, setSorting }) {
 
-    const handleSortChange = e => {
-      console.log(e)
+    const [searchData, setSearchData] = useState('');
+    const {allRecipes, userRecipes, favorites} = useContext(AuthContext);
+
+    // variable for storing filtered recipes and initial recipes
+    let filtered;
+    let initialRecipes;
+    if (condition === "all") {
+      initialRecipes = [...allRecipes];
+    } else if (condition === "my-recipes") {
+      initialRecipes = [...userRecipes];
+    } else if (condition === "favorites") {
+      initialRecipes = [...favorites];
     }
 
-    const handleFilterChange = e => {
-      console.log(e)
-    }
+    /* RESET FUNCTION */
+    const restoreRecipes = () => setSorting(false);
 
-    const handleSearchChange = e => {
-      console.log(e)
-    }
-
+    /* SUBMIT FUNCTIONS */
     const handleSubmit = e => {
-      console.log(e)
+      e.preventDefault();
+      setListRecipes(filtered);
     }
+
+    const handleSearchSubmit = e => {
+      e.preventDefault();
+      filtered = searchRecipes(searchData, initialRecipes);
+      setListRecipes(filtered);
+    }
+
+    /* CHANGE FUNCTIONS */
+    const handleSortChange = e => {
+      filtered = sortRecipes(e.target.value, initialRecipes);
+      handleSubmit(e);
+    }
+
+    const handleFilterChange = (e) => {
+      filtered = initialRecipes.filter(recipe => recipe.holiday === e.target.value);
+      handleSubmit(e);
+    }
+
+    const handleSearchChange = e => setSearchData(e.target.value);
 
     return (
       <section id="sort-bar-section">
@@ -34,10 +62,9 @@ function SortBar({ recipes, setRecipes }) {
                     <option value="" disabled selected>---Sort---</option>
                     <option value="rating">By rating (best first)</option>
                     <option value="prepTime">By prep time (shortest first)</option>
-                    <option value="ingredients">By number of ingredients (fewest first)</option>
               </select>
             </form>
-            <form id="filter-form" onSubmit={handleSubmit}>
+            <form id="filter-form">
               <select id="filter-select" name="filter" onChange={handleFilterChange}>
                     <option value="" disabled selected>---Filter---</option>
                     <option value="Not a Holiday">Everyday recipes</option>
@@ -47,11 +74,20 @@ function SortBar({ recipes, setRecipes }) {
                     <option value="Halloween">Halloween recipes</option>
               </select>
             </form>
+
+            <form id="sort-filter-form-button" onSubmit={restoreRecipes}>
+              <button className="search-form-button" type="submit">Reset</button>
+            </form>
           </div>
           
           <div id="search-div">
-            <form id="search-form" onSubmit={handleSubmit}>
-              <input type="text" placeholder="e.g. mashed potatoes" name="search" onChange={handleSearchChange}/>
+            <form id="search-form" onSubmit={handleSearchSubmit}>
+              <input required 
+                      type="text" 
+                      placeholder="e.g. mashed potatoes" 
+                      name="search" 
+                      value={searchData}
+                      onChange={handleSearchChange}/>
               <button className="search-form-button" type="submit">Search</button>
             </form>
           </div>

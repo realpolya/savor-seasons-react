@@ -1,0 +1,72 @@
+#my-favorites-table-section {
+    height: 70%;
+    background-color: var(--light-color);
+    border-radius: 2rem;
+    overflow-y: scroll;
+}
+
+#my-favorites-table-h2 {
+    padding-top: 1rem;
+    font-family: var(--decor-font);
+    margin: 0;
+}
+
+#my-favorites-table-h2,
+#my-favorites-table-h2-link {
+    font-family: var(--decor-font);
+    color: var(--text-color);
+}
+
+#my-favorites-table-h2-link:hover {
+    color: var(--accent-color);
+}
+
+#my-favorites-table-ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.favorite-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.favorite-item-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    height: 2rem;
+}
+
+.favorite-item-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: .3rem;
+}
+
+.favorite-item-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.favorite-item-h3,
+.favorite-item-p {
+    margin: 0;
+    margin: .3rem 0;
+    margin-right: .3rem;
+}
+
+.favorite-item-p {
+    height: 100%;
+}
+
+.favorite-item-p span {
+    height: 100%;
+}

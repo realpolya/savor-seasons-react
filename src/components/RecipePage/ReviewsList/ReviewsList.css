@@ -1,0 +1,23 @@
+
+#reviews-list-section {
+    width: 60%;
+}
+
+#reviews-list-h2 {
+    font-family: var(--decor-font);
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+#review-form-log-in-link {
+    padding-bottom: 7rem;
+}
+
+@media (max-width: 820px) {
+
+    #reviews-list-section {
+        width: 95%;
+    }
+
+
+}

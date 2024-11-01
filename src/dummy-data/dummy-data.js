@@ -2,7 +2,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9423398e8be04251cc6a",
         "name": "Apple Pie",
-        "prepTime": "2 hour",
+        "prepTime": "5",
         "author": {
             "_id": "671c54008b3a694e3a89f582",
             "username": "Vasya",
@@ -21,7 +21,7 @@ export const dummyRecipes = [
     {
         "_id": "671e947c398e8be04251cc6f",
         "name": "Carrot Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -31,7 +31,7 @@ export const dummyRecipes = [
         },
         "description": "A delicious carrot cake for the holidays.",
         "holiday": "Christmas",
-        "image": "https://example.com/carrot-pie.jpg",
+        "image": "https://images.unsplash.com/photo-1501437638401-4addcfd56d3d?q=80&w=1586&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "reviews": [],
         "createdAt": "2024-10-27T19:29:00.458Z",
         "updatedAt": "2024-10-27T19:29:00.458Z",
@@ -40,7 +40,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9510f8643dcb840d3001",
         "name": "Carrot Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -50,7 +50,7 @@ export const dummyRecipes = [
         },
         "description": "A delicious carrot cake for the holidays.",
         "holiday": "Christmas",
-        "image": "https://example.com/carrot-pie.jpg",
+        "image": "https://images.unsplash.com/photo-1622926421334-6829deee4b4b?q=80&w=2192&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "reviews": [],
         "createdAt": "2024-10-27T19:31:28.165Z",
         "updatedAt": "2024-10-27T19:31:28.165Z",
@@ -59,7 +59,7 @@ export const dummyRecipes = [
     {
         "_id": "671e959dc254f77efcc00d53",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "3",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -69,7 +69,7 @@ export const dummyRecipes = [
         },
         "description": "A delicious random cake for the holidays.",
         "holiday": "Christmas",
-        "image": "https://example.com/carrot-pie.jpg",
+        "image": "https://images.unsplash.com/photo-1595955809761-dcd4c857e147?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "reviews": [],
         "createdAt": "2024-10-27T19:33:49.697Z",
         "updatedAt": "2024-10-27T19:33:49.697Z",
@@ -78,7 +78,7 @@ export const dummyRecipes = [
     {
         "_id": "671e9631174160a8afe7783c",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -97,7 +97,7 @@ export const dummyRecipes = [
     {
         "_id": "671e965567fda41ff97df9a1",
         "name": "Random Cake",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -116,7 +116,7 @@ export const dummyRecipes = [
     {
         "_id": "671f04f3e7306264e1939ca3",
         "name": "Random Cake 2",
-        "prepTime": "2 hour",
+        "prepTime": "2",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",
@@ -136,7 +136,7 @@ export const dummyRecipes = [
     {
         "_id": "671f0b3cc1e7a43c111dd3a5",
         "name": "Random Dish 3",
-        "prepTime": "1 hour",
+        "prepTime": "10",
         "author": {
             "_id": "671d5d34de0073ec8152f408",
             "username": "paola",

@@ -1,0 +1,20 @@
+/* CONTAINS CSS FOR BOTH SIGN IN AND SIGN UP*/
+
+.sign-form {
+    background-color: var(--light-color);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.sign-form-div {
+    margin: 1rem .2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sign-form-label {
+    margin-right: 1rem;
+    width: 40%;
+    text-align: right;
+}

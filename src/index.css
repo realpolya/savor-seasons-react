@@ -1,17 +1,24 @@
 /* colors */
 :root {
-  --dark-color: #31135A; /* */
+  --dark-color: #31135A;
   --light-color: #CEBBC9;
   --background-color: #F9FFCA;
   --accent-color: #CE2D4F;
   --text-color: #31135A;
+  --white-color: white;
   --light-accent-color: #CE6D8B;
   --button-color: #CE6D8B;
   --button-hover-color: #CE2D4F;
   --link-hover-color: #31135A;
+  --grey-color: #585858;
+
+  --span-color: rgb(112, 0, 69);
 
   --main-font: "Montserrat", sans-serif;
   --decor-font: "Fredericka the Great", sans-serif;
+
+  /* max-width for mobile */
+  --mobile-width: 820px;
 }
 
 :root {
@@ -30,6 +37,25 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  height: 100%;
+  width: 100%;
 }
 
 a {
@@ -80,16 +106,15 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+select, input {
+  background-color: var(--background-color);
+  color: var(--dark-color);
+}
 
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (max-width: 820px) {
+
+  #root {
+    padding: 0;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+
+}

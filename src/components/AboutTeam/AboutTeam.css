@@ -1,0 +1,94 @@
+/* General Layout */
+#about-team-main {
+    padding: 2rem;
+    font-family: var(--main-font);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+/* Main About Section */
+.about-me {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-me h2 {
+    font-family: var(--decor-font);
+    font-size: 2.5em;
+    color: var(--dark-color);
+    margin-top: 0;
+}
+
+.about-me p {
+    font-size: 1.1em;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    background-color: var(--light-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: left;
+    color: var(--text-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-member h4 {
+    font-family: var(--decor-font);
+    color: var(--dark-color);
+    font-size: 1.6em;
+    margin-top: 0;
+}
+
+.team-member p {
+    font-size: 1em;
+    color: var(--dark-color);
+    line-height: 1.5;
+}
+
+/* Links Styling */
+.links a {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Responsive Design */
+@media (max-width: var(--mobile-width)) {
+    .about-me {
+        padding: 1.5rem;
+    }
+
+    .team {
+        flex-direction: column;
+    }
+
+    .about-me h2 {
+        font-size: 2em;
+    }
+
+    .team-member h4 {
+        font-size: 1.4em;
+    }
+}

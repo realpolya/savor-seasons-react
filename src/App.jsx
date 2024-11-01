@@ -1,16 +1,13 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, createContext } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 // css
 import './App.css'
 
 // services
-import * as authService from "./services/authService.js";
-import * as favoritesService from "./services/favoritesService.js";
-import * as ingredientsService from "./services/ingredientsService.js";
-import * as recipesService from "./services/recipesService.js";
+import services from "./services/index.js";
 
 // component imports below
 import NavBar from './components/NavBar/NavBar.jsx';
@@ -23,79 +20,90 @@ import AboutTeam from './components/AboutTeam/AboutTeam.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
-// delete later
-import {dummyRecipes} from './dummy-data/dummy-data.js';
-
 /* --------------------------------Variables--------------------------------*/
 
-// AuthContext can be set to an object (if you want to pass down
-// multiple items through the value prop)
-// EXAMPLE: const contextObject = { user, setUser }
 const AuthContext = createContext(null);
 
 /* --------------------------------Function--------------------------------*/
 
 function App() {
 
-  /* STATES */
+  /* LOCATION */
+  const location = useLocation();
+  const token = localStorage.getItem('token');
 
+  /* STATES */
   // condition to view all recipes (or favorites, or my recipes, or sorted/filtered/etc)
-  const [listCondition, setListCondition] = useState('all');
-  const [user, setUser] = useState(null);
-  const [favorites, setFavorites] = useState(null);
-  const [recipes, setRecipes] = useState(dummyRecipes);
-  const [ingredients, setIngredients] = useState([]);
-  const [toggle, setToggle] = useState(true);
+  const [user, setUser] = useState(services.getUser());
+
+  // all recipes are a constant, recipes can get sorted / filtered
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [userRecipes, setUserRecipes] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   /* FUNCTIONS */
-
   const fetchAllRecipes = async () => {
-    const recipesData = await recipesService.index();
-    setRecipes(prev => [...prev, recipesData]);
+    const recipesData = await services.getAllRecipes();
+    setAllRecipes(recipesData);
+    setRecipes(recipesData);
   };
 
-  const fetchAllIngredients = async () => {
-    const ingredientsData = await ingredientsService.index();
-    setIngredients(prev => [...prev, ingredientsData]);
-  };
+  const fetchUserFavorites = async () => {
 
-  const handleListCondition = condition => {
-    setListCondition(condition);
+    const userFavorites = await services.getFavorites(token)
+    setFavorites(userFavorites.recipes);
+
+  }
+
+  const fetchUserRecipes = async () => {
+
+    const userRecipesData = await services.getUserRecipes(token);
+    setUserRecipes(userRecipesData)
+
   }
 
   /* USE EFFECT */
-  // useEffect(() => {
-    
-  //   if (user) fetchAllHoots();
-  // }, [user]);
+  useEffect(() => {
+
+    fetchAllRecipes();
+    if (user) {
+      fetchUserRecipes();
+      fetchUserFavorites()
+    }
+  
+  }, [location.pathname]);
+
 
   /* USE CONTEXT */
-  const authObject = { user, setUser };
+  const contextObject = { user, setUser, allRecipes, recipes, setRecipes, userRecipes, favorites };
 
   /* RETURN */
   return (
     <>
     
-      <AuthContext.Provider value={authObject}>
-
-        <h1>Savor the Seasons</h1>
+      <AuthContext.Provider value={contextObject}>
         
         < NavBar user={user} /> 
 
         <Routes>
-          {/* protected Routes */}
-          <>
-            <Route path="/about-team" element={< AboutTeam setUser={setUser} />} />
-            <Route path="/recipe-form" element={< RecipeForm setUser={setUser}/>} />
-            <Route path="/recipe-list" element={< RecipeList setUser={setUser} />} />
-            <Route path="/recipe-page" element={< RecipePage setUser={setUser} /> } />
-          </>
+
+          {/* Protected Routes */}
+          
+          < Route path="/home" element={< Dashboard />} />
+          < Route path="/about-team" element={< AboutTeam />} />
+
+          < Route path="/recipe-form" element={< RecipeForm />} />
+          < Route path="/recipes/:recipeId/edit" element={<RecipeForm />} />
+          < Route path="/my-recipes" element={< RecipeList condition={"my-recipes"} />} />
+          < Route path="/favorites" element={< RecipeList condition={"favorites"} />} />
+          < Route path="/recipes/:recipeId" element={<RecipePage /> } />
+          
 
           {/* Public Routes */}
-          { user ? (< Route path="/" element={<Dashboard user={user}/>} />) : (< Route path="/" element={<RecipeList 
-          recipes={recipes} setRecipes={setRecipes}/>} />)}
-          < Route path="/sign-up" element={< SignUpForm setUser={setUser}/>} />
-          < Route path="/sign-in" element={< SignInForm setUser={setUser}/>} />
+          < Route path="/" element={< RecipeList condition={"all"}/>} />
+          < Route path="/sign-up" element={< SignUpForm />} />
+          < Route path="/sign-in" element={< SignInForm />} />
           
         </Routes>
 

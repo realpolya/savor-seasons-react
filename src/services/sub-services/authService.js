@@ -6,15 +6,13 @@ import axios from 'axios';
 
 const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
-/* --------------------------------Helper Functions--------------------------------*/
-
 /* --------------------------------Functions--------------------------------*/
 
 const signUp = async (formData) => {
     
     try {
 
-        const response = await axios.post(`${BACKEND_URL}/users/sign-up`, formData);
+        const response = await axios.post(`${BACKEND_URL}/auth/sign-up`, formData);
 
         if (response.data.error) {
             console.log(response.data.error)
@@ -40,7 +38,7 @@ const signIn = async (formData) => {
 
     try {
 
-        const response = await axios.post(`${BACKEND_URL}/users/sign-in`, formData);
+        const response = await axios.post(`${BACKEND_URL}/auth/sign-in`, formData);
 
         if (response.data.error) {
             console.log(response.data.error)
@@ -66,7 +64,6 @@ const getUser = () => {
 
     const token = localStorage.getItem('token');
     if (!token) return null;
-
     const user = JSON.parse(atob(token.split('.')[1]));
     return user;
 
@@ -77,6 +74,7 @@ const signOut = () => {
     localStorage.removeItem('token');
 
 }
+
 
 /* --------------------------------Exports--------------------------------*/
 
