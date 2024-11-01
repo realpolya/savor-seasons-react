@@ -25,24 +25,24 @@ Our wireframe was made using Figma.
 
 #### Landing (no sign-in required)
 
-![alt text](image.png)
+![alt text](/Images/image.png)
 
 #### Dashboard
 
-![alt text](image-1.png)
+![alt text](/Images/image-1.png)
 
 #### Recipe Page
 
-![alt text](image-4.png)
+![alt text](/Images/image-4.png)
 
 ### Flow chart
 
 Our Flow chart using Figma.
-![alt text](image-5.png)
+![alt text](/Images/image-5.png)
 
 ### Color Palettes
 
-![alt text](image-7.png)
+![alt text](/Images/image-7.png)
 
 ```javascript
 :root {
@@ -67,12 +67,12 @@ Our Flow chart using Figma.
 ERD was made using Figma.
 
 We have five models. The User, Favorite and Recipes are refrencing each other. The Ingredents are only refrenced with the Recipes. The Review is enbedded and only refrenced with User.
-![alt text](image-8.png)
+![alt text](/Images/image-8.png)
 
 ### Components
 
 We used a image to map our flies and worked through our components.
-![alt text](image-10.png)
+![alt text](/Images/image-10.png)
 
 ### Trello
 
@@ -114,29 +114,29 @@ Visit the [Trello board](https://trello.com/b/AMCXx13r/seasonal-recipes-app) for
 
 ### Routes
 
-### User Routes
+#### User Routes
 
-![alt text](image-9.png)
+![alt text](/Images/image-9.png)
 
-### Recipes RoutesS
+#### Recipes Routes
 
-![alt text](image-11.png)
+![alt text](/Images/image-11.png)
 
-### Favorite Routes
+#### Favorite Routes
 
-![alt text](image-12.png)
+![alt text](/Images/image-12.png)
 
-### Ingredents Routes
+#### Ingredents Routes
 
-![alt text](image-13.png)
+![alt text](/Images/image-13.png)
 
-### Review Routes
+#### Review Routes
 
-![alt text](image-14.png)
+![alt text](/Images/image-14.png)
 
 ### JS Models Files
 
-- Models user.js
+Models user.js
 
 ```javascript
 export default mongoose.model(
@@ -165,7 +165,7 @@ export default mongoose.model(
 );
 ```
 
-- models recipe.js
+Models recipe.js
 
 ```javascript
 export default mongoose.model(
@@ -187,7 +187,7 @@ export default mongoose.model(
       },
       ingredients: [
         {
-          type: mongoose.Schema.Types.ObjectId, // We need to reference the ingredient model if not there is no relationship
+          type: mongoose.Schema.Types.ObjectId,
           ref: "Ingredient",
         },
       ],
@@ -216,7 +216,7 @@ export default mongoose.model(
 );
 ```
 
-- models favorite.js
+Models favorite.js
 
 ```javascript
 export default mongoose.model(
@@ -239,7 +239,7 @@ export default mongoose.model(
 );
 ```
 
-- models ingredents.js
+Models ingredents.js
 
 ```javascript
 export default mongoose.model(
@@ -257,7 +257,7 @@ export default mongoose.model(
 
 ### JS Controllers Files
 
-- Controllers auth.js
+#### Controllers auth.js
 
 | Route                 | Method | Description                                                                |
 | --------------------- | ------ | -------------------------------------------------------------------------- |
@@ -265,7 +265,7 @@ export default mongoose.model(
 | `/auth/sign-up`       | POST   | Registers a new user and generates a token                                 |
 | `/auth/sign-in`       | POST   | Authenticates user and returns a token                                     |
 
-- Controllers favorite.js
+#### Controllers favorite.js
 
 | Route                  | Method | Description                                   |
 | ---------------------- | ------ | --------------------------------------------- |
@@ -273,12 +273,13 @@ export default mongoose.model(
 | `/favorites/:recipeId` | POST   | Adds a recipe to the user's favorites         |
 | `/favorites/:recipeId` | PUT    | Removes a recipe from the user's favorites    |
 
-- Controllers ingredents.js
-  | Route | Method | Description |
-  | --------------| ------ | ------------------------------------- |
-  |`/ingredients` | GET | Returns all ingredients to the client |
+#### Controllers ingredents.js
 
-- Controllers recipe.js
+| Route          | Method | Description                           |
+| -------------- | ------ | ------------------------------------- |
+| `/ingredients` | GET    | Returns all ingredients to the client |
+
+#### Controllers recipe.js
 
 | Route                                 | Method | Description                                                                       |
 | ------------------------------------- | ------ | --------------------------------------------------------------------------------- |

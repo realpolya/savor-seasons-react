@@ -9,53 +9,50 @@ import './SortBar.css';
 
 /* --------------------------------Function--------------------------------*/
 
-function SortBar() {
+function SortBar({ condition, setListRecipes, setSorting }) {
 
     const [searchData, setSearchData] = useState('');
-    const {user, allRecipes, recipes, setRecipes} = useContext(AuthContext);
+    const [resetBar, setResetBar] = useState(true);
+    const {allRecipes, userRecipes, favorites} = useContext(AuthContext);
 
-    // variable for storing filtered recipes
+    // variable for storing filtered recipes and initial recipes
     let filtered;
+    let initialRecipes;
+    if (condition === "all") {
+      initialRecipes = [...allRecipes];
+    } else if (condition === "my-recipes") {
+      initialRecipes = [...userRecipes];
+    } else if (condition === "favorites") {
+      initialRecipes = [...favorites];
+    }
 
     /* RESET FUNCTION */
-    const restoreRecipes = () => setRecipes(allRecipes);
+    const restoreRecipes = () => setSorting(false);
 
     /* SUBMIT FUNCTIONS */
     const handleSubmit = e => {
-
       e.preventDefault();
-      setRecipes(filtered);
-
+      setListRecipes(filtered);
     }
 
     const handleSearchSubmit = e => {
-
       e.preventDefault();
-      filtered = searchRecipes(searchData, allRecipes);
-      setRecipes(filtered);
-
+      filtered = searchRecipes(searchData, initialRecipes);
+      setListRecipes(filtered);
     }
 
     /* CHANGE FUNCTIONS */
     const handleSortChange = e => {
-
-      filtered = sortRecipes(e.target.value, allRecipes);
+      filtered = sortRecipes(e.target.value, initialRecipes);
       handleSubmit(e);
-
     }
 
     const handleFilterChange = (e) => {
-
-      filtered = allRecipes.filter(recipe => {
-        return recipe.holiday === e.target.value
-      });
-
+      filtered = initialRecipes.filter(recipe => recipe.holiday === e.target.value);
       handleSubmit(e);
-
     }
 
     const handleSearchChange = e => setSearchData(e.target.value);
-
 
     return (
       <section id="sort-bar-section">

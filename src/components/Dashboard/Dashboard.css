@@ -4,13 +4,15 @@
 }
 
 #dashboard-h2 {
-    width: 100%;
+    width: 95%;
     text-align: left;
-    font-weight: 400;
+    font-weight: 600;
+    margin: 1rem;
+    color: var(--accent-color);
 }
 
 #dashboard-div {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

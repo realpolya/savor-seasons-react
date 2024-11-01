@@ -77,22 +77,24 @@ const ReviewForm = ({ condition, data }) => {
 
       {condition === "new" ? <h3>Leave a Review</h3> : <h3>Edit Review</h3>}
 
-      <div>
-        <label htmlFor="">
-        Title:
-        </label>
-        <input type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required />
+      <div className="review-form-div review-form-div-title-rating">
+        <div className="review-form-div-title">
+          <label htmlFor="" className="review-form-div-title-label">
+          Title:
+          </label>
+          <input type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required />
+        </div>
+        <div className="review-form-div-rating">< RatingForm setRating={setRating} rating={rating}/></div>
       </div>
-
-      < RatingForm setRating={setRating} rating={rating}/>
       
-      <div id="review-form-text-div">
-        <label htmlFor="text-input"> Your Review: </label>
+      <div className="review-form-div review-form-div-text">
+        <label htmlFor="text-input" className="review-form-div-title-label"> Your Review: </label>
         <textarea
+          className="review-form-div-textarea"
           required
           type="text"
           name="text"
