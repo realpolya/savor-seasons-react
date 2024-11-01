@@ -17,4 +17,5 @@ button {
 /* text coloring for all files */
 span {
   color: var(--span-color);
+  font-weight: 500;
 }

@@ -76,12 +76,6 @@ function RecipeDetails({recipe}) {
         deleteRecipe(recipeId, token);
         navigate('/');
     }
-    // recipe details logic buttons logic:
-    // AUTHOR & LOGGED IN: Edit, Delete
-    // NOT AUTHOR & LOGGED IN: add to favorites
-    // NOT AUTHOR & LOGGED IN & IN FAVORITES: remove from favorites
-    // everyone should: BACK TO RECIPES
-
 
     return (
         <section id="recipe-details-section">
@@ -95,10 +89,12 @@ function RecipeDetails({recipe}) {
                 <h3 id="details-h3">{recipe.name}</h3>
                 <div id="details-rating-div">
                     < RatingComponent rating={recipeRating}/>
-                    <p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>
+                    {recipeRating === 0 
+                    ? (<p id="details-rating-p">Not rated yet</p>)
+                    : (<p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>)}
                 </div>
                 <p id="details-holiday">
-                    <span>Holiday:</span> {recipe.holiday}
+                    Theme: <span>{recipe.holiday}</span>
                 </p>
 
                 {loading && !recipe.author ? (<p>Author loading...</p>) : (<p id="details-author">
