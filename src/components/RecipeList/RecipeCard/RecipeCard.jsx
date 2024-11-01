@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import RatingComponent from './Rating.jsx';
 
-
 // css
 import './RecipeCard.css';
 
@@ -13,6 +12,7 @@ function RecipeCard({ recipe }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
       if (recipe.author) {
 
         console.log('loaded');
@@ -35,6 +35,7 @@ function RecipeCard({ recipe }) {
     }
 
     return (
+
       <section className="recipe-card-section">
         
           <div className="recipe-card-div-img">
@@ -45,7 +46,9 @@ function RecipeCard({ recipe }) {
             <h3 className="recipe-card-h3">{recipe.name}</h3>
             <div className="recipe-card-rating-div">
               < RatingComponent rating={recipe.rating}/>
-              <p className="recipe-card-rating">{Math.trunc(recipe.rating * 100) / 100} out of 5</p>
+              {recipe.rating === 0 
+              ? (<p className="recipe-card-rating">Not rated yet</p>)
+              : (<p className="recipe-card-rating">{Math.trunc(recipe.rating * 100) / 100} out of 5</p>)}
             </div>
             <p className="recipe-card-holiday">
               {recipe.holiday}
@@ -58,6 +61,7 @@ function RecipeCard({ recipe }) {
             <button className="recipe-card-button">View</button>
           </div>
       </section>
+      
     )
 
 }

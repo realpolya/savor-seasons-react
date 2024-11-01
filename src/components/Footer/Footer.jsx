@@ -1,7 +1,5 @@
 /* --------------------------------Imports--------------------------------*/
-import { Link } from 'react-router-dom'
-import { AuthContext } from '../../App'
-import { useContext } from 'react'
+
 // css
 import './Footer.css';
 

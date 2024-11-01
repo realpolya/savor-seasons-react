@@ -4,12 +4,10 @@ import { useParams } from 'react-router-dom';
 import RatingForm from './RatingForm';
 import { ReviewContext } from '../ReviewsList.jsx';
 
-import services from '../../../../services/index.js'
-
 // css
 import './ReviewForm.css';
 
-/* --------------------------------Function--------------------------------*/
+/* --------------------------------Variables--------------------------------*/
 
 const initialForm = {
   name: '', 
@@ -17,59 +15,63 @@ const initialForm = {
   rating: 0
 }
 
+/* --------------------------------Function--------------------------------*/
+
+
 const ReviewForm = ({ condition, data }) => {
 
-    const {handleAddReview, handleUpdateReview} = useContext(ReviewContext);
+  const {handleAddReview, handleUpdateReview} = useContext(ReviewContext);
 
-    const {recipeId} = useParams();
-  
-    const [formData, setFormData] = useState(initialForm);
-    const [rating, setRating] = useState(0);
+  const {recipeId} = useParams();
 
-    const[error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
+  const [formData, setFormData] = useState(initialForm);
+  const [rating, setRating] = useState(0);
 
-    const handleChange = (e) => {
-      setFormData({...formData, [e.target.name]: e.target.value});
-    };
-  
-    const handleSubmit = (e) => {
+  const[error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
-      e.preventDefault();
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
 
-      if (!formData.text || !formData.name || formData.rating === 0) { //handleAddReview
-        setError("Please enter a review title, text, and rating");
-        return;
-      }
+  const handleSubmit = (e) => {
 
-      if (!data) {
-        handleAddReview(recipeId, formData);
-        setSuccessMessage("Review submitted successfully");
-        setTimeout(() => {
-          setSuccessMessage("")
-        }, 3000);
-        setFormData(initialForm);
-      } else {
-        handleUpdateReview(recipeId, data._id, formData);
-      }
+    e.preventDefault();
 
-      setError(null);
+    if (!formData.text || !formData.name || formData.rating === 0) {
+      setError("Please enter a review title, text, and rating");
+      return;
+    }
 
-    };
+    if (!data) {
+      handleAddReview(recipeId, formData);
+      setSuccessMessage("Review submitted successfully");
+      setTimeout(() => {
+        setSuccessMessage("")
+      }, 3000);
+      setFormData(initialForm);
+    } else {
+      handleUpdateReview(recipeId, data._id, formData);
+    }
 
-    // set rating
-    useEffect(() => {
-      setFormData((prev) => {return {...prev, rating}})
-    }, [rating])
+    setError(null);
 
-    useEffect(() => {
+  };
 
-      if (data) {
-        setFormData(data);
-        setRating(data.rating);
-      }
+  // set rating
+  useEffect(() => {
+    setFormData((prev) => {return {...prev, rating}})
+  }, [rating])
+
+
+  useEffect(() => {
+
+    if (data) {
+      setFormData(data);
+      setRating(data.rating);
+    }
       
-    }, [data])
+  }, [data])
 
 
   return (
@@ -113,6 +115,7 @@ const ReviewForm = ({ condition, data }) => {
 
     </form>
   );
+  
 };
 
 /* --------------------------------Exports--------------------------------*/

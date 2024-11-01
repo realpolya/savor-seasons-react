@@ -12,7 +12,6 @@ import './SortBar.css';
 function SortBar({ condition, setListRecipes, setSorting }) {
 
     const [searchData, setSearchData] = useState('');
-    const [resetBar, setResetBar] = useState(true);
     const {allRecipes, userRecipes, favorites} = useContext(AuthContext);
 
     // variable for storing filtered recipes and initial recipes

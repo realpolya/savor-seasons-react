@@ -2,36 +2,44 @@
 
 import './RecipeForm.css';
 import {useState, useEffect, useContext} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams, useLocation} from 'react-router-dom';
 
 import services from "../../services/index.js";
 
 import {AuthContext} from '../../App.jsx';
 
+/* --------------------------------Variables--------------------------------*/
+
+const initial = {
+    name: '',
+    prepTime: '',
+    author: '',
+    description: '',
+    holiday: '',
+    image: '',
+    ingredients: [],
+}
+
 /* --------------------------------Function--------------------------------*/
 
+
 function RecipeForm() {
+
+    const location = useLocation();
     const navigate = useNavigate();
-    const {recipeId} = useParams(); // Get recipe ID from URL params
+    const {recipeId} = useParams();
     const {user} = useContext(AuthContext);
 
     const token = localStorage.getItem('token');
 
-    const [formData, setFormData] = useState({
-        name: '',
-        prepTime: '',
-        author: '',
-        description: '',
-        holiday: '',
-        image: '',
-        ingredients: [],
-    });
+    const [formData, setFormData] = useState(initial);
 
     const [ingredientsList, setIngredientsList] = useState([]);
     const [error, setError] = useState(null); // Error handling
 
     // Fetch ingredients on mount
     useEffect(() => {
+
         async function fetchIngredients() {
             try {
                 const data = await services.getAllIngredients(token);
@@ -46,8 +54,17 @@ function RecipeForm() {
             try {
               
                 const recipeToEdit = await services.getSingleRecipe(recipeId, token)
+                const ingrIds = [];
 
+                // get ingredient ids
+                if (recipeToEdit.ingredients) {
+                    recipeToEdit.ingredients.forEach(ingr => ingrIds.push(ingr._id));
+                }
+
+                // populate formData array with ids from ingredients
+                recipeToEdit.ingredients = [...ingrIds];
                 setFormData(recipeToEdit);
+
             } catch (error) {
                 console.error('Error fetching single recipe:', error);
             }
@@ -56,21 +73,11 @@ function RecipeForm() {
         fetchIngredients();
         if (recipeId) {
             fetchSingleRecipe(recipeId);
+        } else {
+            setFormData(initial);
         }
-    }, [token]);
 
-    // Fetch recipe if editing
-    useEffect(() => {
-        const fetchRecipe = async () => {
-            try {
-                const recipeData = await services.getSingleRecipe(recipeId);
-                setFormData(recipeData);
-            } catch (error) {
-                console.error('Error fetching the recipe:', error);
-            }
-        };
-        if (recipeId) fetchRecipe();
-    }, [recipeId]);
+    }, [recipeId, location.pathname]); // removed token from dependency array (token is being refetched)
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -182,18 +189,22 @@ function RecipeForm() {
                             {error ? (
                                 <p>{error}</p>
                             ) : (
-                                ingredientsList.map((ingredient) => (
-                                    <div key={ingredient._id} className="checkbox-item">
-                                        <input
-                                            type="checkbox"
-                                            id={ingredient._id}
-                                            value={ingredient._id}
-                                            checked={formData.ingredients.includes(ingredient._id)}
-                                            onChange={handleCheckboxChange}
-                                        />
-                                        <label htmlFor={ingredient._id}>{ingredient.name}</label>
+                                ingredientsList.map((ingredient) => {
+
+                                    return <div key={ingredient._id} className="checkbox-item">
+                                            <input
+
+                                                type="checkbox"
+                                                id={ingredient._id}
+                                                value={ingredient._id}
+                                                checked={formData.ingredients.includes(ingredient._id)}
+                                                onChange={handleCheckboxChange}
+                                                
+                                            />
+                                            <label htmlFor={ingredient._id}>{ingredient.name}</label>
                                     </div>
-                                ))
+
+                                })
                             )}
                         </div>
                     </fieldset>
@@ -205,5 +216,9 @@ function RecipeForm() {
     );
 }
 
+/* --------------------------------Exports--------------------------------*/
+
 export default RecipeForm;
+
+/* --------------------------------Test below--------------------------------*/
 
