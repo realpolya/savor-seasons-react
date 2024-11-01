@@ -65,6 +65,11 @@
     padding: .2rem;
 }
 
+#details-edit-link,
+#details-back-link {
+    color: var(--white-color)
+}
+
 @media (max-width: 820px) {
 
     #recipe-details-section {
