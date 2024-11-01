@@ -1,16 +1,16 @@
 /* --------------------------------Imports--------------------------------*/
 import RatingComponent from './Rating';
-// css
-import './RecipeDetails.css';
 import {useContext, useState, useEffect} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../../App.jsx';
 import {addRecipeToFavorites, removeRecipeFromFavorites, deleteRecipe} from "../../../services/index.js";
 
+// css
+import './RecipeDetails.css';
+
 /* --------------------------------Function--------------------------------*/
 
 function RecipeDetails({recipe}) {
-// adding stuff
 
     const [loading, setLoading] = useState(true);
     const [isUserTheAuthor, setIsUserTheAuthor] = useState(false);
@@ -30,11 +30,12 @@ function RecipeDetails({recipe}) {
             if (recipe.author && recipe.ingredients) {
                 
                 if (recipe.reviews.length > 0) {
+
                     let newRating = 0;
                     recipe.reviews.forEach(review => newRating += +review.rating);
                     newRating = newRating / recipe.reviews.length;
                     setRecipeRating(newRating);
-    
+                    
                 }
 
                 setLoading(false);
@@ -76,12 +77,6 @@ function RecipeDetails({recipe}) {
         deleteRecipe(recipeId, token);
         navigate('/');
     }
-    // recipe details logic buttons logic:
-    // AUTHOR & LOGGED IN: Edit, Delete
-    // NOT AUTHOR & LOGGED IN: add to favorites
-    // NOT AUTHOR & LOGGED IN & IN FAVORITES: remove from favorites
-    // everyone should: BACK TO RECIPES
-
 
     return (
         <section id="recipe-details-section">
@@ -95,10 +90,12 @@ function RecipeDetails({recipe}) {
                 <h3 id="details-h3">{recipe.name}</h3>
                 <div id="details-rating-div">
                     < RatingComponent rating={recipeRating}/>
-                    <p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>
+                    {recipeRating === 0 
+                    ? (<p id="details-rating-p">Not rated yet</p>)
+                    : (<p id="details-rating-p">{Math.trunc(recipeRating * 100) / 100} out of 5</p>)}
                 </div>
                 <p id="details-holiday">
-                    {recipe.holiday}
+                    Theme: <span>{recipe.holiday}</span>
                 </p>
 
                 {loading && !recipe.author ? (<p>Author loading...</p>) : (<p id="details-author">
@@ -112,7 +109,7 @@ function RecipeDetails({recipe}) {
                     {loading && !recipe.ingredients ? (<p>Ingredients loading...</p>) : (
                         <div id="details-ingredients-list">
                             {recipe.ingredients?.map(ingredient => {
-                                return <p key={ingredient._id} className="ingredient-p">🥕 {ingredient.name}</p>
+                                return <p key={ingredient._id} className="ingredient-p">{ingredient.name}</p>
                             })}
                         </div>)}
 

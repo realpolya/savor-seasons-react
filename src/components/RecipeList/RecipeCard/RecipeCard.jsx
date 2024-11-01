@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import RatingComponent from './Rating.jsx';
 
-
 // css
 import './RecipeCard.css';
 
@@ -13,6 +12,7 @@ function RecipeCard({ recipe }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
       if (recipe.author) {
 
         console.log('loaded');
@@ -35,6 +35,7 @@ function RecipeCard({ recipe }) {
     }
 
     return (
+
       <section className="recipe-card-section">
         
           <div className="recipe-card-div-img">
@@ -43,20 +44,24 @@ function RecipeCard({ recipe }) {
 
           <div className="recipe-card-div-info">
             <h3 className="recipe-card-h3">{recipe.name}</h3>
-            < RatingComponent rating={recipe.rating}/>
-            <p className="recipe-card-rating">Rating: {recipe.rating}</p>
+            <div className="recipe-card-rating-div">
+              < RatingComponent rating={recipe.rating}/>
+              {recipe.rating === 0 
+              ? (<p className="recipe-card-rating">Not rated yet</p>)
+              : (<p className="recipe-card-rating">{Math.trunc(recipe.rating * 100) / 100} out of 5</p>)}
+            </div>
             <p className="recipe-card-holiday">
               {recipe.holiday}
             </p>
-            <p className="recipe-card-author">
-              {loading ? <span>User not loaded yet</span> : <span>By {recipe.author.username}</span> }
-            </p>
+            <div className="recipe-card-author">
+              {loading ? <p className="recipe-card-author-p">User not loaded yet</p> : <p className="recipe-card-author-p">By <span>{recipe.author.username}</span></p> }
+            </div>
             <p className="recipe-card-time">🕒 {recipe.prepTime} min</p>
-            {/* <p className="recipe-card-time">🥕 {recipe.ingredients.length} ingredients</p> */}
             <p className="recipe-card-details">{recipe.description}</p>
             <button className="recipe-card-button">View</button>
           </div>
       </section>
+      
     )
 
 }

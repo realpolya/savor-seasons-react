@@ -41,48 +41,48 @@ function SignInForm() {
     }
   };
 
-    return (
-      <main>
-        <h1>Log In</h1>
-        {message && <p className="error-message">{message}</p>}
-        <form autoComplete="off" onSubmit={handleSubmit}>
+  return (
+    <main>
+      <h1>Log In</h1>
+      {message && <p className="error-message">{message}</p>}
+      <form autoComplete="off" onSubmit={handleSubmit} className="sign-form">
 
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              value={formData.username}
-              name="username"
-              autoComplete="off"
-              onChange={handleChange}
-            />
-          </div>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={formData.username}
+            name="username"
+            autoComplete="off"
+            onChange={handleChange}
+          />
+        </div>
 
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={formData.password}
-              name="password"
-              autoComplete="off"
-              onChange={handleChange}
-            />
-          </div>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={formData.password}
+            name="password"
+            autoComplete="off"
+            onChange={handleChange}
+          />
+        </div>
 
-          <div>
-            <button type='submit'>Log In</button>
+        <div className="sign-form-div-buttons">
+          <button type='submit'>Log In</button>
 
-            <Link to="/">
-              <button type='button'>Cancel</button>
-            </Link>
-          </div>
+          <Link to="/">
+            <button type='button'>Cancel</button>
+          </Link>
+        </div>
 
-        </form>
-      </main>
-    );
-  }
+      </form>
+    </main>
+  );
+}
 
 /* --------------------------------Exports--------------------------------*/
 

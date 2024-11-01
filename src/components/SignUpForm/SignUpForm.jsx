@@ -1,12 +1,12 @@
 /* --------------------------------Imports--------------------------------*/
 import { useState, useContext  } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
-// contexts & services
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App.jsx';
 import { signUp } from '../../services/index.js';
 
 // css
 import './SignUpForm.css';
+import '../SignInForm/SignInForm.css' // reconfigure CSS later
 
 /* --------------------------------Function--------------------------------*/
 
@@ -48,21 +48,20 @@ function SignUpForm() {
   };
 
 
-  const { username, password, passwordConf } = formData;
+  const { username, email, password, passwordConf } = formData;
 
-  //TODO: check for email too
   const isFormInvalid = () => {
-    return !(username && password && password === passwordConf);
+    return !(username && email && password && password === passwordConf);
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
+    <main className="sign-main">
+      <h1 className="sign-h1">Sign Up</h1>
       {message && <p className="error-message">{message}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="sign-form">
 
-        <div>
-          <label htmlFor="username">Username:</label>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -73,8 +72,8 @@ function SignUpForm() {
           />
         </div>
 
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="email">Email:</label>
           <input
             type="text"
             id="email"
@@ -85,8 +84,8 @@ function SignUpForm() {
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -97,8 +96,8 @@ function SignUpForm() {
           />
         </div>
 
-        <div>
-          <label htmlFor="passwordConf">Confirm Password:</label>
+        <div className="sign-form-div">
+          <label className="sign-form-label" htmlFor="passwordConf">Confirm Password:</label>
           <input
             type="password"
             id="passwordConf"
@@ -109,7 +108,7 @@ function SignUpForm() {
           />
         </div>
 
-        <div>
+        <div className="sign-form-div-buttons">
           <button type="submit" disabled={isFormInvalid()}>Sign Up</button>
           <Link to="/">
             <button type="button">Cancel</button>

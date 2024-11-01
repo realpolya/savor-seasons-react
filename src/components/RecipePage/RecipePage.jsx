@@ -5,7 +5,7 @@ import ReviewsList from './ReviewsList/ReviewsList.jsx';
 import services from '../../services/index.js';
 
 import { useContext, useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../App.jsx';
 
 // css
@@ -17,7 +17,6 @@ function RecipePage() {
 
   const [loading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState();
-  const {user, recipes, setRecipes} = useContext(AuthContext);
   const {recipeId} = useParams();
 
   useEffect(() => {
@@ -52,16 +51,3 @@ function RecipePage() {
 /* --------------------------------Exports--------------------------------*/
 
 export default RecipePage;
-
-
-// if (recipes.length > 0) {
-    //   console.log('loaded');
-    //   const newRecipe = recipes.find(recipe => {
-    //     return JSON.stringify(recipe._id) === JSON.stringify(recipeId)}
-    //   );
-    //   setRecipe(newRecipe);
-    //   setLoading(false)
-
-    // } else {
-    //   console.log('not loaded')
-    // }

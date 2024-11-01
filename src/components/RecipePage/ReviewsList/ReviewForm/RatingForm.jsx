@@ -7,7 +7,6 @@ import { Rating } from 'react-simple-star-rating';
 function RatingForm({ setRating, rating }) {
 
   const handleRatingChange = (rate) => {
-    console.log(rate)
     setRating(rate);
   };
 

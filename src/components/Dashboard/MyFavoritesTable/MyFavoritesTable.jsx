@@ -1,8 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import {Link} from 'react-router-dom';
-import {useContext, useState} from 'react';
-
+import {useContext} from 'react';
 import {AuthContext} from '../../../App.jsx';
 
 // css
@@ -15,6 +14,7 @@ function MyFavoritesTable() {
   const { favorites } = useContext(AuthContext);
   
   return (
+
     <section id="my-favorites-table-section">
 
       <h2 id="my-favorites-table-h2">
@@ -25,19 +25,20 @@ function MyFavoritesTable() {
               {favorites.map(recipe => (
                 <li key={recipe._id} className="favorite-item">
 
-                  <Link to={`/recipes/${recipe._id}`}>
+                  <Link to={`/recipes/${recipe._id}`} className="favorite-item-link">
                     <img src={recipe.image} alt={recipe.name} className="favorite-item-img" />
-                    <div>
-                      <h3>{recipe.name}</h3>
-                      <span>by</span> {recipe.author.username}
+                    <div className="favorite-item-div">
+                      <h3 className="favorite-item-h3">{recipe.name}</h3>
+                      <p className="favorite-item-p"><span>by</span> {recipe.author.username}</p>
                     </div>
                   </Link>
 
                 </li>
               ))}
       </ul>) }
-
+      
     </section>
+
   )
 
 }

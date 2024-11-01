@@ -26,6 +26,32 @@
 
 .recipe-card-div-info {
     text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-card-h3,
+.recipe-card-rating-div,
+.recipe-card-holiday,
+.recipe-card-author,
+.recipe-card-time,
+.recipe-card-details,
+.recipe-card-button {
+    margin: .7rem;
+}
+
+.recipe-card-author-p,
+.recipe-card-rating {
+    margin: 0;
+}
+
+.recipe-card-rating {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-left: .5rem;
 }
 
 .recipe-card-details {

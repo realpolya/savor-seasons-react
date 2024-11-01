@@ -4,12 +4,10 @@ import { useParams } from 'react-router-dom';
 import RatingForm from './RatingForm';
 import { ReviewContext } from '../ReviewsList.jsx';
 
-import services from '../../../../services/index.js'
-
 // css
 import './ReviewForm.css';
 
-/* --------------------------------Function--------------------------------*/
+/* --------------------------------Variables--------------------------------*/
 
 const initialForm = {
   name: '', 
@@ -17,59 +15,63 @@ const initialForm = {
   rating: 0
 }
 
+/* --------------------------------Function--------------------------------*/
+
+
 const ReviewForm = ({ condition, data }) => {
 
-    const {handleAddReview, handleUpdateReview} = useContext(ReviewContext);
+  const {handleAddReview, handleUpdateReview} = useContext(ReviewContext);
 
-    const {recipeId} = useParams();
-  
-    const [formData, setFormData] = useState(initialForm);
-    const [rating, setRating] = useState(0);
+  const {recipeId} = useParams();
 
-    const[error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
+  const [formData, setFormData] = useState(initialForm);
+  const [rating, setRating] = useState(0);
 
-    const handleChange = (e) => {
-      setFormData({...formData, [e.target.name]: e.target.value});
-    };
-  
-    const handleSubmit = (e) => {
+  const[error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
-      e.preventDefault();
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
 
-      if (!formData.text || !formData.name || formData.rating === 0) { //handleAddReview
-        setError("Please enter a review title, text, and rating");
-        return;
-      }
+  const handleSubmit = (e) => {
 
-      if (!data) {
-        handleAddReview(recipeId, formData);
-        setSuccessMessage("Review submitted successfully");
-        setTimeout(() => {
-          setSuccessMessage("")
-        }, 3000);
-        setFormData(initialForm);
-      } else {
-        handleUpdateReview(recipeId, data._id, formData);
-      }
+    e.preventDefault();
 
-      setError(null);
+    if (!formData.text || !formData.name || formData.rating === 0) {
+      setError("Please enter a review title, text, and rating");
+      return;
+    }
 
-    };
+    if (!data) {
+      handleAddReview(recipeId, formData);
+      setSuccessMessage("Review submitted successfully");
+      setTimeout(() => {
+        setSuccessMessage("")
+      }, 3000);
+      setFormData(initialForm);
+    } else {
+      handleUpdateReview(recipeId, data._id, formData);
+    }
 
-    // set rating
-    useEffect(() => {
-      setFormData((prev) => {return {...prev, rating}})
-    }, [rating])
+    setError(null);
 
-    useEffect(() => {
+  };
 
-      if (data) {
-        setFormData(data);
-        setRating(data.rating);
-      }
+  // set rating
+  useEffect(() => {
+    setFormData((prev) => {return {...prev, rating}})
+  }, [rating])
+
+
+  useEffect(() => {
+
+    if (data) {
+      setFormData(data);
+      setRating(data.rating);
+    }
       
-    }, [data])
+  }, [data])
 
 
   return (
@@ -77,22 +79,24 @@ const ReviewForm = ({ condition, data }) => {
 
       {condition === "new" ? <h3>Leave a Review</h3> : <h3>Edit Review</h3>}
 
-      <div>
-        <label htmlFor="">
-        Title:
-        </label>
-        <input type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required />
+      <div className="review-form-div review-form-div-title-rating">
+        <div className="review-form-div-title">
+          <label htmlFor="" className="review-form-div-title-label">
+          Title:
+          </label>
+          <input type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required />
+        </div>
+        <div className="review-form-div-rating">< RatingForm setRating={setRating} rating={rating}/></div>
       </div>
-
-      < RatingForm setRating={setRating} rating={rating}/>
       
-      <div id="review-form-text-div">
-        <label htmlFor="text-input"> Your Review: </label>
+      <div className="review-form-div review-form-div-text">
+        <label htmlFor="text-input" className="review-form-div-title-label"> Your Review: </label>
         <textarea
+          className="review-form-div-textarea"
           required
           type="text"
           name="text"
@@ -111,6 +115,7 @@ const ReviewForm = ({ condition, data }) => {
 
     </form>
   );
+  
 };
 
 /* --------------------------------Exports--------------------------------*/

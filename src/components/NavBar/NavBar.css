@@ -16,10 +16,15 @@
     margin-left: 1rem;
 }
 
-#nav-bar-h1 {
+#nav-bar-h1, #nav-bar-h1-mobile {
     font-size: 1.3rem;
     margin: 0;
     margin-top: .5rem;
+    color: var(--light-color);
+}
+
+#nav-bar-h1-mobile {
+    display: none;
 }
 
 #nav-bar-ul {
@@ -38,7 +43,34 @@
     padding-left: 1rem;
 }
 
-.nav-bar-link:hover {
+.nav-bar-link:hover,
+.nav-bar-logo-link:hover {
     color: var(--background-color);
 }
 
+
+@media (max-width: 820px) {
+
+    #nav-bar-h1, #nav-bar-p {
+        display: none;
+    }
+
+    #nav-bar-h1-mobile {
+        display: inline;
+        font-size: 2rem;
+        margin: .2rem;
+    }
+
+    #nav-bar-ul {
+        font-size: .9rem;
+    }
+
+    #nav-bar-logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+}

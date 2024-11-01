@@ -26,6 +26,11 @@
     align-items: center;
 }
 
+.my-actions-span {
+    color: var(--light-accent-color);
+    font-weight: 500;
+}
+
 @media (max-width: 820px) {
 
     #my-actions-section {
