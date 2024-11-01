@@ -1,7 +1,7 @@
 /* --------------------------------Imports--------------------------------*/
 
 import { useState, useEffect, createContext } from 'react'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 
 // css
 import './App.css'
