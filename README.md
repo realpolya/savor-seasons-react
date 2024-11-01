@@ -1,8 +1,14 @@
 # Savor the Seasons (Seasonal Recipes Website)
 
-This repo holds the front-end for the Savor the Seasons projects.
+Welcome to the *Savor the Seasons* MERN stack project!
 
-Authors: Mandy Decamp, Paola Tatiana Soria, Polina Stepanova
+* Visit *Savor the Seasons* front-end repository [here](https://github.com/realpolya/savor-seasons-react).
+
+* Visit *Savor the Seasons* back-end repository [here](https://github.com/paolasoria0597/Savor-the-Seasons-BackEnd).
+
+
+
+**Authors:** Mandy Decamp, Paola Tatiana Soria, Polina Stepanova
 
 ## Planning Phase
 
@@ -25,40 +31,46 @@ Our wireframe was made using Figma.
 
 #### Landing (no sign-in required)
 
-![alt text](image.png)
+![alt text](./Images/image.png)
 
 #### Dashboard
 
-![alt text](image-1.png)
+![alt text](./Images/image-1.png)
 
 #### Recipe Page
 
-![alt text](image-4.png)
+![alt text](./Images/image-4.png)
 
 ### Flow chart
 
 Our Flow chart using Figma.
-![alt text](image-5.png)
+![alt text](./Images/image-5.png)
 
-### Color Palettes
+### Color Palette
 
-![alt text](image-7.png)
+![alt text](./Images/image-7.png)
 
 ```javascript
 :root {
-    --main-color: #FFDECF;
-    --accent-color: #E79069;
-    --dark-color: #A36B61;
-    --red-color: #C4515B;
-    --darkred-color: darkred;
-    --light-color: #FFECE6;
-    --text-accent-color: darkred;
-    --button-color: #FFF5EA;
-    --halloween-orange: #FFE6BB;
-    --halloween-orange-font: orange;
-    --halloween-main-color: #9583B1;
-    --halloween-dark-color: #624090;
-    --halloween-text-accent-color: #624090;
+  --dark-color: #31135A;
+  --light-color: #CEBBC9;
+  --background-color: #F9FFCA;
+  --accent-color: #CE2D4F;
+  --text-color: #31135A;
+  --white-color: white;
+  --light-accent-color: #CE6D8B;
+  --button-color: #CE6D8B;
+  --button-hover-color: #CE2D4F;
+  --link-hover-color: #31135A;
+  --grey-color: #585858;
+
+  --span-color: rgb(112, 0, 69);
+
+  --main-font: "Montserrat", sans-serif;
+  --decor-font: "Fredericka the Great", sans-serif;
+
+  /* max-width for mobile */
+  --mobile-width: 820px;
 }
 ```
 
@@ -67,12 +79,12 @@ Our Flow chart using Figma.
 ERD was made using Figma.
 
 We have five models. The User, Favorite and Recipes are refrencing each other. The Ingredents are only refrenced with the Recipes. The Review is enbedded and only refrenced with User.
-![alt text](image-8.png)
+![alt text](./Images/image-8.png)
 
 ### Components
 
-We used a image to map our flies and worked through our components.
-![alt text](image-10.png)
+The following tree structure shows the components and their inner relationship.
+![alt text](./Images/image-10.png)
 
 ### Trello
 
@@ -116,27 +128,27 @@ Visit the [Trello board](https://trello.com/b/AMCXx13r/seasonal-recipes-app) for
 
 ### User Routes
 
-![alt text](image-9.png)
+![alt text](./Images/image-9.png)
 
-### Recipes RoutesS
+### Recipes Routes
 
-![alt text](image-11.png)
+![alt text](./Images/image-11.png)
 
 ### Favorite Routes
 
-![alt text](image-12.png)
+![alt text](./Images/image-12.png)
 
 ### Ingredents Routes
 
-![alt text](image-13.png)
+![alt text](./Images/image-13.png)
 
 ### Review Routes
 
-![alt text](image-14.png)
+![alt text](./Images/image-14.png)
 
-### JS Models Files
+### Back-End Mongoose Models
 
-- Models user.js
+- User model:
 
 ```javascript
 export default mongoose.model(
@@ -165,7 +177,7 @@ export default mongoose.model(
 );
 ```
 
-- models recipe.js
+- Recipe model:
 
 ```javascript
 export default mongoose.model(
@@ -216,7 +228,7 @@ export default mongoose.model(
 );
 ```
 
-- models favorite.js
+- Favorites model:
 
 ```javascript
 export default mongoose.model(
@@ -239,7 +251,7 @@ export default mongoose.model(
 );
 ```
 
-- models ingredents.js
+- Ingredient model:
 
 ```javascript
 export default mongoose.model(
@@ -255,9 +267,9 @@ export default mongoose.model(
 );
 ```
 
-### JS Controllers Files
+### Back-End Express Routes
 
-- Controllers auth.js
+#### Routes for /auth
 
 | Route                 | Method | Description                                                                |
 | --------------------- | ------ | -------------------------------------------------------------------------- |
@@ -265,7 +277,7 @@ export default mongoose.model(
 | `/auth/sign-up`       | POST   | Registers a new user and generates a token                                 |
 | `/auth/sign-in`       | POST   | Authenticates user and returns a token                                     |
 
-- Controllers favorite.js
+#### Routes for /favorites
 
 | Route                  | Method | Description                                   |
 | ---------------------- | ------ | --------------------------------------------- |
@@ -273,12 +285,13 @@ export default mongoose.model(
 | `/favorites/:recipeId` | POST   | Adds a recipe to the user's favorites         |
 | `/favorites/:recipeId` | PUT    | Removes a recipe from the user's favorites    |
 
-- Controllers ingredents.js
-  | Route | Method | Description |
-  | --------------| ------ | ------------------------------------- |
-  |`/ingredients` | GET | Returns all ingredients to the client |
+#### Routes for /ingredients
 
-- Controllers recipe.js
+| Route | Method | Description |
+| --------------| ------ | ------------------------------------- |
+|`/ingredients` | GET | Returns all ingredients to the client |
+
+#### Routes for /recipes
 
 | Route                                 | Method | Description                                                                       |
 | ------------------------------------- | ------ | --------------------------------------------------------------------------------- |
@@ -291,6 +304,13 @@ export default mongoose.model(
 | `/recipes/:recipeId/review`           | POST   | Adds a review to a recipe                                                         |
 | `/recipes/:recipeId/review/:reviewId` | PUT    | Updates a specific review by reviewId for a recipe                                |
 | `/recipes/:recipeId/review/:reviewId` | DELETE | Deletes a specific review by reviewId from a recipe                               |
+
+### Post-MVP goals
+
+- Create auto-complete input bar for ingredients instead of checkb-box. The ingredients database would serve as an API library fetching suggestions for the user as they type.
+- Create POST route for ingredients. User would be able to type their own ingredient, and it would automatically expand the database of ingredients.
+- Create a recipe social media platform where users can follow other users and get notifications when their favorite chefs post new recipes.
+- Work on CSS for mobile and add a "hamburger" bar functionality.
 
 ### Sources
 
