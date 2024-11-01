@@ -6,7 +6,8 @@ import './AboutTeam.css';
 /* --------------------------------Function--------------------------------*/
 
 function AboutTeam() {
-   const teamMembers= [
+    
+    const teamMembers = [
        { name:'Polina Stepanova',
        role: 'Frontend/Backend Developer',
        bio: 'Passionate about building engaging user experiences with a strong focus on Javascript and React',
@@ -27,9 +28,10 @@ function AboutTeam() {
            github: 'https://github.com/Mandy2114',
            image:''
        }
-       ];
+    ];
 
     return (
+        
       <main id="about-team-main">
           <div className="about-me">
           <h2> Hi, We're a team of passionate developers</h2>
@@ -52,6 +54,7 @@ function AboutTeam() {
           </div>
           </div>
       </main>
+
     );
 
   };

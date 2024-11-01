@@ -17,6 +17,7 @@ function Dashboard() {
     const {user} = useContext(AuthContext);
 
     return (
+
       <main id="dashboard-main">
           <h2 id="dashboard-h2">Welcome {user.username}!</h2>
           <div id="dashboard-div">
@@ -27,6 +28,7 @@ function Dashboard() {
             </div>
           </div>
       </main>
+      
     )
 };
 

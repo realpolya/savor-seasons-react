@@ -18,10 +18,6 @@ function RecipeList({ condition }) {
     const [sorting, setSorting] = useState(true);
     const [listRecipes, setListRecipes]  = useState(null);
     const {user, recipes, userRecipes, favorites} = useContext(AuthContext);
-    
-    // useEffect(() => {
-
-    // }, []);
 
     useEffect(() => {
       try {
@@ -44,6 +40,7 @@ function RecipeList({ condition }) {
     }, [condition, recipes, userRecipes, favorites, sorting])
 
     return (
+
       <main id="recipe-list-main">
 
           {condition==="all"? ( <h2 id="main-title" className="recipe-list-h2">Savor the Season Recipes</h2>): null}
@@ -64,6 +61,7 @@ function RecipeList({ condition }) {
         </section>) }
           
       </main>
+      
     )
 
   }

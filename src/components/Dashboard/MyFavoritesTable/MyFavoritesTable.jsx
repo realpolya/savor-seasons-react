@@ -2,7 +2,6 @@
 
 import {Link} from 'react-router-dom';
 import {useContext} from 'react';
-
 import {AuthContext} from '../../../App.jsx';
 
 // css
@@ -15,6 +14,7 @@ function MyFavoritesTable() {
   const { favorites } = useContext(AuthContext);
   
   return (
+
     <section id="my-favorites-table-section">
 
       <h2 id="my-favorites-table-h2">
@@ -36,8 +36,9 @@ function MyFavoritesTable() {
                 </li>
               ))}
       </ul>) }
-
+      
     </section>
+
   )
 
 }

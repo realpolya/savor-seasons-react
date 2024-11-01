@@ -24,10 +24,7 @@ const sortRecipes = (sortValue, recipes) => {
 
     } else if (sortValue === 'prepTime') {
 
-        console.log('in sort service now')
-
         sorted = [...recipes].sort((a, b) => {
-            console.log('prep times', a.prepTime, b.prepTime);
             return Number(a.prepTime) - Number(b.prepTime)
         });
 
