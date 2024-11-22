@@ -1,12 +1,10 @@
 # Savor the Seasons (Seasonal Recipes Website)
 
-Welcome to the *Savor the Seasons* MERN stack project!
+Welcome to the _Savor the Seasons_ MERN stack project!
 
-* Visit *Savor the Seasons* front-end repository [here](https://github.com/realpolya/savor-seasons-react).
+- Visit _Savor the Seasons_ front-end repository [here](https://github.com/realpolya/savor-seasons-react).
 
-* Visit *Savor the Seasons* back-end repository [here](https://github.com/paolasoria0597/Savor-the-Seasons-BackEnd).
-
-
+- Visit _Savor the Seasons_ back-end repository [here](https://github.com/paolasoria0597/Savor-the-Seasons-BackEnd).
 
 **Authors:** Mandy Decamp, Paola Tatiana Soria, Polina Stepanova
 
@@ -126,23 +124,23 @@ Visit the [Trello board](https://trello.com/b/AMCXx13r/seasonal-recipes-app) for
 
 ### Routes
 
-### User Routes
+#### User Routes
 
 ![alt text](./Images/image-9.png)
 
-### Recipes Routes
+### Recipes RoutesS
 
-![alt text](./Images/image-11.png)
+![alt text](image-11.png)
 
-### Favorite Routes
+#### Favorite Routes
 
 ![alt text](./Images/image-12.png)
 
-### Ingredents Routes
+#### Ingredents Routes
 
 ![alt text](./Images/image-13.png)
 
-### Review Routes
+#### Review Routes
 
 ![alt text](./Images/image-14.png)
 
@@ -199,7 +197,7 @@ export default mongoose.model(
       },
       ingredients: [
         {
-          type: mongoose.Schema.Types.ObjectId, // We need to reference the ingredient model if not there is no relationship
+          type: mongoose.Schema.Types.ObjectId,
           ref: "Ingredient",
         },
       ],
@@ -287,9 +285,9 @@ export default mongoose.model(
 
 #### Routes for /ingredients
 
-| Route | Method | Description |
-| --------------| ------ | ------------------------------------- |
-|`/ingredients` | GET | Returns all ingredients to the client |
+| Route          | Method | Description                           |
+| -------------- | ------ | ------------------------------------- |
+| `/ingredients` | GET    | Returns all ingredients to the client |
 
 #### Routes for /recipes
 
