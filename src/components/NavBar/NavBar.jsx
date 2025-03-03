@@ -30,9 +30,6 @@ function NavBar() {
       <li className="nav-bar-li">
         <Link to="/" onClick={handleSignOut} className="nav-bar-link">Sign out</Link>
       </li>
-      <li className="nav-bar-li">
-        <Link to="/about-team" className="nav-bar-link">About Team</Link>
-      </li>
   </ul>
 
   const outNav = <ul id="nav-bar-ul">
@@ -41,9 +38,6 @@ function NavBar() {
       </li>
       <li className="nav-bar-li">
         <Link to="/sign-in" className="nav-bar-link">Sign in</Link>
-      </li>
-      <li className="nav-bar-li">
-        <Link to="/about-team" className="nav-bar-link">About Team</Link>
       </li>
   </ul>
 
