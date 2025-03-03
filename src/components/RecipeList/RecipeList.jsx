@@ -43,7 +43,13 @@ function RecipeList({ condition }) {
 
       <main id="recipe-list-main">
 
-          {condition==="all"? ( <h2 id="main-title" className="recipe-list-h2">Savor the Season Recipes</h2>): null}
+          {condition==="all"? (
+                <div id="div-recipes-list-heading">
+                    <h2 id="main-title" className="recipe-list-h2">Savor the Seasons Recipes</h2>
+                    <p>Welcome to a full-stack application built by engineers Paola Soria, Polina Stepanova, and Mandy Decamp. <span>Savor the Seasons</span> is a web platform where food enthusiasts
+                         can exchange recipes and review each other's culinary endeavors. Enjoy! </p>
+                </div>
+            ): null}
           {condition==="my-recipes"? (<h2 className="recipe-list-h2">My Recipes</h2>): null}
           {condition==="favorites"? (<h2 className="recipe-list-h2"> My Favorites</h2>): null}
 
